@@ -1,0 +1,39 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../src/camera_sensor.c \
+../src/glcdc_display.c \
+../src/hal_entry.c \
+../src/i2c_control.c \
+../src/mipi_csi.c 
+
+C_DEPS += \
+./src/camera_sensor.d \
+./src/glcdc_display.d \
+./src/hal_entry.d \
+./src/i2c_control.d \
+./src/mipi_csi.d 
+
+CREF += \
+mipi_csi_ek_ra8p1_ep.cref 
+
+OBJS += \
+./src/camera_sensor.o \
+./src/glcdc_display.o \
+./src/hal_entry.o \
+./src/i2c_control.o \
+./src/mipi_csi.o 
+
+MAP += \
+mipi_csi_ek_ra8p1_ep.map 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+src/%.o: ../src/%.c
+	@echo 'Building file: $<'
+	$(file > $@.in,-mcpu=cortex-m85 -mlittle-endian -mfloat-abi=hard -Os -ffunction-sections -fdata-sections -fmessage-length=0 -funsigned-char -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wno-parentheses-equality -Wfloat-equal -gdwarf-4 -g3 -std=c99 -flax-vector-conversions -fshort-enums -fno-unroll-loops -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\src" -I"." -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra\\fsp\\inc" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra\\fsp\\inc\\api" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra\\fsp\\inc\\instances" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra\\arm\\CMSIS_6\\CMSIS\\Core\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra_gen" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra_cfg\\fsp_cfg\\bsp" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra_cfg\\fsp_cfg" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra\\fsp\\src\\r_mipi_csi" -I"D:\\Lab\\Lab_MCU\\Renesas RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ra\\fsp\\src\\r_vin" -D_RENESAS_RA_ -DUSE_VIRTUAL_COM=0 -D_RA_CORE=CPU0 -D_RA_ORDINAL=1 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -x c "$<" -c -o "$@")
+	@clang --target=arm-none-eabi @"$@.in"
+
