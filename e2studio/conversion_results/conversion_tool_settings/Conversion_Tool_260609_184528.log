@@ -1,0 +1,118 @@
+2026-06-09 18:44:59,815 [INFO] (check_requirements.py #28, load_requirements): 📥 Downloading requirements from https://Tool-support.renesas.com/tool-support/Zoo/MCT/requirements.txt
+2026-06-09 18:44:59,819 [DEBUG] (connectionpool.py #1049, _new_conn): Starting new HTTPS connection (1): tool-support.renesas.com:443
+2026-06-09 18:45:00,595 [DEBUG] (connectionpool.py #544, _make_request): https://tool-support.renesas.com:443 "GET /tool-support/Zoo/MCT/requirements.txt HTTP/1.1" 200 None
+2026-06-09 18:45:00,617 [INFO] (check_requirements.py #56, check_requirements): mera: INSTALLED (2.6.0+pkg.4513)
+2026-06-09 18:45:00,617 [INFO] (check_requirements.py #56, check_requirements): mera_visualizer: INSTALLED (2.5.0+mcuv4)
+2026-06-09 18:45:00,617 [INFO] (check_requirements.py #75, check_requirements): onnx==1.17.0: OK
+2026-06-09 18:45:00,617 [INFO] (check_requirements.py #75, check_requirements): tflite==2.18.0: OK
+[INFO] Success to execute the command
+Exit code: 0
+CMD:[D:/Lab/Lab_MCU/Renesas_RA/.metadata/.plugins/com.renesas.ai.translator/py.bat D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/.settings/.plugin/com.renesas.ai.translator/renesas_aicompiler_caller/cli.py comm get_model_info --framework tflite --input_model D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite --output_shape_dict_jsonpath D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_input_shape.json --output_model_info_jsonpath D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_model_info.json --accelerator_type ethos-u55 ]
+2026-06-09 18:45:13,067 [INFO] (environment_check.py #288, exec_environment_check): Execute environment check ...
+2026-06-09 18:45:13,380 [DEBUG] (__init__.py #342, wrapper): matplotlib data path: C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\lib\site-packages\matplotlib\mpl-data
+2026-06-09 18:45:13,385 [DEBUG] (__init__.py #342, wrapper): CONFIGDIR=C:\Users\lingk\.matplotlib
+2026-06-09 18:45:13,386 [DEBUG] (__init__.py #1560, <module>): interactive is False
+2026-06-09 18:45:13,386 [DEBUG] (__init__.py #1561, <module>): platform is win32
+2026-06-09 18:45:13,412 [DEBUG] (__init__.py #342, wrapper): CACHEDIR=C:\Users\lingk\.matplotlib
+2026-06-09 18:45:13,414 [DEBUG] (font_manager.py #1635, _load_fontmanager): Using fontManager instance from C:\Users\lingk\.matplotlib\fontlist-v390.json
+2026-06-09 18:45:14,061 [INFO] (environment_check.py #206, _check_python_deps_for_windows): mera version 2.6.0+pkg.4513 released on 2026-03-05
+2026-06-09 18:45:14,062 [INFO] (environment_check.py #192, _check_python_package_and_version): 'mera' version 2.6.0+pkg.4513 is installed.
+2026-06-09 18:45:14,063 [INFO] (environment_check.py #192, _check_python_package_and_version): 'ethos-u-vela' version 4.2.0 is installed.
+2026-06-09 18:45:14,064 [INFO] (environment_check.py #192, _check_python_package_and_version): 'tflite' version 2.18.0 is installed.
+2026-06-09 18:45:14,064 [INFO] (environment_check.py #192, _check_python_package_and_version): 'onnx' version 1.17.0 is installed.
+2026-06-09 18:45:14,065 [INFO] (environment_check.py #192, _check_python_package_and_version): 'typing_extensions' version 4.15.0 is installed.
+2026-06-09 18:45:14,135 [INFO] (get_model_info.py #523, main): [Parsing input model node start...]
+2026-06-09 18:45:14,135 [INFO] (get_model_info.py #422, make_shape_dict_from_model): Make shape_dict from model.
+2026-06-09 18:45:14,289 [INFO] (get_model_info.py #378, get_tflite_shape_dict): tflite_shape_dict: {'x': (1, 256, 256, 3)}
+2026-06-09 18:45:14,289 [INFO] (get_model_info.py #384, get_tflite_shape_dict): shape_dict: {'x': [1, 256, 256, 3]}
+2026-06-09 18:45:14.814519: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-06-09 18:45:16.335402: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-06-09 18:45:16,550 [DEBUG] (tpu_cluster_resolver.py #34, <module>): Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+2026-06-09 18:45:17,179 [DEBUG] (__init__.py #47, <module>): Creating converter from 7 to 5
+2026-06-09 18:45:17,179 [DEBUG] (__init__.py #47, <module>): Creating converter from 5 to 7
+2026-06-09 18:45:17,179 [DEBUG] (__init__.py #47, <module>): Creating converter from 7 to 5
+2026-06-09 18:45:17,179 [DEBUG] (__init__.py #47, <module>): Creating converter from 5 to 7
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+2026-06-09 18:45:18,497 [INFO] (get_model_info.py #221, is_tflite_quantized): === Input Details ===
+2026-06-09 18:45:18,497 [INFO] (get_model_info.py #223, is_tflite_quantized): Input tensor 0:
+2026-06-09 18:45:18,497 [INFO] (get_model_info.py #224, is_tflite_quantized):   name: x
+2026-06-09 18:45:18,497 [INFO] (get_model_info.py #225, is_tflite_quantized):   index: 0
+2026-06-09 18:45:18,498 [INFO] (get_model_info.py #226, is_tflite_quantized):   shape: [  1 256 256   3]
+2026-06-09 18:45:18,498 [INFO] (get_model_info.py #227, is_tflite_quantized):   dtype: <class 'numpy.int8'>
+2026-06-09 18:45:18,498 [INFO] (get_model_info.py #229, is_tflite_quantized):   quantization (deprecated)_soon): (0.003921568859368563, -128)
+2026-06-09 18:45:18,499 [INFO] (get_model_info.py #230, is_tflite_quantized):   quantization_parameters: {'scales': array([0.00392157], dtype=float32), 'zero_points': array([-128]), 'quantized_dimension': 0}
+2026-06-09 18:45:18,499 [INFO] (get_model_info.py #231, is_tflite_quantized):   sparsity_parameters: {}
+2026-06-09 18:45:18,499 [INFO] (get_model_info.py #233, is_tflite_quantized): === Output Details ===
+2026-06-09 18:45:18,499 [INFO] (get_model_info.py #235, is_tflite_quantized): Output tensor 0:
+2026-06-09 18:45:18,499 [INFO] (get_model_info.py #236, is_tflite_quantized):   name: Identity
+2026-06-09 18:45:18,499 [INFO] (get_model_info.py #237, is_tflite_quantized):   index: 632
+2026-06-09 18:45:18,500 [INFO] (get_model_info.py #238, is_tflite_quantized):   shape: [   1 1344    7]
+2026-06-09 18:45:18,500 [INFO] (get_model_info.py #239, is_tflite_quantized):   dtype: <class 'numpy.int8'>
+2026-06-09 18:45:18,500 [INFO] (get_model_info.py #241, is_tflite_quantized):   quantization (deprecated_soon): (0.005605374928563833, -95)
+2026-06-09 18:45:18,500 [INFO] (get_model_info.py #242, is_tflite_quantized):   quantization_parameters: {'scales': array([0.00560537], dtype=float32), 'zero_points': array([-95]), 'quantized_dimension': 0}
+2026-06-09 18:45:18,500 [INFO] (get_model_info.py #243, is_tflite_quantized):   sparsity_parameters: {}
+2026-06-09 18:45:18,506 [INFO] (get_model_info.py #504, write_dict2json): Write dictionary to json file.
+2026-06-09 18:45:18,507 [INFO] (get_model_info.py #504, write_dict2json): Write dictionary to json file.
+2026-06-09 18:45:18,507 [INFO] (get_model_info.py #537, main): [Parsing input model node finished]
+Variable container does not have anything...
+[INFO] Success to execute the command
+CMD:[D:/Lab/Lab_MCU/Renesas_RA/.metadata/.plugins/com.renesas.ai.translator/py.bat D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/.settings/.plugin/com.renesas.ai.translator/renesas_aicompiler_caller/cli.py ruhmi deploy --framework quantized --input_model D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite --output_dir D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/converted --optimization_mode 0 --memory_mode 0 --mera_options  --vela_options  --shape_dict_json D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_input_shape.json ]
+2026-06-09 18:45:25,282 [INFO] (environment_check.py #288, exec_environment_check): Execute environment check ...
+2026-06-09 18:45:25,446 [DEBUG] (__init__.py #342, wrapper): matplotlib data path: C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\lib\site-packages\matplotlib\mpl-data
+2026-06-09 18:45:25,449 [DEBUG] (__init__.py #342, wrapper): CONFIGDIR=C:\Users\lingk\.matplotlib
+2026-06-09 18:45:25,450 [DEBUG] (__init__.py #1560, <module>): interactive is False
+2026-06-09 18:45:25,450 [DEBUG] (__init__.py #1561, <module>): platform is win32
+2026-06-09 18:45:25,465 [DEBUG] (__init__.py #342, wrapper): CACHEDIR=C:\Users\lingk\.matplotlib
+2026-06-09 18:45:25,468 [DEBUG] (font_manager.py #1635, _load_fontmanager): Using fontManager instance from C:\Users\lingk\.matplotlib\fontlist-v390.json
+2026-06-09 18:45:25,825 [INFO] (environment_check.py #206, _check_python_deps_for_windows): mera version 2.6.0+pkg.4513 released on 2026-03-05
+2026-06-09 18:45:25,826 [INFO] (environment_check.py #192, _check_python_package_and_version): 'mera' version 2.6.0+pkg.4513 is installed.
+2026-06-09 18:45:25,827 [INFO] (environment_check.py #192, _check_python_package_and_version): 'ethos-u-vela' version 4.2.0 is installed.
+2026-06-09 18:45:25,827 [INFO] (environment_check.py #192, _check_python_package_and_version): 'tflite' version 2.18.0 is installed.
+2026-06-09 18:45:25,828 [INFO] (environment_check.py #192, _check_python_package_and_version): 'onnx' version 1.17.0 is installed.
+2026-06-09 18:45:25,829 [INFO] (environment_check.py #192, _check_python_package_and_version): 'typing_extensions' version 4.15.0 is installed.
+2026-06-09 18:45:25,836 [INFO] (deploy_model.py #335, main): Arguments: Namespace(framework='quantized', input_model='D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite', output_dir='D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/converted', shape_dict_json='D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_input_shape.json', optimization_mode=0, memory_mode=0, use_only_cpu=False, weight_loc=0, ethos_configuration_filepath=None, mera_options='', vela_options='')
+2026-06-09 18:45:25,836 [INFO] (deploy_model.py #336, main): Mera options: Namespace(target='mcu', enable_ospi=False, enable_ref_data=True, suffix='', use_x86=False, args=[])
+2026-06-09 18:45:25,836 [INFO] (deploy_model.py #337, main): Vela options: Namespace(sys_config='RA8P1', accel_config='ethos-u55-256', verbose_all=False, args=[])
+Variable container does not have anything...
+2026-06-09 18:45:25,838 [INFO] (deploy_model.py #361, main): Targeting MCU on ALT2 
+2026-06-09 18:45:25,838 [INFO] (deploy_model.py #294, compile_mera): 
+Deploying MERA model ...
+2026-06-09 18:45:25,840 [DEBUG] (deploy_project.py #241, pushd): (pushd) Running in model
+2026-06-09 18:45:25,841 [DEBUG] (utils.py #22, cmd): Running command 'C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli --io_desc_input D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite --io_desc_result C:\Users\lingk\AppData\Local\Temp\tmpzgh9psog\tempfile'
+2026-06-09 18:45:25,878 [DEBUG] (deploy_project.py #208, save_artifact): Saved json artifact 'input_desc.json' into D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\model
+2026-06-09 18:45:25,878 [DEBUG] (deploy_project.py #248, popd): (popd) cwd is now D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted
+2026-06-09 18:45:25,879 [INFO] (deploy.py #309, deploy):  *** mera v2.6.0+pkg.4513 ***
+2026-06-09 18:45:25,879 [INFO] (deploy.py #310, deploy): Starting deployment of model 'ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24'...
+2026-06-09 18:45:25,879 [DEBUG] (deploy_project.py #241, pushd): (pushd) Running in build
+2026-06-09 18:45:25,879 [DEBUG] (deploy_project.py #241, pushd): (pushd) Running in MCU
+2026-06-09 18:45:25,880 [DEBUG] (deploy_project.py #208, save_artifact): Saved json artifact 'deploy_cfg.json' into D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU
+2026-06-09 18:45:25,881 [DEBUG] (utils.py #22, cmd): Running command 'C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU\deploy_cfg.json'
+[2026-06-09 18:45:25.914] [info] Loading and converting TFLite model ... 
+[2026-06-09 18:45:25.916] [info] TFLite Model Version: 3
+Traceback (most recent call last):
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 310, in compile_mera
+    deployer.deploy(
+  File "C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\lib\site-packages\mera\deploy.py", line 349, in deploy
+    self._apply_frontend(model, deploy_cfg_json)
+  File "C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\lib\site-packages\mera\deploy.py", line 246, in _apply_frontend
+    cmd(f"{find_tool('fe_tflite_cli')} {deploy_cfg_json}")
+  File "C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\lib\site-packages\mera\utils.py", line 35, in cmd
+    raise subprocess.CalledProcessError(p.returncode, command)
+subprocess.CalledProcessError: Command 'C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU\deploy_cfg.json' returned non-zero exit status 3221226505.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\cli.py", line 104, in <module>
+    dispatch(sys.argv[1:])
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\cli.py", line 100, in dispatch
+    handler(args.args)
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 368, in main
+    mera_path = compile_mera(
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 320, in compile_mera
+    raise RuntimeError(f"Error: {e}\n\n"
+RuntimeError: Error: Command 'C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\ruhmi\.venv\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU\deploy_cfg.json' returned non-zero exit status 3221226505.
+
+Failed to deploy the model: D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite. See the above error log for more details. If that does not help, please contact Renesas.
+[ERROR] Failed to execute the command
+Failed to perform conversion.

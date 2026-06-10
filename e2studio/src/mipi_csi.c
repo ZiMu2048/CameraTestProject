@@ -60,8 +60,8 @@ void mipi_csi_ep_entry(void)
     handle_error(err, " ** camera_open FAILED ** \r\n");
 
     /* 硬编码: 分辨率 = 1024x600 */
-    g_image_width  = camera_profiles[RES_1024x600].width;
-    g_image_height = camera_profiles[RES_1024x600].height;
+    g_image_width  = camera_profiles[RES_VGA].width;
+    g_image_height = camera_profiles[RES_VGA].height;
 
     /*If_GLCDC_On*/
 #if (DISPLAY_OUTPUT == 1U)

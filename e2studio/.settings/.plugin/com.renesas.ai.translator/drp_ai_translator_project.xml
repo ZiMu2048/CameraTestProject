@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DrpAiTranslatorProjectSettings>
+    <ProjectSettingsInfo>
+        <name>mipi_csi_ek_ra8p1_ep</name>
+        <framework>2</framework>
+        <modelfile>ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite</modelfile>
+        <output_directory>conversion_results</output_directory>
+        <docker_image_name>Unused property</docker_image_name>
+        <PytorchSettingInfo>
+            <configuration_type>false</configuration_type>
+            <configuration_file/>
+            <modelname/>
+            <model_weight/>
+            <input_layer_shape/>
+        </PytorchSettingInfo>
+    </ProjectSettingsInfo>
+    <DRP-AI_TVMSettingInfo>
+        <TransSettingInfo>
+            <item key="D:\Lab\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite_trans_config.json</item>
+            <item key="ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_trans_config.json</item>
+        </TransSettingInfo>
+        <QuantizationSetting>
+            <item key="D:\Lab\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite_quant_config.json</item>
+            <item key="ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_quant_config.json</item>
+        </QuantizationSetting>
+    </DRP-AI_TVMSettingInfo>
+</DrpAiTranslatorProjectSettings>

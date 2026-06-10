@@ -47,6 +47,7 @@ fsp_err_t glcdc_init(void)
      g_display_runtime_cfg_bg.input.hsize = g_image_width;
      g_display_runtime_cfg_bg.input.vsize = g_image_height;
      g_display_runtime_cfg_bg.input.hstride = (uint16_t) ( ((uint32_t) g_image_width * 2 + 3) & ~0x03 ); /* Align to 4 bytes */
+     //g_display_runtime_cfg_bg.input.hstride = (uint16_t) ( ((uint32_t) 1024 * 2 + 3) & ~0x03 );
      /* Calculate the buffer size according to the new input size and format */
      g_buffer_size = (uint32_t) g_display_runtime_cfg_bg.input.hstride * g_display_runtime_cfg_bg.input.vsize;
 

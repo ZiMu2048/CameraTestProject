@@ -312,98 +312,98 @@
 22000360 22000360        0     1         __ram_zero_nocache$$Base = .
 22000360 22000360        0     1         . = ALIGN(32)
 22000360 22000360        0     1         __ram_zero_nocache$$Limit = .
-22000360 22000360     102c     8 __ram_noinit$$
+22000360 22000360     802c     8 __ram_noinit$$
 22000360 22000360        0     1         __ram_noinit$$Base = .
-22000360 22000360     1000     8         ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o:(.bss.g_main_stack)
-22000360 22000360     1000     1                 g_main_stack
-22001360 22001360       2c     4         ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o:(.ram_noinit)
-22001360 22001360       2c     1                 g_clock_freq
-2200138c 2200138c        0     1         __ram_noinit$$Limit = .
-2200138c 2200138c      ac8     4 __ram_zero$$
-2200138c 2200138c        0     1         __ram_zero$$Base = .
-2200138c 2200138c       a8     4         ./src/SEGGER_RTT/SEGGER_RTT.o:(.bss._SEGGER_RTT)
-2200138c 2200138c       a8     1                 _SEGGER_RTT
-22001434 22001434      800     1         ./src/SEGGER_RTT/SEGGER_RTT.o:(.bss._acUpBuffer)
-22001434 22001434      800     1                 _acUpBuffer
-22001c34 22001c34       10     1         ./src/SEGGER_RTT/SEGGER_RTT.o:(.bss._acDownBuffer)
-22001c34 22001c34       10     1                 _acDownBuffer
-22001c44 22001c44        4     4         ./src/camera_sensor.o:(.bss.g_plck_hz)
-22001c44 22001c44        4     1                 g_plck_hz
-22001c48 22001c48        1     1         ./src/glcdc_display.o:(.bss.g_vsync_flag)
-22001c48 22001c48        1     1                 g_vsync_flag
-22001c4c 22001c4c        4     4         ./src/glcdc_display.o:(.bss.g_buffer_size)
-22001c4c 22001c4c        4     1                 g_buffer_size
-22001c50 22001c50        1     1         ./src/i2c_control.o:(.bss.g_i2c_event_for_peripheral)
-22001c50 22001c50        1     1                 g_i2c_event_for_peripheral
-22001c52 22001c52        2     2         ./src/mipi_csi.o:(.bss.g_image_width)
-22001c52 22001c52        2     1                 g_image_width
-22001c54 22001c54        2     2         ./src/mipi_csi.o:(.bss.g_image_height)
-22001c54 22001c54        2     1                 g_image_height
-22001c58 22001c58       18     4         ./src/mipi_csi.o:(.bss.g_vin_cfg_run_time)
-22001c58 22001c58       18     1                 g_vin_cfg_run_time
-22001c70 22001c70        4     4         ./src/mipi_csi.o:(.bss.gp_next_buffer)
-22001c70 22001c70        4     1                 gp_next_buffer
-22001c74 22001c74       84     4         ./src/mipi_csi.o:(.bss.g_vin_cfg_run_time_extend)
-22001c74 22001c74       84     1                 g_vin_cfg_run_time_extend
-22001cf8 22001cf8       10     4         ./ra_gen/common_data.o:(.bss.g_display_ctrl)
-22001cf8 22001cf8       10     1                 g_display_ctrl
-22001d08 22001d08        8     4         ./ra_gen/common_data.o:(.bss.g_mipi_phy0_ctrl)
-22001d08 22001d08        8     1                 g_mipi_phy0_ctrl
-22001d10 22001d10       14     4         ./ra_gen/common_data.o:(.bss.g_mipi_csi0_ctrl)
-22001d10 22001d10       14     1                 g_mipi_csi0_ctrl
-22001d24 22001d24       14     4         ./ra_gen/common_data.o:(.bss.g_vin_ctrl)
-22001d24 22001d24       14     1                 g_vin_ctrl
-22001d38 22001d38        8     4         ./ra_gen/common_data.o:(.bss.g_ioport_ctrl)
-22001d38 22001d38        8     1                 g_ioport_ctrl
-22001d40 22001d40        8     4         ./ra_gen/hal_data.o:(.bss.g_transfer1_ctrl)
-22001d40 22001d40        8     1                 g_transfer1_ctrl
-22001d48 22001d48        8     4         ./ra_gen/hal_data.o:(.bss.g_transfer0_ctrl)
-22001d48 22001d48        8     1                 g_transfer0_ctrl
-22001d50 22001d50       40     4         ./ra_gen/hal_data.o:(.bss.g_i2c_master_for_peripheral_ctrl)
-22001d50 22001d50       40     1                 g_i2c_master_for_peripheral_ctrl
-22001d90 22001d90        2     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.0)
-22001d90 22001d90        2     1                 g_ctrl_blk.0
-22001d92 22001d92        2     2         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.1)
-22001d92 22001d92        2     1                 g_ctrl_blk.1
-22001d94 22001d94        2     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.2)
-22001d94 22001d94        2     1                 g_ctrl_blk.2
-22001d96 22001d96        2     2         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.3)
-22001d96 22001d96        2     1                 g_ctrl_blk.3
-22001d98 22001d98        4     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.4)
-22001d98 22001d98        4     1                 g_ctrl_blk.4
-22001d9c 22001d9c        8     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_fade_pending)
-22001d9c 22001d9c        8     1                 g_fade_pending
-22001da4 22001da4        4     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_frame_ctr)
-22001da4 22001da4        4     1                 g_frame_ctr
-22001da8 22001da8        1     1         ./ra/fsp/src/r_dtc/r_dtc.o:(.bss.r_dtc_state_initialize.g_dtc_state_initialized)
-22001da8 22001da8        1     1                 r_dtc_state_initialize.g_dtc_state_initialized
-22001dac 22001dac       54     4         ./ra/fsp/src/bsp/mcu/all/bsp_group_irq.o:(.bss.g_bsp_group_irq_sources)
-22001dac 22001dac       54     1                 g_bsp_group_irq_sources
-22001e00 22001e00        4     4         ./ra/fsp/src/bsp/mcu/all/bsp_io.o:(.bss.g_protect_pfswe_counter)
-22001e00 22001e00        4     1                 g_protect_pfswe_counter
-22001e04 22001e04       3c     4         ./ra/fsp/src/bsp/mcu/all/bsp_irq.o:(.bss.gp_renesas_isr_context)
-22001e04 22001e04       3c     1                 gp_renesas_isr_context
-22001e40 22001e40        a     2         ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o:(.bss.g_protect_counters)
-22001e40 22001e40        a     1                 g_protect_counters
-22001e4c 22001e4c        4     4         ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o:(.bss.SystemCoreClock)
-22001e4c 22001e4c        4     1                 SystemCoreClock
-22001e50 22001e50        4     4         C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\toolchains\llvm_arm\ATfE-21.1.1-Windows-x86_64\bin\..\lib\clang-runtimes/arm-none-eabi/armv8.1m.main_hard_fpdp_nomve_exn_rtti_unaligned_size\lib\libc.a(libc_picolib_machine_arm_tls.c.o):(.bss.__tls)
-22001e50 22001e50        4     1                 __tls
-22001e54 22001e54        0     1         __ram_zero$$Limit = .
-22001e54 22001e54        0     1 __ram_tdata$$
-22001e54 22001e54        0     1         __ram_tdata$$Base = .
-22001e54 22001e54        0     1         __ram_tdata$$Load = LOADADDR(__ram_tdata$$)
-22001e54 22001e54        0     1         __ram_tdata$$Limit = .
-22001e54 22001e54        0     1 __ram_tbss$$
-22001e54 22001e54        0     1         __ram_tbss$$Base = .
-22001e54 22001e54        0     1         __ram_tbss$$Limit = .
-22001e58 22001e58        0     1 __ram_thread_stack$$
-22001e58 22001e58        0     1         __ram_thread_stack$$Base = .
-22001e58 22001e58        0     1         __ram_thread_stack$$Limit = .
-22002000 22002000        0     1 .ram.endof
-22002000 22002000        0     1         __ddsc_RAM_END = .
-22002000 22002000        0     1 .ram.flat_nsc
-22002000 22002000        0     1         __ddsc_RAM_NSC = .
+22000360 22000360     8000     8         ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o:(.bss.g_main_stack)
+22000360 22000360     8000     1                 g_main_stack
+22008360 22008360       2c     4         ./ra/fsp/src/bsp/mcu/all/bsp_clocks.o:(.ram_noinit)
+22008360 22008360       2c     1                 g_clock_freq
+2200838c 2200838c        0     1         __ram_noinit$$Limit = .
+2200838c 2200838c      ac8     4 __ram_zero$$
+2200838c 2200838c        0     1         __ram_zero$$Base = .
+2200838c 2200838c       a8     4         ./src/SEGGER_RTT/SEGGER_RTT.o:(.bss._SEGGER_RTT)
+2200838c 2200838c       a8     1                 _SEGGER_RTT
+22008434 22008434      800     1         ./src/SEGGER_RTT/SEGGER_RTT.o:(.bss._acUpBuffer)
+22008434 22008434      800     1                 _acUpBuffer
+22008c34 22008c34       10     1         ./src/SEGGER_RTT/SEGGER_RTT.o:(.bss._acDownBuffer)
+22008c34 22008c34       10     1                 _acDownBuffer
+22008c44 22008c44        4     4         ./src/camera_sensor.o:(.bss.g_plck_hz)
+22008c44 22008c44        4     1                 g_plck_hz
+22008c48 22008c48        1     1         ./src/glcdc_display.o:(.bss.g_vsync_flag)
+22008c48 22008c48        1     1                 g_vsync_flag
+22008c4c 22008c4c        4     4         ./src/glcdc_display.o:(.bss.g_buffer_size)
+22008c4c 22008c4c        4     1                 g_buffer_size
+22008c50 22008c50        1     1         ./src/i2c_control.o:(.bss.g_i2c_event_for_peripheral)
+22008c50 22008c50        1     1                 g_i2c_event_for_peripheral
+22008c52 22008c52        2     2         ./src/mipi_csi.o:(.bss.g_image_width)
+22008c52 22008c52        2     1                 g_image_width
+22008c54 22008c54        2     2         ./src/mipi_csi.o:(.bss.g_image_height)
+22008c54 22008c54        2     1                 g_image_height
+22008c58 22008c58       18     4         ./src/mipi_csi.o:(.bss.g_vin_cfg_run_time)
+22008c58 22008c58       18     1                 g_vin_cfg_run_time
+22008c70 22008c70        4     4         ./src/mipi_csi.o:(.bss.gp_next_buffer)
+22008c70 22008c70        4     1                 gp_next_buffer
+22008c74 22008c74       84     4         ./src/mipi_csi.o:(.bss.g_vin_cfg_run_time_extend)
+22008c74 22008c74       84     1                 g_vin_cfg_run_time_extend
+22008cf8 22008cf8       10     4         ./ra_gen/common_data.o:(.bss.g_display_ctrl)
+22008cf8 22008cf8       10     1                 g_display_ctrl
+22008d08 22008d08        8     4         ./ra_gen/common_data.o:(.bss.g_mipi_phy0_ctrl)
+22008d08 22008d08        8     1                 g_mipi_phy0_ctrl
+22008d10 22008d10       14     4         ./ra_gen/common_data.o:(.bss.g_mipi_csi0_ctrl)
+22008d10 22008d10       14     1                 g_mipi_csi0_ctrl
+22008d24 22008d24       14     4         ./ra_gen/common_data.o:(.bss.g_vin_ctrl)
+22008d24 22008d24       14     1                 g_vin_ctrl
+22008d38 22008d38        8     4         ./ra_gen/common_data.o:(.bss.g_ioport_ctrl)
+22008d38 22008d38        8     1                 g_ioport_ctrl
+22008d40 22008d40        8     4         ./ra_gen/hal_data.o:(.bss.g_transfer1_ctrl)
+22008d40 22008d40        8     1                 g_transfer1_ctrl
+22008d48 22008d48        8     4         ./ra_gen/hal_data.o:(.bss.g_transfer0_ctrl)
+22008d48 22008d48        8     1                 g_transfer0_ctrl
+22008d50 22008d50       40     4         ./ra_gen/hal_data.o:(.bss.g_i2c_master_for_peripheral_ctrl)
+22008d50 22008d50       40     1                 g_i2c_master_for_peripheral_ctrl
+22008d90 22008d90        2     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.0)
+22008d90 22008d90        2     1                 g_ctrl_blk.0
+22008d92 22008d92        2     2         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.1)
+22008d92 22008d92        2     1                 g_ctrl_blk.1
+22008d94 22008d94        2     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.2)
+22008d94 22008d94        2     1                 g_ctrl_blk.2
+22008d96 22008d96        2     2         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.3)
+22008d96 22008d96        2     1                 g_ctrl_blk.3
+22008d98 22008d98        4     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_ctrl_blk.4)
+22008d98 22008d98        4     1                 g_ctrl_blk.4
+22008d9c 22008d9c        8     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_fade_pending)
+22008d9c 22008d9c        8     1                 g_fade_pending
+22008da4 22008da4        4     4         ./ra/fsp/src/r_glcdc/r_glcdc.o:(.bss.g_frame_ctr)
+22008da4 22008da4        4     1                 g_frame_ctr
+22008da8 22008da8        1     1         ./ra/fsp/src/r_dtc/r_dtc.o:(.bss.r_dtc_state_initialize.g_dtc_state_initialized)
+22008da8 22008da8        1     1                 r_dtc_state_initialize.g_dtc_state_initialized
+22008dac 22008dac       54     4         ./ra/fsp/src/bsp/mcu/all/bsp_group_irq.o:(.bss.g_bsp_group_irq_sources)
+22008dac 22008dac       54     1                 g_bsp_group_irq_sources
+22008e00 22008e00        4     4         ./ra/fsp/src/bsp/mcu/all/bsp_io.o:(.bss.g_protect_pfswe_counter)
+22008e00 22008e00        4     1                 g_protect_pfswe_counter
+22008e04 22008e04       3c     4         ./ra/fsp/src/bsp/mcu/all/bsp_irq.o:(.bss.gp_renesas_isr_context)
+22008e04 22008e04       3c     1                 gp_renesas_isr_context
+22008e40 22008e40        a     2         ./ra/fsp/src/bsp/mcu/all/bsp_register_protection.o:(.bss.g_protect_counters)
+22008e40 22008e40        a     1                 g_protect_counters
+22008e4c 22008e4c        4     4         ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o:(.bss.SystemCoreClock)
+22008e4c 22008e4c        4     1                 SystemCoreClock
+22008e50 22008e50        4     4         C:\Renesas\RA\e2studio_v2025-12_fsp_v6.3.0\toolchains\llvm_arm\ATfE-21.1.1-Windows-x86_64\bin\..\lib\clang-runtimes/arm-none-eabi/armv8.1m.main_hard_fpdp_nomve_exn_rtti_unaligned_size\lib\libc.a(libc_picolib_machine_arm_tls.c.o):(.bss.__tls)
+22008e50 22008e50        4     1                 __tls
+22008e54 22008e54        0     1         __ram_zero$$Limit = .
+22008e54 22008e54        0     1 __ram_tdata$$
+22008e54 22008e54        0     1         __ram_tdata$$Base = .
+22008e54 22008e54        0     1         __ram_tdata$$Load = LOADADDR(__ram_tdata$$)
+22008e54 22008e54        0     1         __ram_tdata$$Limit = .
+22008e54 22008e54        0     1 __ram_tbss$$
+22008e54 22008e54        0     1         __ram_tbss$$Base = .
+22008e54 22008e54        0     1         __ram_tbss$$Limit = .
+22008e58 22008e58        0     1 __ram_thread_stack$$
+22008e58 22008e58        0     1         __ram_thread_stack$$Base = .
+22008e58 22008e58        0     1         __ram_thread_stack$$Limit = .
+22009000 22009000        0     1 .ram.endof
+22009000 22009000        0     1         __ddsc_RAM_END = .
+22009000 22009000        0     1 .ram.flat_nsc
+22009000 22009000        0     1         __ddsc_RAM_NSC = .
  2000388  2000388     5516     8 __flash_readonly$$
  2000388  2000388        0     1         __flash_readonly$$Base = .
  2000388  2000388        2     2         ./src/SERIAL_TERM/r_sci_b_uart/r_sci_b_uart.o:(.text.sci_b_uart_rxi_isr)
@@ -1137,8 +1137,8 @@
      d18      d18       20     1         ./ra/fsp/src/bsp/mcu/all/bsp_sdram.o:(.debug_ranges)
      d38      d38       18     1         ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.o:(.debug_ranges)
      d50      d50       40     1         ./ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.o:(.debug_ranges)
-       0        0    15630     1 .debug_str
-       0        0    15630     1         <internal>:(.debug_str)
+       0        0    15683     1 .debug_str
+       0        0    15683     1         <internal>:(.debug_str)
        0        0       29     1 .comment
        0        0       29     1         <internal>:(.comment)
        0        0     14b8     4 .debug_frame

@@ -1,0 +1,39 @@
+{
+    "schema": 2,
+    "metadata": {},
+    "checksums": {},
+    "devices": [
+        "CPU",
+        "EC_C_CODEGEN"
+    ],
+    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite",
+    "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\conversion_results\\converted\\build\\MCU",
+    "symbolic_dimensions": {},
+    "model_info": {},
+    "frontend_options": {
+        "kv_cache_length": 0,
+        "attention_dim_pad": 32,
+        "input_norm": {}
+    },
+    "backend_options": {
+        "cpu": {
+            "host_arch": "x86"
+        },
+        "dna": {
+            "arch_cfg": "ALT2",
+            "ccfg": "{}",
+            "extract_qtz_io_to_cpu": true
+        },
+        "ccodegen": {
+            "enable_ethos": true,
+            "enable_ospi": false,
+            "enable_ref_data": true,
+            "convert_canonical": false
+        },
+        "dnax": {
+            "enable_cpu_only": false,
+            "enable_dma": true
+        }
+    },
+    "fe_mode": "FULL"
+}
