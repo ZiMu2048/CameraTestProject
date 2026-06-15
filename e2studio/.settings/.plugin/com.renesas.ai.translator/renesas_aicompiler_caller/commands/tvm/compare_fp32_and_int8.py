@@ -25,6 +25,7 @@ import tvm
 import renesas_aicompiler_caller # noqa
 from renesas_aicompiler_caller.utils import LogFactory
 from renesas_aicompiler_caller.commands.tvm.utils import load_shape_dict_json
+from renesas_aicompiler_caller.utils.environment_check import check_tvm_environment
 
 logger = LogFactory().add_console_handler() \
                      .add_file_handler(filename=f"{os.path.basename(__file__)}.log") \
@@ -118,6 +119,7 @@ def cos_sim(v1, v2):
 
 
 def main(args):
+    check_tvm_environment()
     # Parse command line arguments
     args = parse_args(args)
 

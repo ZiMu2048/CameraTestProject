@@ -9,6 +9,8 @@
 ***********************************************************************************************************************/
 
 #include "mipi_csi.h"
+#include "model.h"          // RunModel(), GetModelInputPtr_xxx(), GetModelOutputPtr_xxx()
+#include "sub_0000_tensors.h"  // kArenaSize_sub_0000
 
 /* External variables */
 extern sensor_reg_t live_camera;
@@ -91,8 +93,13 @@ void mipi_csi_ep_entry(void)
     /* ====== 硬编码: Live Camera 模式 ====== */
     err = camera_write_array(&live_camera);
     handle_error(err, "Change to live camera mode FAILED \r\n");
-
     APP_PRINT("\r\nLive camera streaming started\r\n");
+    R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);
+
+    /* ====== NPU 初始化 ====== */
+    err = RM_ETHOSU_Open(&g_rm_ethosu0_ctrl, &g_rm_ethosu0_cfg);
+    handle_error(err, "RM_ETHOSU_Open FAILED\r\n");
+    R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);
 
         /* ====== 主循环: Vsync → 刷新显存 ====== */
     while(true)
@@ -102,8 +109,66 @@ void mipi_csi_ep_entry(void)
         /* Wait for a Vsync event */
         while(!g_vsync_flag);
 
+        // 1. 把 VIN 最新帧复制到显示 framebuffer
+        if (gp_next_buffer != NULL)
+        {
+            memcpy(fb_background[0], gp_next_buffer, VIN_BYTES_PER_FRAME);
+        }
+
+        // 2.填入模型输入
+        if (gp_next_buffer != NULL)
+        {
+            int8_t *model_input = GetModelInputPtr_serving_default_x_0();
+            preprocess_frame_to_fomo(gp_next_buffer, model_input);
+
+            // 3. 运行模型推理
+            RunModel(false);
+
+            // 4. 读取输出并在 fb_background[0] 上画框
+            int8_t *output = GetModelOutputPtr_StatefulPartitionedCall_0_70066();
+
+            // 输出 shape: [1, 32, 32, 4]
+            // output[row*32*4 + col*4 + cls] = 得分
+
+            // FOMO 输出格子到 fb 坐标的映射：
+            // FOMO格子(col,row) → 在256x256图像上的像素 (col*8+4, row*8+4)
+            // 256x256图像来自 600x600 裁剪区域的缩放
+            // 所以换算回 1024x600 framebuffer：
+            //   fb_x = 212 + (col*8 + 4) * 600 / 256
+            //   fb_y = 0   + (row*8 + 4) * 600 / 256
+
+            const int8_t DETECT_THRESHOLD = 60;  // int8格式，0对应量化后的中间值，可调
+            const int BOX_HALF = 20;  // 框的半径（像素，在1024x600坐标系中）
+
+            for (int row = 0; row < 32; row++) {
+                for (int col = 0; col < 32; col++) {
+                    for (int cls = 1; cls < 4; cls++) {  // 跳过背景cls=0
+                        int8_t score = output[row * 32 * 4 + col * 4 + cls];
+                        if (score > DETECT_THRESHOLD) {
+                            // 映射到 fb 坐标
+                            int cx = 212 + (col * 8 + 4) * 600 / 256;
+                            int cy =   0 + (row * 8 + 4) * 600 / 256;
+                            // 画红色框 (RGB565红色 = 0xF800)
+                            draw_rect_rgb565(fb_background[0],
+                                             cx - BOX_HALF, cy - BOX_HALF,
+                                             cx + BOX_HALF, cy + BOX_HALF,
+                                             0xF800,
+                                             DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+                            APP_PRINT("Detected cls=%d at grid(%d,%d)\r\n", cls, col, row);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
         /* Update new frame for GLCDC display */
-        err = R_GLCDC_BufferChange(&g_display_ctrl, (uint8_t * const) gp_next_buffer, DISPLAY_FRAME_LAYER_1);
+        err = R_GLCDC_BufferChange(&g_display_ctrl, (uint8_t * const) fb_background[0], DISPLAY_FRAME_LAYER_1);
         if (FSP_ERR_INVALID_UPDATE_TIMING != err)
         {
             handle_error(err, "** R_GLCDC_BufferChange API FAILED **\r\n");
@@ -338,3 +403,74 @@ void handle_error (fsp_err_t err, char * err_str)
 /***********************************************************************************************************************
 * End of function handle_error
 ***********************************************************************************************************************/
+
+
+// 把 VIN 的 RGB565 1024x600 帧 → FOMO 输入 int8 RGB 256x256
+// src: VIN帧缓冲指针(RGB565, stride=2048字节)
+// dst: 模型输入指针(RGB888 int8, 256x256x3)
+static void preprocess_frame_to_fomo(const uint8_t *src, int8_t *dst)
+{
+    // 从 1024x600 中心裁剪出 600x600，再缩放到 256x256
+    // 中心裁剪起点：x_offset = (1024 - 600) / 2 = 212
+    const int src_crop_x = 212;
+    const int src_crop_y = 0;
+    const int src_crop_size = 600;   // 正方形裁剪区域
+
+    const int dst_size = 256;
+    const int src_stride_bytes = 2048;  // VIN_CFG_BYTES_PER_LINE
+
+    for (int dy = 0; dy < dst_size; dy++)
+    {
+        // 在源裁剪区域中对应的行
+        int sy = src_crop_y + (dy * src_crop_size / dst_size);
+
+        for (int dx = 0; dx < dst_size; dx++)
+        {
+            // 在源裁剪区域中对应的列
+            int sx = src_crop_x + (dx * src_crop_size / dst_size);
+
+            // 读 RGB565 像素（注意大端：byte_swap=1）
+            int byte_offset = sy * src_stride_bytes + sx * 2;
+            uint16_t pixel = ((uint16_t)src[byte_offset] << 8)
+                           | ((uint16_t)src[byte_offset + 1]);
+
+            // 提取 RGB 分量，展开到 8bit
+            uint8_t r5 = (pixel >> 11) & 0x1F;
+            uint8_t g6 = (pixel >> 5)  & 0x3F;
+            uint8_t b5 = (pixel >> 0)  & 0x1F;
+
+            uint8_t r = (uint8_t)((r5 << 3) | (r5 >> 2));
+            uint8_t g = (uint8_t)((g6 << 2) | (g6 >> 4));
+            uint8_t b = (uint8_t)((b5 << 3) | (b5 >> 2));
+
+            // 写入 int8（uint8 - 128），RGB顺序
+            int dst_offset = (dy * dst_size + dx) * 3;
+            dst[dst_offset + 0] = (int8_t)((int16_t)r - 128);
+            dst[dst_offset + 1] = (int8_t)((int16_t)g - 128);
+            dst[dst_offset + 2] = (int8_t)((int16_t)b - 128);
+        }
+    }
+}
+
+static void draw_rect_rgb565(uint8_t *fb, int x0, int y0, int x1, int y1,
+                              uint16_t color, int fb_stride_pixels)
+{
+    // 越界保护
+    if (x0 < 0) x0 = 0;
+    if (y0 < 0) y0 = 0;
+    if (x1 >= 1024) x1 = 1023;
+    if (y1 >= 600)  y1 = 599;
+
+    uint16_t *pixels = (uint16_t *)fb;
+
+    // 上边和下边（水平线）
+    for (int x = x0; x <= x1; x++) {
+        pixels[y0 * fb_stride_pixels + x] = color;
+        pixels[y1 * fb_stride_pixels + x] = color;
+    }
+    // 左边和右边（竖线）
+    for (int y = y0; y <= y1; y++) {
+        pixels[y * fb_stride_pixels + x0] = color;
+        pixels[y * fb_stride_pixels + x1] = color;
+    }
+}

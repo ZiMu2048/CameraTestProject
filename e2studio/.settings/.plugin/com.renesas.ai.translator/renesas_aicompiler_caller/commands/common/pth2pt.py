@@ -7,6 +7,7 @@
 # Corporation.
 import os
 import sys
+from renesas_aicompiler_caller.utils.environment_check import check_tvm_environment
 import torch
 import argparse
 from importlib import machinery
@@ -37,6 +38,7 @@ def create_dummy_data(data, dummy_data):
 
 def main(args):
 
+    check_tvm_environment()
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_pth")
     parser.add_argument("--input_python")

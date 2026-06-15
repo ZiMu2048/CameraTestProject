@@ -21,6 +21,7 @@ import argparse
 from pathlib import Path
 import shutil
 
+from renesas_aicompiler_caller.utils.environment_check import check_ruhmi_environment
 from renesas_aicompiler_caller.utils import LogFactory
 
 logger = LogFactory().add_console_handler() \
@@ -56,6 +57,7 @@ def copy_ethos_system_config(output_dir: str):
 def main(args):
     """Main function
     """
+    check_ruhmi_environment()
     parser = argparse.ArgumentParser(prog="ruhmi get_ethos_config")
 
     parser.add_argument(

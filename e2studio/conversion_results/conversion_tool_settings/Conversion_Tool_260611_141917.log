@@ -1,0 +1,67 @@
+CMD:[D:/Lab/Lab_MCU/Renesas_RA/.metadata/.plugins/com.renesas.ai.translator/py.bat D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/.settings/.plugin/com.renesas.ai.translator/renesas_aicompiler_caller/cli.py ruhmi deploy --framework quantized --input_model D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/Renesas_YOLO_int8.tflite --output_dir D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/converted --optimization_mode 1 --memory_mode 1 --mera_options  --vela_options  --shape_dict_json D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/conversion_tool_settings/Renesas_YOLO_int8.tflite_input_shape.json ]
+2026-06-11 14:19:14,214 [DEBUG] (__init__.py #342, wrapper): matplotlib data path: D:\Renesas\RUHMI\.venv\lib\site-packages\matplotlib\mpl-data
+2026-06-11 14:19:14,219 [DEBUG] (__init__.py #342, wrapper): CONFIGDIR=C:\Users\lingk\.matplotlib
+2026-06-11 14:19:14,220 [DEBUG] (__init__.py #1560, <module>): interactive is False
+2026-06-11 14:19:14,220 [DEBUG] (__init__.py #1561, <module>): platform is win32
+2026-06-11 14:19:14,249 [DEBUG] (__init__.py #342, wrapper): CACHEDIR=C:\Users\lingk\.matplotlib
+2026-06-11 14:19:14,251 [DEBUG] (font_manager.py #1635, _load_fontmanager): Using fontManager instance from C:\Users\lingk\.matplotlib\fontlist-v390.json
+2026-06-11 14:19:14,834 [INFO] (environment_check.py #360, check_ruhmi_environment): Checking RUHMI environment ...
+2026-06-11 14:19:14,834 [INFO] (environment_check.py #248, _check_python_deps_for_ruhmi): mera version 2.6.0+pkg.4513 released on 2026-03-05
+2026-06-11 14:19:14,835 [INFO] (environment_check.py #234, _check_python_package_and_version): 'mera' version 2.6.0+pkg.4513 is installed.
+2026-06-11 14:19:14,836 [INFO] (environment_check.py #234, _check_python_package_and_version): 'ethos-u-vela' version 4.2.0 is installed.
+2026-06-11 14:19:14,837 [INFO] (environment_check.py #234, _check_python_package_and_version): 'tflite' version 2.18.0 is installed.
+2026-06-11 14:19:14,838 [INFO] (environment_check.py #234, _check_python_package_and_version): 'onnx' version 1.17.0 is installed.
+2026-06-11 14:19:14,838 [INFO] (environment_check.py #234, _check_python_package_and_version): 'typing_extensions' version 4.15.0 is installed.
+2026-06-11 14:19:14,839 [INFO] (environment_check.py #234, _check_python_package_and_version): 'mera-visualizer' version 2.5.0+mcuv4 is installed.
+2026-06-11 14:19:14,840 [INFO] (deploy_model.py #337, main): Arguments: Namespace(framework='quantized', input_model='D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/Renesas_YOLO_int8.tflite', output_dir='D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/converted', shape_dict_json='D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/conversion_results/conversion_tool_settings/Renesas_YOLO_int8.tflite_input_shape.json', optimization_mode=1, memory_mode=1, use_only_cpu=False, weight_loc=0, ethos_configuration_filepath=None, mera_options='', vela_options='')
+2026-06-11 14:19:14,840 [INFO] (deploy_model.py #338, main): Mera options: Namespace(target='mcu', enable_ospi=False, enable_ref_data=True, suffix='', use_x86=False, args=[])
+2026-06-11 14:19:14,840 [INFO] (deploy_model.py #339, main): Vela options: Namespace(sys_config='RA8P1', accel_config='ethos-u55-256', verbose_all=False, args=[])
+Variable container does not have anything...
+2026-06-11 14:19:14,842 [INFO] (deploy_model.py #363, main): Targeting MCU on ALT2 
+2026-06-11 14:19:14,842 [INFO] (deploy_model.py #295, compile_mera): 
+Deploying MERA model ...
+2026-06-11 14:19:14,845 [DEBUG] (deploy_project.py #241, pushd): (pushd) Running in model
+2026-06-11 14:19:14,848 [DEBUG] (utils.py #22, cmd): Running command 'D:\Renesas\RUHMI\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli --io_desc_input D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\Renesas_YOLO_int8.tflite --io_desc_result C:\Users\lingk\AppData\Local\Temp\tmpqwk4749i\tempfile'
+2026-06-11 14:19:14,885 [DEBUG] (deploy_project.py #208, save_artifact): Saved json artifact 'input_desc.json' into D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\model
+2026-06-11 14:19:14,885 [DEBUG] (deploy_project.py #248, popd): (popd) cwd is now D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted
+2026-06-11 14:19:14,885 [INFO] (deploy.py #309, deploy):  *** mera v2.6.0+pkg.4513 ***
+2026-06-11 14:19:14,885 [INFO] (deploy.py #310, deploy): Starting deployment of model 'Renesas_YOLO_int8'...
+2026-06-11 14:19:14,885 [DEBUG] (deploy_project.py #241, pushd): (pushd) Running in build
+2026-06-11 14:19:14,887 [DEBUG] (deploy_project.py #241, pushd): (pushd) Running in MCU
+2026-06-11 14:19:14,888 [DEBUG] (deploy_project.py #208, save_artifact): Saved json artifact 'deploy_cfg.json' into D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU
+2026-06-11 14:19:14,888 [DEBUG] (utils.py #22, cmd): Running command 'D:\Renesas\RUHMI\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU\deploy_cfg.json'
+[2026-06-11 14:19:14.917] [info] Loading and converting TFLite model ... 
+[2026-06-11 14:19:14.918] [info] TFLite Model Version: 3
+Traceback (most recent call last):
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 311, in compile_mera
+    deployer.deploy(
+  File "D:\Renesas\RUHMI\.venv\lib\site-packages\mera\deploy.py", line 349, in deploy
+    self._apply_frontend(model, deploy_cfg_json)
+  File "D:\Renesas\RUHMI\.venv\lib\site-packages\mera\deploy.py", line 246, in _apply_frontend
+    cmd(f"{find_tool('fe_tflite_cli')} {deploy_cfg_json}")
+  File "D:\Renesas\RUHMI\.venv\lib\site-packages\mera\utils.py", line 35, in cmd
+    raise subprocess.CalledProcessError(p.returncode, command)
+subprocess.CalledProcessError: Command 'D:\Renesas\RUHMI\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU\deploy_cfg.json' returned non-zero exit status 3221226505.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\cli.py", line 149, in <module>
+    dispatch(sys.argv[1:])
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\cli.py", line 144, in dispatch
+    runpy.run_module(module_name, run_name="__main__")
+  File "C:\Users\lingk\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 227, in run_module
+    return _run_code(code, {}, init_globals, run_name, mod_spec)
+  File "C:\Users\lingk\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 384, in <module>
+    main(sys.argv[1:])
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 370, in main
+    mera_path = compile_mera(
+  File "D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\.settings\.plugin\com.renesas.ai.translator\renesas_aicompiler_caller\commands\ruhmi\deploy_model.py", line 321, in compile_mera
+    raise RuntimeError(f"Error: {e}\n\n"
+RuntimeError: Error: Command 'D:\Renesas\RUHMI\.venv\Lib\site-packages\mera\bin_utils\fe_tflite_cli D:\Lab\Lab_MCU\Renesas_RA\mipi_csi_ek_ra8p1_ep\mipi_csi_ek_ra8p1_ep\e2studio\conversion_results\converted\build\MCU\deploy_cfg.json' returned non-zero exit status 3221226505.
+
+Failed to deploy the model: D:/Lab/Lab_MCU/Renesas_RA/mipi_csi_ek_ra8p1_ep/mipi_csi_ek_ra8p1_ep/e2studio/Renesas_YOLO_int8.tflite. See the above error log for more details. If that does not help, please contact Renesas.
+[ERROR] Failed to execute the command
+Failed to perform conversion.

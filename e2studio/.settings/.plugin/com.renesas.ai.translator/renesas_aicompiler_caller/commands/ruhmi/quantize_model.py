@@ -20,6 +20,7 @@ import argparse
 import sys
 from pathlib import Path
 import json
+from renesas_aicompiler_caller.utils.environment_check import check_ruhmi_environment
 import numpy as np
 import re
 from typing import List
@@ -458,6 +459,7 @@ def _validate_channel_num(list_to_be_valid, expect_channel_num, variable_name):
 def main(args):
     """Main function
     """
+    check_ruhmi_environment()
     # Parse arguments
     args = parse_args(args)
     logger.info(f"Arguments: {args}")

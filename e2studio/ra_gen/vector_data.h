@@ -6,7 +6,7 @@
         #endif
 /* Number of interrupts allocated */
 #ifndef VECTOR_DATA_IRQ_COUNT
-#define VECTOR_DATA_IRQ_COUNT    (15)
+#define VECTOR_DATA_IRQ_COUNT    (16)
 #endif
 /* ISR prototypes */
 void iic_master_rxi_isr(void);
@@ -20,6 +20,7 @@ void mipi_csi_vc_isr(void);
 void glcdc_line_detect_isr(void);
 void glcdc_underflow_1_isr(void);
 void glcdc_underflow_2_isr(void);
+void rm_ethosu_isr(void);
 void sci_b_uart_rxi_isr(void);
 void sci_b_uart_txi_isr(void);
 void sci_b_uart_tei_isr(void);
@@ -48,16 +49,18 @@ void sci_b_uart_eri_isr(void);
 #define GLCDC_UNDERFLOW_1_IRQn          ((IRQn_Type) 9) /* GLCDC UNDERFLOW 1 (Graphic 1 underflow) */
 #define VECTOR_NUMBER_GLCDC_UNDERFLOW_2 ((IRQn_Type) 10) /* GLCDC UNDERFLOW 2 (Graphic 2 underflow) */
 #define GLCDC_UNDERFLOW_2_IRQn          ((IRQn_Type) 10) /* GLCDC UNDERFLOW 2 (Graphic 2 underflow) */
-#define VECTOR_NUMBER_SCI8_RXI ((IRQn_Type) 11) /* SCI8 RXI (Receive data full) */
-#define SCI8_RXI_IRQn          ((IRQn_Type) 11) /* SCI8 RXI (Receive data full) */
-#define VECTOR_NUMBER_SCI8_TXI ((IRQn_Type) 12) /* SCI8 TXI (Transmit data empty) */
-#define SCI8_TXI_IRQn          ((IRQn_Type) 12) /* SCI8 TXI (Transmit data empty) */
-#define VECTOR_NUMBER_SCI8_TEI ((IRQn_Type) 13) /* SCI8 TEI (Transmit end) */
-#define SCI8_TEI_IRQn          ((IRQn_Type) 13) /* SCI8 TEI (Transmit end) */
-#define VECTOR_NUMBER_SCI8_ERI ((IRQn_Type) 14) /* SCI8 ERI (Receive error) */
-#define SCI8_ERI_IRQn          ((IRQn_Type) 14) /* SCI8 ERI (Receive error) */
+#define VECTOR_NUMBER_NPU_IRQ ((IRQn_Type) 11) /* NPU IRQ (NPU IRQ) */
+#define NPU_IRQ_IRQn          ((IRQn_Type) 11) /* NPU IRQ (NPU IRQ) */
+#define VECTOR_NUMBER_SCI8_RXI ((IRQn_Type) 12) /* SCI8 RXI (Receive data full) */
+#define SCI8_RXI_IRQn          ((IRQn_Type) 12) /* SCI8 RXI (Receive data full) */
+#define VECTOR_NUMBER_SCI8_TXI ((IRQn_Type) 13) /* SCI8 TXI (Transmit data empty) */
+#define SCI8_TXI_IRQn          ((IRQn_Type) 13) /* SCI8 TXI (Transmit data empty) */
+#define VECTOR_NUMBER_SCI8_TEI ((IRQn_Type) 14) /* SCI8 TEI (Transmit end) */
+#define SCI8_TEI_IRQn          ((IRQn_Type) 14) /* SCI8 TEI (Transmit end) */
+#define VECTOR_NUMBER_SCI8_ERI ((IRQn_Type) 15) /* SCI8 ERI (Receive error) */
+#define SCI8_ERI_IRQn          ((IRQn_Type) 15) /* SCI8 ERI (Receive error) */
 /* The number of entries required for the ICU vector table. */
-#define BSP_ICU_VECTOR_NUM_ENTRIES (15)
+#define BSP_ICU_VECTOR_NUM_ENTRIES (16)
 
 #ifdef __cplusplus
         }

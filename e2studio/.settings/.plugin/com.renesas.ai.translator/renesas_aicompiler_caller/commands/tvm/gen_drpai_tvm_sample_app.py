@@ -37,6 +37,7 @@ from renesas_aicompiler_caller.commands.tvm.utils import SampleAppCppWriter, \
                                                   V2LCopyFilesFactory, \
                                                   V2HCopyFilesFactory, \
                                                   CopyFilesDirector
+from renesas_aicompiler_caller.utils.environment_check import check_tvm_environment
 
 logger = LogFactory().add_console_handler() \
                      .build(__name__)
@@ -359,6 +360,7 @@ def main(args):
         ```
     """
 
+    check_tvm_environment()
     # Parse command line arguments
     args = parse_args(args)
     logger.info(args)

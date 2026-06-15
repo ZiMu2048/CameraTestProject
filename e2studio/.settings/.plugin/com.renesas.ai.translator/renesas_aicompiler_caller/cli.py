@@ -17,48 +17,80 @@
 # Copyright (C) 2023-2024 Renesas Electronics Corporation. All rights reserved.
 #######################################################################################################################
 import sys
+import os
 import argparse
 from pathlib import Path
 import platform
+import runpy
 
 # To append the drpai tvm plug path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 import renesas_aicompiler_caller  # noqa
 
+# Define command registry with module names instead of direct imports
 registered_commands = None
+
+# Define common commands available on both Windows and Linux platforms
+common_commands = {
+    'ruhmi deploy': (
+        "Deploy a model with RUHMI",
+        'commands.ruhmi.deploy_model'
+    ),
+    'ruhmi quantize': (
+        "Quantize a model with RUHMI",
+        'commands.ruhmi.quantize_model'
+    ),
+    'ruhmi get_ethos_config': (
+        "Get a ethos system config from RUHMI",
+        'commands.ruhmi.get_ethos_config'
+    ),
+    'ruhmi_g3e deploy': (
+        "Deploy a model with RUHMI for G3E (INT8 TFLite only)",
+        'commands.ruhmi_g3e.deploy_model'
+    ),
+    'ruhmi_g3e get_ethos_config': (
+        "Get a ethos system config for G3E",
+        'commands.ruhmi_g3e.get_ethos_config'
+    ),
+    'comm get_model_info': (
+        "Get a model information",
+        'commands.common.get_model_info'
+    )
+}
+
+# Define Linux-specific commands that are not available on Windows
+linux_only_commands = {
+    'tvm gen_drpai_tvm_obj': (
+        "Generate a DRP-AI TVM Model Object",
+        'commands.tvm.gen_drpai_tvm_obj'
+    ),
+    'tvm gen_preprocess_obj': (
+        "Generate a DRP-AI Preprocess Runtime Object",
+        'commands.tvm.gen_preprocess_obj'
+    ),
+    'tvm gen_drpai_tvm_sample_app': (
+        "Generate a sample code for DRP-AI TVM",
+        'commands.tvm.gen_drpai_tvm_sample_app'
+    ),
+    'tvm compare_fp32_and_int8': (
+        "Compare outputs between fp32 and int8 models",
+        'commands.tvm.compare_fp32_and_int8'
+    ),
+    'comm convert_pth2pt': (
+        "Convert the model format from pth to pt",
+        'commands.common.pth2pt'
+    )
+}
+
+# Determine the current platform and assign the appropriate command set
 if platform.system() == "Windows":
-    import commands.ruhmi.deploy_model  # noqa
-    import commands.ruhmi.quantize_model  # noqa
-    import commands.ruhmi.get_ethos_config  # noqa
-    import commands.common.get_model_info  # noqa
-    registered_commands = {
-        'ruhmi deploy': ("Deploy a model with RUHMI", commands.ruhmi.deploy_model.main),
-        'ruhmi quantize': ("Quantize a model with RUHMI", commands.ruhmi.quantize_model.main),
-        'ruhmi get_ethos_config': ("Get a ethos system config from RUHMI", commands.ruhmi.get_ethos_config.main),
-        'comm get_model_info': ("Get a model information", commands.common.get_model_info.main)
-    }
+    # On Windows, only common commands are available
+    registered_commands = common_commands
 elif platform.system() == "Linux":
-    # To avoid the segmentation fault, firstly import tensorflow library
-    import torch  # noqa
-    import tensorflow as tf  # noqa
-    import commands.common.get_model_info  # noqa
-    import commands.tvm.gen_drpai_tvm_obj  # noqa
-    import commands.tvm.gen_preprocess_obj  # noqa
-    import commands.tvm.gen_drpai_tvm_sample_app  # noqa
-    import commands.tvm.compare_fp32_and_int8  # noqa
-    import commands.common.pth2pt  # noqa
-    registered_commands = {
-        'comm get_model_info': ("Get a model information", commands.common.get_model_info.main),
-        'tvm gen_drpai_tvm_obj': ("Generate  a DRP-AI TVM Model Object", commands.tvm.gen_drpai_tvm_obj.main),
-        'tvm gen_preprocess_obj': ("Generate  a DRP-AI Preprocess Runtime Object",
-                                   commands.tvm.gen_preprocess_obj.main),
-        'tvm gen_drpai_tvm_sample_app': ("Generate  a sample code for DRP-AI TVM",
-                                         commands.tvm.gen_drpai_tvm_sample_app.main),
-        'tvm compare_fp32_and_int8': ("Compare outputs between fp32 and int8 models",
-                                      commands.tvm.compare_fp32_and_int8.main),
-        'comm convert_pth2pt': ("Convert the model format from pth to pt",  commands.common.pth2pt.main)
-    }
+    # On Linux, both common and Linux-specific commands are available
+    registered_commands = {**common_commands, **linux_only_commands}
 else:
+    # Raise an error for unsupported platforms
     raise RuntimeError(f"Unsupported system was detected: {platform.system()}")
 
 
@@ -71,6 +103,12 @@ def build_parser():
         prog="cli.py",
         description=desc,
         formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--device-type",
+        required=False,
+        choices=["RA8P1", "RA8", "RZG3E"],
+        help="Target device type (e.g., RA8P1, RA8, RZG3E)"
     )
     parser.add_argument("top_command", nargs="?", help="Main command (e.g. ruhmi)")
     parser.add_argument("sub_command", nargs="?", help="Subcommand (e.g. deploy, quantize, get_ethos_config)")
@@ -94,10 +132,17 @@ def dispatch(argv):
         parser.print_help()
         sys.exit(1)
 
-    _, handler = registered_commands[command_key]
+    # Inject device type into environment variable
+    if args.device_type:
+        os.environ["RUHMI_DEVICE_TYPE"] = args.device_type
 
-    # Run the main() function for specified command
-    handler(args.args)
+    _, module_name = registered_commands[command_key]
+
+    # Pass arguments to the module via sys.argv
+    original_argv = sys.argv.copy()
+    sys.argv = [module_name] + args.args
+    runpy.run_module(module_name, run_name="__main__")
+    sys.argv = original_argv
 
 
 if __name__ == '__main__':

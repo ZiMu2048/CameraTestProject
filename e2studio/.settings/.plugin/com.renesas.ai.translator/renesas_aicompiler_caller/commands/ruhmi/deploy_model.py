@@ -22,6 +22,7 @@ from pathlib import Path
 import shutil
 import json
 from contextlib import contextmanager
+from renesas_aicompiler_caller.utils.environment_check import check_ruhmi_environment
 import mera
 from mera import Target, Platform
 from renesas_aicompiler_caller.utils import LogFactory
@@ -328,6 +329,7 @@ def compile_mera(model_path, out_dir, platform, target,
 def main(args):
     """Main function
     """
+    check_ruhmi_environment()
     # Parse arguments
     args = parse_args(args)
     mera_options = parse_mera_options(args.mera_options)

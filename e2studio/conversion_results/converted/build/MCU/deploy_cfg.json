@@ -6,7 +6,7 @@
         "CPU",
         "EC_C_CODEGEN"
     ],
-    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite",
+    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\Renesas_FOMO_Int8.tflite",
     "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\conversion_results\\converted\\build\\MCU",
     "symbolic_dimensions": {},
     "model_info": {},

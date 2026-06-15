@@ -944,6 +944,19 @@ FSP Configuration
     Parameter Checking: Default (BSP)
     Linker section to keep DTC vector table: .fsp_dtc_vector_table
     
+  Module "Google TFLM Core Lib"
+  Module "Google Flatbuffers"
+  Module "Google TFLM Ethos-U Kernel"
+  Module "Arm Ethos-U Core Driver Wrapper (rm_ethosu)"
+    Parameter Checking: Default (BSP)
+    Ethos-U log level: Disabled
+    
+  Module "Arm Ethos-U Core Driver"
+  Module "Arm Ethos-U Profiler"
+  Module "Arm CMSIS View Library Source"
+  Module "Google TFLM CMSIS-NN Kernel"
+  Module "Arm CMSIS NN Library Source"
+  Module "Arm CMSIS DSP Library Source"
   HAL
     Instance "g_ioport I/O Port (r_ioport)"
       Name: g_ioport
@@ -1308,3 +1321,21 @@ FSP Configuration
       Dithering: Pattern C: Pattern 11
       Dithering: Pattern D: Pattern 11
       
+    Instance "Google TFLM Core Lib"
+      Instance "Google Flatbuffers"
+      Instance "Google TFLM CMSIS-NN Kernel"
+        Instance "Arm CMSIS NN Library Source"
+          Instance "Arm CMSIS DSP Library Source"
+      Instance "Google TFLM Ethos-U Kernel"
+        Instance "Arm Ethos-U Core Driver Wrapper (rm_ethosu)"
+          Name: g_rm_ethosu0
+          Callback: NULL
+          NPU Interrupt Priority: Priority 12
+          Enable Secure Mode: Enabled
+          Enable Privilege Mode: Enabled
+          
+          Instance "Arm Ethos-U Core Driver"
+            Name: g_ethosu0
+            
+        Instance "Arm Ethos-U Profiler"
+          Instance "Arm CMSIS View Library Source"
