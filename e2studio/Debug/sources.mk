@@ -119,4 +119,9 @@ src/SERIAL_TERM/r_sci_uart \
 src/SERIAL_TERM/r_uarta \
 src/SERIAL_TERM \
 src \
+<<<<<<< HEAD
 
+=======
+src/model \
+
+>>>>>>> branch 'main' of git@github.com:ZiMu2048/CameraTestProject.git

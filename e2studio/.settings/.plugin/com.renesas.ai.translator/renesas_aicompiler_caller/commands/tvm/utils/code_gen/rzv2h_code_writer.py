@@ -660,8 +660,7 @@ class V2HSampleAppCppWriterForV230(Writer):
         self._writer.close()
 
 
-@register_code_generator
-class V2NSampleAppCppWriterForV251(Writer):
+class _BaseSampleAppCppWriterForV251(Writer):
     """Writer to output sample code depending on DRP-AI TVM Model Object.
 
     Args:
@@ -708,3 +707,13 @@ class V2NSampleAppCppWriterForV251(Writer):
 
     def close(self):
         self._writer.close()
+
+
+@register_code_generator
+class V2NSampleAppCppWriterForV251(_BaseSampleAppCppWriterForV251):
+    pass
+
+
+@register_code_generator
+class V2HSampleAppCppWriterForV251(_BaseSampleAppCppWriterForV251):
+    pass

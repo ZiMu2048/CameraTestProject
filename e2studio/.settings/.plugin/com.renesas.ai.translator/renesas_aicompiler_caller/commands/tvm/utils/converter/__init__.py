@@ -22,6 +22,7 @@ from .v221_rzcpu_model_converter import *  # noqa
 from .v111_rzcpu_model_converter import *  # noqa
 from .v210_rzcpu_model_converter import *  # noqa
 from .v251_rzcpu_model_converter import *  # noqa
+from .v261_rzcpu_model_converter import *  # noqa
 
 PRODUCT = os.getenv("PRODUCT", None)
 if PRODUCT is None:
@@ -31,9 +32,11 @@ if PRODUCT is None:
 if PRODUCT == "V2L":
     from .v111_rzv2l_model_converter import *  # noqa
     from .v230_rzv2l_model_converter import *  # noqa
+    from .v261_rzv2l_model_converter import *  # noqa
 elif PRODUCT == "V2H":
     from .v210_rzv2h_model_converter import *  # noqa
     from .v221_rzv2h_model_converter import *  # noqa
     from .v230_rzv2h_model_converter import *  # noqa
+    from .v251_rzv2h_model_converter import *  # noqa
 elif PRODUCT == "V2N":
     from .v251_rzv2n_model_converter import *  # noqa

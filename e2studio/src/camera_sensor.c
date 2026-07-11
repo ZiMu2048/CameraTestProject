@@ -19,7 +19,11 @@ uint32_t g_plck_hz = RESET_VALUE;
 
 const camera_config_t camera_profiles[RES_MAX] = {
     [RES_1024x600]    = {1024, 600},
+<<<<<<< HEAD
     [RES_VGA]         = {800,  480},
+=======
+    [RES_VGA]         = {480,  272},
+>>>>>>> branch 'main' of git@github.com:ZiMu2048/CameraTestProject.git
     [RES_QVGA]        = {320,  240},
 };
 

@@ -16,10 +16,5 @@
 #
 # Copyright (C) 2023-2025 Renesas Electronics Corporation. All rights reserved.
 #######################################################################################################################
-from .utils import exec_environment_check
-
-__version__ = "1.1.0"
-__release_date__ = "2025-09-29"
-
-# Check environment conditions
-exec_environment_check()
+__version__ = "1.2.0"
+__release_date__ = "2025-11-12"

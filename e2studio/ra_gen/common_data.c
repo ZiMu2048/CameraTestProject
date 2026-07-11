@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* generated common source file - do not edit */
 #include "common_data.h"
 #include "ethosu_driver.h"
@@ -21,6 +22,31 @@ const rm_ethosu_cfg_t g_rm_ethosu0_cfg =
 const rm_ethosu_instance_t g_rm_ethosu0 =
 { .p_ctrl = &g_rm_ethosu0_ctrl, .p_cfg = &g_rm_ethosu0_cfg, .p_api = &g_rm_ethosu_on_npu, };
 /** Display framebuffer */
+=======
+/* generated common source file - do not edit */
+#include "common_data.h"
+#include "ethosu_driver.h"
+struct ethosu_driver g_ethosu0;
+rm_ethosu_extended_cfg_t g_rm_ethosu0_ext_cfg =
+{ .p_dev = &g_ethosu0, };
+
+rm_ethosu_instance_ctrl_t g_rm_ethosu0_ctrl =
+{ .p_ext_cfg = &g_rm_ethosu0_ext_cfg, };
+
+const rm_ethosu_cfg_t g_rm_ethosu0_cfg =
+{ .secure_enable = 1, .privilege_enable = 1,
+#if defined(VECTOR_NUMBER_NPU_IRQ)
+            .irq             = VECTOR_NUMBER_NPU_IRQ,
+#else
+  .irq = FSP_INVALID_VECTOR,
+#endif
+  .ipl = (12),
+  .p_callback = NULL, .p_context = NULL, };
+
+const rm_ethosu_instance_t g_rm_ethosu0 =
+{ .p_ctrl = &g_rm_ethosu0_ctrl, .p_cfg = &g_rm_ethosu0_cfg, .p_api = &g_rm_ethosu_on_npu, };
+/** Display framebuffer */
+>>>>>>> branch 'main' of git@github.com:ZiMu2048/CameraTestProject.git
 #if GLCDC_CFG_LAYER_1_ENABLE
         uint8_t fb_background[2][DISPLAY_BUFFER_STRIDE_BYTES_INPUT0 * DISPLAY_VSIZE_INPUT0] BSP_ALIGN_VARIABLE(64) BSP_PLACE_IN_SECTION(BSP_UNINIT_SECTION_PREFIX ".sdram_noinit");
         #else

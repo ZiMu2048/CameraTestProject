@@ -17,5 +17,5 @@
 # Copyright (C) 2023-2024 Renesas Electronics Corporation. All rights reserved.
 #######################################################################################################################
 from .logging import LogFactory
-from .environment_check import exec_environment_check, SRC_CMAKE_FILES
+from .environment_check import SRC_CMAKE_FILES
 from .variable_container import VariableContainer

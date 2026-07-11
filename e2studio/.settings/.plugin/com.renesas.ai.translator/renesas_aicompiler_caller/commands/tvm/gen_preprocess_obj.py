@@ -23,6 +23,7 @@ import sys
 
 import renesas_aicompiler_caller # noqa
 from renesas_aicompiler_caller.utils import LogFactory, VariableContainer
+from renesas_aicompiler_caller.utils.environment_check import check_tvm_environment
 from drpai_preprocess import preruntime, drpai_param, op
 
 logger = LogFactory().add_console_handler() \
@@ -223,6 +224,7 @@ def gen_preprocess_obj(preprocess_config, output_dir):
 
 
 def main(args):
+    check_tvm_environment()
     # Parse command line arguments
     args = parse_args(args)
 

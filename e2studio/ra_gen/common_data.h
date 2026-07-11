@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* generated common header file - do not edit */
 #ifndef COMMON_DATA_H_
 #define COMMON_DATA_H_
@@ -42,6 +43,52 @@ extern display_runtime_cfg_t g_display_runtime_cfg_bg;
 extern glcdc_instance_ctrl_t g_display_ctrl;
 extern const display_cfg_t g_display_cfg;
 
+=======
+/* generated common header file - do not edit */
+#ifndef COMMON_DATA_H_
+#define COMMON_DATA_H_
+#include <stdint.h>
+#include "bsp_api.h"
+#include "rm_ethosu_api.h"
+#include "rm_ethosu.h"
+#include "arm_math.h"
+#include "arm_nnfunctions.h"
+#include "r_glcdc.h"
+#include "r_display_api.h"
+#include "r_mipi_csi.h"
+#include "r_mipi_csi_api.h"
+#include "r_vin.h"
+#include "r_capture_api.h"
+#include "r_ioport.h"
+#include "bsp_pin_cfg.h"
+FSP_HEADER
+#include "ethosu_driver.h"
+extern struct ethosu_driver g_ethosu0;
+extern rm_ethosu_instance_ctrl_t g_rm_ethosu0_ctrl;
+extern const rm_ethosu_cfg_t g_rm_ethosu0_cfg;
+extern const rm_ethosu_instance_t g_rm_ethosu0;
+#ifndef NULL
+void NULL(rm_ethosu_callback_args_t *p_arg);
+#endif
+#define GLCDC_CFG_LAYER_1_ENABLE (true)
+#define GLCDC_CFG_LAYER_2_ENABLE (false)
+
+#define GLCDC_CFG_CLUT_ENABLE (false)
+
+#define GLCDC_CFG_CORRECTION_GAMMA_ENABLE_R       (false)
+#define GLCDC_CFG_CORRECTION_GAMMA_ENABLE_G       (false)
+#define GLCDC_CFG_CORRECTION_GAMMA_ENABLE_B       (false)
+
+/* Display on GLCDC Instance. */
+extern const display_instance_t g_display;
+extern display_runtime_cfg_t g_display_runtime_cfg_fg;
+extern display_runtime_cfg_t g_display_runtime_cfg_bg;
+
+/** Access the GLCDC instance using these structures when calling API functions directly (::p_api is not used). */
+extern glcdc_instance_ctrl_t g_display_ctrl;
+extern const display_cfg_t g_display_cfg;
+
+>>>>>>> branch 'main' of git@github.com:ZiMu2048/CameraTestProject.git
 #if ((GLCDC_CFG_CORRECTION_GAMMA_ENABLE_R | GLCDC_CFG_CORRECTION_GAMMA_ENABLE_G | GLCDC_CFG_CORRECTION_GAMMA_ENABLE_B) && GLCDC_CFG_COLOR_CORRECTION_ENABLE && !(false))
             extern display_gamma_correction_t g_display_gamma_cfg;
             #endif

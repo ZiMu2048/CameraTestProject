@@ -22,6 +22,8 @@ import argparse
 import json
 from pathlib import Path
 
+from renesas_aicompiler_caller.utils.environment_check import check_ruhmi_environment, \
+                                                  check_tvm_environment
 import renesas_aicompiler_caller # noqa
 from renesas_aicompiler_caller.utils import LogFactory, VariableContainer
 
@@ -519,6 +521,19 @@ def main(args):
     # Parse command line arguments
     args = parse_args(args)
     _validate_args(args)
+
+    try:
+        if args.accelerator_type == "drpai":
+            check_tvm_environment()
+        elif args.accelerator_type == "ethos-u55":
+            check_ruhmi_environment()
+        else:
+            raise ValueError(f"Unsupported accelerator type: {args.accelerator_type}")
+
+        logger.info("Environment check passed.")
+
+    except Exception as e:
+        raise RuntimeError(f"Environment check failed: {e}")
 
     logger.info("[Parsing input model node start...]")
     # Make shape_dict from input_model or input_shape_string

@@ -36,28 +36,44 @@ vars = VariableContainer()
 SUPPORTED_DRPAI_TVM_VERSION = {
     "V2L": {
         "78650d4aef45e6669ae7b055e9e321c3a94fdf846bcfbd988790199ab0a8e806": "v1.1.1",
-        "bee5e39a19b0fc92431e41b94b8e63cc7f2645ffda8606d08c72eb97bf35219b": "v2.3.0"
+        "bee5e39a19b0fc92431e41b94b8e63cc7f2645ffda8606d08c72eb97bf35219b": "v2.3.0",
+        "fda95f1706f04c9cff3d3be826550f5457e0ea9191f8b3dbd145b236505e3b66": "v2.6.1"
     },
     "V2H": {
         "9d1b5b6162313a30dbe48314b6019887bd705b057618ce9c9ade21919c2e2458": "v2.1.0",
         "6b6f4eec223399a7d6a3e5dd6158a213fc1b2b5a8c2fcaf97df4f694250ef958": "v2.2.1",
-        "06e57df61bbb1831c3827f14e67696635bf585ea6a1fcae85984e8e402e4a851": "v2.3.0"
+        "06e57df61bbb1831c3827f14e67696635bf585ea6a1fcae85984e8e402e4a851": "v2.3.0",
+        "e29f5071ce05bc93b9345cb439d6758bd9c84cb99364bd0f174cdbf0aa9c2fbe": "v2.5.1"
     },
     "V2N": {
         "98d1a5186ab160faafb150157885ef2fa88657f57e3113da42d2f8681c8272ed": "v2.5.1"
     }
 }
 
+# Note that if you update/add "--device-type" in cli.py, you also need to update this variable.
 SUPPORTED_MERA_VERSION = [
     {
-        "supported_device": ["RA8P1"],  # Supported device
+        "supported_device": ["RA8P1", "RA8"],  # Supported device
         "python_version": "3.10",
         "python_lib_dependencies": {
             "mera": "2.3",
             "ethos-u-vela": "4.2.0",
             "tflite": "2.18.0",
             "onnx": "1.17.0",
-            "typing_extensions": "4.5.0"
+            "typing_extensions": "4.5.0",
+            "mera-visualizer": "1.0"
+        }
+    },
+    {
+        "supported_device": ["RZG3E"],
+        "python_version": "3.10",
+        "python_lib_dependencies": {
+            "mera": "2.3",
+            "ethos-u-vela": "4.2.0",
+            "tensorflow": "2.18.0",
+            "tflite": "2.18.0",
+            "typing_extensions": "4.5.0",
+            "mera-visualizer": "1.0"
         }
     }
 ]
@@ -73,6 +89,10 @@ SRC_CMAKE_FILES = {
         "v2.3.0": [
             "template_apps/drpai_tvm_v230/rzv2l/CMakeLists.txt",
             "template_apps/drpai_tvm_v230/rzv2l/toolchain/runtime.cmake"
+        ],
+        "v2.6.1": [
+            "template_apps/drpai_tvm_v261/rzv2l/CMakeLists.txt",
+            "template_apps/drpai_tvm_v261/rzv2l/toolchain/runtime.cmake"
         ]
     },
     "V2H": {
@@ -85,6 +105,10 @@ SRC_CMAKE_FILES = {
             "template_apps/drpai_tvm_v210/rzv2h/toolchain/runtime.cmake"
         ],
         "v2.3.0": [
+            "template_apps/drpai_tvm_v210/rzv2h/CMakeLists.txt",
+            "template_apps/drpai_tvm_v210/rzv2h/toolchain/runtime.cmake"
+        ],
+        "v2.5.1": [
             "template_apps/drpai_tvm_v210/rzv2h/CMakeLists.txt",
             "template_apps/drpai_tvm_v210/rzv2h/toolchain/runtime.cmake"
         ]
@@ -138,24 +162,42 @@ def with_trailing_slash(path: Path) -> str:
 
 def _check_python_version():
     """Check Python version whether it is supported version.
+
+    If RUHMI_DEVICE_TYPE environment variable is set, filter metadata
+    by device type to ensure the correct dependencies are checked.
     """
     import sys
     # Check python version
     target_metadata = None
     python_version = f"{sys.version_info.major}.{sys.version_info.minor}"
     supported_python_version = []
+
+    device_type = os.getenv("RUHMI_DEVICE_TYPE")
+
     for metadata in SUPPORTED_MERA_VERSION:
         supported_python_version.append(metadata["python_version"])
         if python_version == metadata["python_version"]:
-            target_metadata = metadata
-            break
+            if device_type is not None:
+                if device_type in metadata["supported_device"]:
+                    target_metadata = metadata
+                    break
+            else:
+                target_metadata = metadata
+                break
 
     if target_metadata is None:
-        raise RuntimeError(f'This tool does not work with Python {sys.version}. '
-                           f'Install the Python {supported_python_version}. '
-                           'To check the default python version, run the following command.'
-                           '> py --version \n'
-                           'Python 3.10.X')
+        if device_type is not None:
+            raise RuntimeError(f'This tool does not work with Python {sys.version} for device {device_type}. '
+                               f'Install the Python {supported_python_version}. '
+                               'To check the default python version, run the following command.'
+                               '> py --version \n'
+                               'Python 3.10.X')
+        else:
+            raise RuntimeError(f'This tool does not work with Python {sys.version}. '
+                               f'Install the Python {supported_python_version}. '
+                               'To check the default python version, run the following command.'
+                               '> py --version \n'
+                               'Python 3.10.X')
     return target_metadata
 
 
@@ -194,8 +236,8 @@ def _check_python_package_and_version(package_name, package_version=None):
         logger.warning(f"'{package_name}' version is {installed_version}. This tool was tested with {package_version}")
 
 
-def _check_python_deps_for_windows(target_metadata: Dict):
-    """Check python version and dependecies for Windows
+def _check_python_deps_for_ruhmi(target_metadata: Dict):
+    """Check python version and dependecies for Ruhmi
     """
     import importlib.util
     if importlib.util.find_spec("mera") is None:
@@ -266,34 +308,57 @@ def _check_environment_variable_for_linux():
     vars.register("QUANTIZER", QUANTIZER)
 
 
-def _check_environment_variable_for_windows():
-    """Check environment variable for windows.
+def _check_environment_variable_for_ruhmi():
+    """Check environment variable for Ruhmi.
     """
-    # Check whether vela command is enable
-    if shutil.which("vela") is None:
-        scripts_path = str(Path(sys.executable).parent / "Scripts")
-        os.environ["PATH"] = scripts_path + os.pathsep + os.environ["PATH"]
-        logger.info("The `vela` command was not found. Adding the following path to PATH environment variable: \n"
-                    f"{scripts_path}")
-        assert shutil.which("vela"), "Failed to find the vela command. " \
-                                     "Set the vela command path to PATH environment variable"
-
-    # Remove the environment variable to get AMD64 from platform.processor()
-    PROCESSOR_IDENTIFIER = os.getenv("PROCESSOR_IDENTIFIER", None)
-    if PROCESSOR_IDENTIFIER is not None:
-        del os.environ["PROCESSOR_IDENTIFIER"]
-
-
-def exec_environment_check():
-    logger.info("Execute environment check ...")
     if platform.system() == "Windows":
-        metadata = _check_python_version()
-        _check_python_deps_for_windows(metadata)
-        _check_environment_variable_for_windows()
+        # Check whether vela command is enable
+        if shutil.which("vela") is None:
+            scripts_path = str(Path(sys.executable).parent / "Scripts")
+            os.environ["PATH"] = scripts_path + os.pathsep + os.environ["PATH"]
+            logger.info(
+                "The `vela` command was not found. Adding the following path to "
+                f"PATH environment variable: \n{scripts_path}"
+            )
+            assert shutil.which("vela"), (
+                "Failed to find the vela command. "
+                "Set the vela command path to PATH environment variable"
+            )
+
+        # Remove the environment variable to get AMD64 from platform.processor()
+        PROCESSOR_IDENTIFIER = os.getenv("PROCESSOR_IDENTIFIER", None)
+        if PROCESSOR_IDENTIFIER is not None:
+            del os.environ["PROCESSOR_IDENTIFIER"]
     elif platform.system() == "Linux":
-        _check_environment_variable_for_linux()
-        _check_tvm_version()
+        if shutil.which("vela") is None:
+            # On Linux, use the 'bin' directory next to the Python executable
+            bin_path = str(Path(sys.executable).parent / "bin")
+            os.environ["PATH"] = bin_path + os.pathsep + os.environ["PATH"]
+            logger.info(
+                "The `vela` command was not found. Adding the following path to "
+                "the PATH environment variable:\n"
+                f"{bin_path}"
+            )
+            assert shutil.which("vela"), (
+                "Failed to find the `vela` command. "
+                "Please ensure it is correctly set in the PATH."
+            )
     else:
-        raise RuntimeError(f"Unsupported platform was detected: {platform.system()}"
-                           "This tool only supports Windows/Linux")
+        raise RuntimeError(f"Unsupported platform: {platform.system()}")
+
+
+def check_tvm_environment():
+    logger.info("Checking TVM environment ...")
+    if platform.system() != "Linux":
+        raise RuntimeError("TVM environment check is only supported on Linux.")
+    _check_environment_variable_for_linux()
+    _check_tvm_version()
+    vars.show_container()
+
+
+def check_ruhmi_environment():
+    logger.info("Checking RUHMI environment ...")
+    metadata = _check_python_version()
+    _check_python_deps_for_ruhmi(metadata)
+    _check_environment_variable_for_ruhmi()
     vars.show_container()

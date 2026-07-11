@@ -1,0 +1,26 @@
+{
+  "inputs": [
+    [
+      "serving_default_x_0",
+      [
+        "1",
+        "256",
+        "256",
+        "3"
+      ],
+      "Int8"
+    ]
+  ],
+  "outputs": [
+    [
+      "StatefulPartitionedCall_0_70066",
+      [
+        "1",
+        "32",
+        "32",
+        "4"
+      ],
+      "Int8"
+    ]
+  ]
+}

@@ -586,3 +586,51 @@ class V2LSampleAppCppWriterForV230(Writer):
 
     def close(self):
         self._writer.close()
+
+
+@register_code_generator
+class V2LSampleAppCppWriterForV261(Writer):
+    """Writer to output sample code depending on DRP-AI TVM Model Object.
+
+    Args:
+        filename: Path to output file.
+        drpai_tvm_model_obj_dir: Path to DRP-AI TVM Model Object directory.
+        preprocess_obj_dirs: List containing path to preprocess object directory.
+        preprocess_configs: List containing preprocess configuration.
+        code_gen_mode: Value for code gen mode to output sample code
+        template_file: Path to template file that is written sample application. e.g. /path/to/sample_app.cpp
+        drpai_tvm_version: DRP-AI TVM version
+
+    Notes1:
+        After instantiation of this class, please call the following function.
+        ```
+        a = SampleAppCppWriter(xxx)
+        a.write_code()
+        ```
+
+    Note2:
+        This class assumes preprocess_obj_dirs and preprocess_configs are aligned in input order defined in deploy.json
+    """
+    def __init__(self,
+                 filename: str,
+                 drpai_tvm_model_obj_dir: str,
+                 preprocess_obj_dirs: List[str],
+                 preprocess_configs: List[str],
+                 code_gen_mode: CodeGenMode,
+                 template_file: str = None,
+                 drpai_tvm_version: str = "v2.6.1"):
+        default_template_file = f"{mod_path}/template_apps/drpai_tvm_v261/rzv2l/sample_app.cpp"
+        template_file = default_template_file if template_file is None else template_file
+        self._writer = V2LSampleAppCppWriterForV111(filename,
+                                                    drpai_tvm_model_obj_dir,
+                                                    preprocess_obj_dirs,
+                                                    preprocess_configs,
+                                                    code_gen_mode,
+                                                    template_file=template_file,
+                                                    drpai_tvm_version=drpai_tvm_version)
+
+    def write_code(self):
+        self._writer.write_code()
+
+    def close(self):
+        self._writer.close()

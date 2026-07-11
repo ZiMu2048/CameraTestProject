@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 com.renesas.cdt.ddsc.settingseditor.active_page=ModuleSelection
+=======
+com.renesas.cdt.ddsc.settingseditor.active_page=SWPConfigurator
+>>>>>>> branch 'main' of git@github.com:ZiMu2048/CameraTestProject.git
 eclipse.preferences.version=1

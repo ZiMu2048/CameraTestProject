@@ -26,6 +26,7 @@ from renesas_aicompiler_caller.utils import VariableContainer, \
                                      LogFactory
 from renesas_aicompiler_caller.commands.tvm.utils import create_model_converter, \
                                                   load_shape_dict_json
+from renesas_aicompiler_caller.utils.environment_check import check_tvm_environment
 
 vars = VariableContainer()
 
@@ -185,6 +186,7 @@ def load_quant_configs_json(quant_configs_json):
 
 
 def main(args):
+    check_tvm_environment()
     # Parse command line arguments
     args = parse_args(args)
     _validate_args(args)
