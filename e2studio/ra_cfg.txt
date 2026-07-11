@@ -34,7 +34,7 @@ FSP Configuration
     SDRAM: Initialization: Auto-Refresh Interval (ARFI): 10 cycles
     SDRAM: Initialization: Auto-Refresh Count (ARFC): 8 times
     SDRAM: Initialization: Precharge Cycle Count (PRC): 3 cycles
-    SDRAM: Address Multiplex Shift: 9-bit shift
+    SDRAM: Address Multiplex Shift: 8-bit shift
     SDRAM: Endian Mode: Little Endian
     SDRAM: Continuous Access Mode: Enabled
     SDRAM: Bus Width: 32-bit

@@ -50,7 +50,7 @@
       <property id="config.bsp.fsp.sdram.arfi" value="config.bsp.fsp.sdram.arfi.10"/>
       <property id="config.bsp.fsp.sdram.arfc" value="config.bsp.fsp.sdram.arfc.8"/>
       <property id="config.bsp.fsp.sdram.prc" value="config.bsp.fsp.sdram.prc.3"/>
-      <property id="config.bsp.fsp.sdram.addr_shift" value="config.bsp.fsp.sdram.addr_shift.9"/>
+      <property id="config.bsp.fsp.sdram.addr_shift" value="config.bsp.fsp.sdram.addr_shift.8"/>
       <property id="config.bsp.fsp.sdram.endian_mode" value="config.bsp.fsp.sdram.endian_mode.little"/>
       <property id="config.bsp.fsp.sdram.continuous_access_mode" value="config.bsp.fsp.sdram.continuous_access_mode.enabled"/>
       <property id="config.bsp.fsp.sdram.bus_width" value="config.bsp.fsp.sdram.bus_width.32"/>
