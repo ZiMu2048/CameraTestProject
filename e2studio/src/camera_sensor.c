@@ -19,7 +19,7 @@ uint32_t g_plck_hz = RESET_VALUE;
 
 const camera_config_t camera_profiles[RES_MAX] = {
     [RES_1024x600]    = {1024, 600},
-    [RES_VGA]         = {480,  272},
+    [RES_VGA]         = {800,  480},
     [RES_QVGA]        = {320,  240},
 };
 
