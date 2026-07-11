@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <DrpAiTranslatorProjectSettings>
     <ProjectSettingsInfo>
-        <framework>2</framework>
-        <modelfile>Renesas_FOMO_Int8.tflite</modelfile>
+        <framework>1</framework>
+        <modelfile>Renesas_YOLO_FP32.onnx</modelfile>
         <output_directory>conversion_results</output_directory>
         <product>RA8P1 (CPU+Ethos-U55)</product>
         <tool_name>RUHMI Framework AI Compiler</tool_name>
@@ -18,21 +18,23 @@
     <DRP-AI_TVMSettingInfo>
         <TransSettingInfo>
             <item key="D:\Lab\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite_trans_config.json</item>
-            <item key="Renesas_YOLO_int8.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO_int8.tflite_trans_config.json</item>
-            <item key="RenesasCupFOMO.tflite">conversion_results/conversion_tool_settings/RenesasCupFOMO.tflite_trans_config.json</item>
+            <item key="Renesas_FOMO_Int8.tflite">conversion_results/conversion_tool_settings/Renesas_FOMO_Int8.tflite_trans_config.json</item>
             <item key="ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_trans_config.json</item>
             <item key="Renesas_YOLO.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO.tflite_trans_config.json</item>
+            <item key="RenesasCupFOMO.tflite">conversion_results/conversion_tool_settings/RenesasCupFOMO.tflite_trans_config.json</item>
+            <item key="Renesas_YOLO_int8.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO_int8.tflite_trans_config.json</item>
             <item key="Renesas_YOLO_int32.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO_int32.tflite_trans_config.json</item>
-            <item key="Renesas_FOMO_Int8.tflite">conversion_results/conversion_tool_settings/Renesas_FOMO_Int8.tflite_trans_config.json</item>
+            <item key="Renesas_YOLO_FP32.onnx">conversion_results/conversion_tool_settings/Renesas_YOLO_FP32.onnx_trans_config.json</item>
         </TransSettingInfo>
         <QuantizationSetting>
             <item key="D:\Lab\ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.21.tflite_quant_config.json</item>
-            <item key="Renesas_YOLO_int8.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO_int8.tflite_quant_config.json</item>
-            <item key="RenesasCupFOMO.tflite">conversion_results/conversion_tool_settings/RenesasCupFOMO.tflite_quant_config.json</item>
+            <item key="Renesas_FOMO_Int8.tflite">conversion_results/conversion_tool_settings/Renesas_FOMO_Int8.tflite_quant_config.json</item>
             <item key="ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite">conversion_results/conversion_tool_settings/ei-renesascup_solarboard-object-detection-tensorflow-lite-int8-quantized-model.24.tflite_quant_config.json</item>
             <item key="Renesas_YOLO.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO.tflite_quant_config.json</item>
+            <item key="RenesasCupFOMO.tflite">conversion_results/conversion_tool_settings/RenesasCupFOMO.tflite_quant_config.json</item>
+            <item key="Renesas_YOLO_int8.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO_int8.tflite_quant_config.json</item>
             <item key="Renesas_YOLO_int32.tflite">conversion_results/conversion_tool_settings/Renesas_YOLO_int32.tflite_quant_config.json</item>
-            <item key="Renesas_FOMO_Int8.tflite">conversion_results/conversion_tool_settings/Renesas_FOMO_Int8.tflite_quant_config.json</item>
+            <item key="Renesas_YOLO_FP32.onnx">conversion_results/conversion_tool_settings/Renesas_YOLO_FP32.onnx_quant_config.json</item>
         </QuantizationSetting>
     </DRP-AI_TVMSettingInfo>
 </DrpAiTranslatorProjectSettings>

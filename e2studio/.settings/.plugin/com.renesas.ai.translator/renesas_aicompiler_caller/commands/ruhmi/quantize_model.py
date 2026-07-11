@@ -269,7 +269,8 @@ def preprocess_func(filepath, width, height,
     elif pillow_img.mode != "RGB":
         pillow_img = pillow_img.convert("RGB")
 
-    input_data = np.float32(pillow_img)
+    #input_data = np.float32(pillow_img)
+    input_data = np.float32(pillow_img)[:, :, ::-1].copy()
     input_data = input_data - mean
     input_data = input_data / std
     input_data = input_data.astype(np.float32)

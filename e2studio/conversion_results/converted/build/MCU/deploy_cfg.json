@@ -6,8 +6,8 @@
         "CPU",
         "EC_C_CODEGEN"
     ],
-    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\Renesas_FOMO_Int8.tflite",
-    "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\mipi_csi_ek_ra8p1_ep\\mipi_csi_ek_ra8p1_ep\\e2studio\\conversion_results\\converted\\build\\MCU",
+    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\conversion_results\\quantized\\model.mera",
+    "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\conversion_results\\converted\\build\\MCU",
     "symbolic_dimensions": {},
     "model_info": {},
     "frontend_options": {
@@ -27,7 +27,7 @@
         "ccodegen": {
             "enable_ethos": true,
             "enable_ospi": false,
-            "enable_ref_data": true,
+            "enable_ref_data": false,
             "convert_canonical": false
         },
         "dnax": {

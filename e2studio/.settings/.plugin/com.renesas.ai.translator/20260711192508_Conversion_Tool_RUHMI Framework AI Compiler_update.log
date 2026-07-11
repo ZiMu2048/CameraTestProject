@@ -1,0 +1,87 @@
+2026-07-11 19:24:48,722 [INFO] (check_requirements.py #28, load_requirements): 📥 Downloading requirements from https://Tool-support.renesas.com/tool-support/Zoo/MCT/requirements.txt
+2026-07-11 19:24:48,725 [DEBUG] (connectionpool.py #1062, _new_conn): Starting new HTTPS connection (1): tool-support.renesas.com:443
+2026-07-11 19:24:49,554 [DEBUG] (connectionpool.py #544, _make_request): https://tool-support.renesas.com:443 "GET /tool-support/Zoo/MCT/requirements.txt HTTP/1.1" 200 None
+2026-07-11 19:24:49,557 [INFO] (check_requirements.py #53, _handle_http_requirement): mera: VERSION MISMATCH (installed 2.6.0+pkg.4513, required 2.6.0+pkg.4815)
+2026-07-11 19:24:49,557 [INFO] (check_requirements.py #19, install_package): ➡️ Installing: https://github.com/renesas/ruhmi-framework-mcu/raw/refs/tags/Release-2026-06-19/install/mera-2.6.0+pkg.4815-cp310-cp310-win_amd64.whl
+Collecting mera==2.6.0+pkg.4815
+  Downloading https://github.com/renesas/ruhmi-framework-mcu/raw/refs/tags/Release-2026-06-19/install/mera-2.6.0+pkg.4815-cp310-cp310-win_amd64.whl (24.5 MB)
+     ---------------------------------------- 24.5/24.5 MB 3.7 MB/s eta 0:00:00
+Requirement already satisfied: numpy==1.26.4 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (1.26.4)
+Requirement already satisfied: portalocker in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (3.2.0)
+Requirement already satisfied: matplotlib in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (3.10.9)
+Requirement already satisfied: tensorflow==2.18.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (2.18.0)
+Requirement already satisfied: pytest in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (9.0.3)
+Requirement already satisfied: ethos-u-vela==4.2.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (4.2.0)
+Requirement already satisfied: PyYAML in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (6.0.3)
+Requirement already satisfied: tabulate in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (0.10.0)
+Requirement already satisfied: tqdm in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (4.68.2)
+Requirement already satisfied: seaborn in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from mera==2.6.0+pkg.4815) (0.13.2)
+Requirement already satisfied: lxml>=4.5.2 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from ethos-u-vela==4.2.0->mera==2.6.0+pkg.4815) (6.1.1)
+Requirement already satisfied: flatbuffers==24.3.25 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from ethos-u-vela==4.2.0->mera==2.6.0+pkg.4815) (24.3.25)
+Requirement already satisfied: tensorflow-intel==2.18.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2.18.0)
+Requirement already satisfied: typing-extensions>=3.6.6 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (4.15.0)
+Requirement already satisfied: protobuf!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<6.0.0dev,>=3.20.3 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (5.29.6)
+Requirement already satisfied: wrapt>=1.11.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2.2.1)
+Requirement already satisfied: google-pasta>=0.1.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.2.0)
+Requirement already satisfied: absl-py>=1.0.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2.4.0)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (1.81.1)
+Requirement already satisfied: opt-einsum>=2.3.2 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.4.0)
+Requirement already satisfied: packaging in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (26.2)
+Requirement already satisfied: tensorboard<2.19,>=2.18 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2.18.0)
+Requirement already satisfied: setuptools in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (65.5.0)
+Requirement already satisfied: ml-dtypes<0.5.0,>=0.4.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.4.1)
+Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,>=0.2.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.7.0)
+Requirement already satisfied: requests<3,>=2.21.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2.34.2)
+Requirement already satisfied: termcolor>=1.1.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.3.0)
+Requirement already satisfied: tensorflow-io-gcs-filesystem>=0.23.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.31.0)
+Requirement already satisfied: libclang>=13.0.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (18.1.1)
+Requirement already satisfied: keras>=3.5.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.12.2)
+Requirement already satisfied: h5py>=3.11.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.16.0)
+Requirement already satisfied: six>=1.12.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (1.17.0)
+Requirement already satisfied: astunparse>=1.6.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (1.6.3)
+Requirement already satisfied: pillow>=8 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (3.3.2)
+Requirement already satisfied: cycler>=0.10 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (0.12.1)
+Requirement already satisfied: contourpy>=1.0.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (1.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (2.9.0.post0)
+Requirement already satisfied: fonttools>=4.22.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (4.63.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from matplotlib->mera==2.6.0+pkg.4815) (1.5.0)
+Requirement already satisfied: pywin32>=226 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from portalocker->mera==2.6.0+pkg.4815) (312)
+Requirement already satisfied: exceptiongroup>=1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pytest->mera==2.6.0+pkg.4815) (1.3.1)
+Requirement already satisfied: tomli>=1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pytest->mera==2.6.0+pkg.4815) (2.4.1)
+Requirement already satisfied: pygments>=2.7.2 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pytest->mera==2.6.0+pkg.4815) (2.20.0)
+Requirement already satisfied: iniconfig>=1.0.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pytest->mera==2.6.0+pkg.4815) (2.3.0)
+Requirement already satisfied: pluggy<2,>=1.5 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pytest->mera==2.6.0+pkg.4815) (1.6.0)
+Requirement already satisfied: colorama>=0.4 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pytest->mera==2.6.0+pkg.4815) (0.4.6)
+Requirement already satisfied: pandas>=1.2 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from seaborn->mera==2.6.0+pkg.4815) (2.3.3)
+Requirement already satisfied: pytz>=2020.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pandas>=1.2->seaborn->mera==2.6.0+pkg.4815) (2026.2)
+Requirement already satisfied: tzdata>=2022.7 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from pandas>=1.2->seaborn->mera==2.6.0+pkg.4815) (2026.2)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from astunparse>=1.6.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.47.0)
+Requirement already satisfied: rich in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from keras>=3.5.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (15.0.0)
+Requirement already satisfied: namex in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from keras>=3.5.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.1.0)
+Requirement already satisfied: optree in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from keras>=3.5.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.19.1)
+Requirement already satisfied: urllib3<3,>=1.26 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from requests<3,>=2.21.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2.7.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from requests<3,>=2.21.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.4.7)
+Requirement already satisfied: certifi>=2023.5.7 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from requests<3,>=2.21.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (2026.5.20)
+Requirement already satisfied: idna<4,>=2.5 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from requests<3,>=2.21.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.18)
+Requirement already satisfied: tensorboard-data-server<0.8.0,>=0.7.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorboard<2.19,>=2.18->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.7.2)
+Requirement already satisfied: markdown>=2.6.8 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorboard<2.19,>=2.18->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.10.2)
+Requirement already satisfied: werkzeug>=1.0.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from tensorboard<2.19,>=2.18->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.1.8)
+Requirement already satisfied: markupsafe>=2.1.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from werkzeug>=1.0.1->tensorboard<2.19,>=2.18->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (3.0.3)
+Requirement already satisfied: markdown-it-py>=2.2.0 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from rich->keras>=3.5.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (4.2.0)
+Requirement already satisfied: mdurl~=0.1 in c:\renesas\ra\ruhmi\.venv\lib\site-packages (from markdown-it-py>=2.2.0->rich->keras>=3.5.0->tensorflow-intel==2.18.0->tensorflow==2.18.0->mera==2.6.0+pkg.4815) (0.1.2)
+Installing collected packages: mera
+  Attempting uninstall: mera
+    Found existing installation: mera 2.6.0+pkg.4513
+    Uninstalling mera-2.6.0+pkg.4513:
+      Successfully uninstalled mera-2.6.0+pkg.4513
+Successfully installed mera-2.6.0+pkg.4815
+
+[notice] A new release of pip is available: 23.0.1 -> 26.1.2
+[notice] To update, run: python.exe -m pip install --upgrade pip
+2026-07-11 19:25:08,715 [INFO] (check_requirements.py #22, install_package): ✅ Successfully installed https://github.com/renesas/ruhmi-framework-mcu/raw/refs/tags/Release-2026-06-19/install/mera-2.6.0+pkg.4815-cp310-cp310-win_amd64.whl
+2026-07-11 19:25:08,717 [INFO] (check_requirements.py #51, _handle_http_requirement): mera_visualizer: INSTALLED (2.5.0+mcuv4)
+2026-07-11 19:25:08,718 [INFO] (check_requirements.py #71, _handle_pypi_requirement): onnx==1.17.0: OK
+2026-07-11 19:25:08,718 [INFO] (check_requirements.py #71, _handle_pypi_requirement): tflite==2.18.0: OK
+[INFO] Success to execute the command
+Exit code: 0

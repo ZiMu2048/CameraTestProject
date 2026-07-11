@@ -122,20 +122,10 @@ void mipi_csi_ep_entry(void)
             preprocess_frame_to_fomo(gp_next_buffer, model_input);
 
             // 3. 运行模型推理
-            RunModel(false);
+            RunModel(true);
 
             // 4. 读取输出并在 fb_background[0] 上画框
             int8_t *output = GetModelOutputPtr_StatefulPartitionedCall_0_70066();
-
-            // 输出 shape: [1, 32, 32, 4]
-            // output[row*32*4 + col*4 + cls] = 得分
-
-            // FOMO 输出格子到 fb 坐标的映射：
-            // FOMO格子(col,row) → 在256x256图像上的像素 (col*8+4, row*8+4)
-            // 256x256图像来自 600x600 裁剪区域的缩放
-            // 所以换算回 1024x600 framebuffer：
-            //   fb_x = 212 + (col*8 + 4) * 600 / 256
-            //   fb_y = 0   + (row*8 + 4) * 600 / 256
 
             const int8_t DETECT_THRESHOLD = 60;  // int8格式，0对应量化后的中间值，可调
             const int BOX_HALF = 20;  // 框的半径（像素，在1024x600坐标系中）
