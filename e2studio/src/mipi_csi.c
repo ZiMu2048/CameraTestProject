@@ -162,11 +162,6 @@ void mipi_csi_ep_entry(void)
         }
 
 
-
-
-
-
-
         /* Update new frame for GLCDC display */
         err = R_GLCDC_BufferChange(&g_display_ctrl, (uint8_t * const) fb_background[0], DISPLAY_FRAME_LAYER_1);
         if (FSP_ERR_INVALID_UPDATE_TIMING != err)
