@@ -6,7 +6,7 @@
         "CPU",
         "EC_C_CODEGEN"
     ],
-    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\Renesas_YOLO_FP32.onnx",
+    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\Renesas_YOLO_FP32_256.onnx",
     "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\conversion_results\\quantized\\build\\MERAInterpreter",
     "symbolic_dimensions": {},
     "model_info": {},

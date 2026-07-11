@@ -8,14 +8,16 @@ C_SRCS += \
 ../src/glcdc_display.c \
 ../src/hal_entry.c \
 ../src/i2c_control.c \
-../src/mipi_csi.c 
+../src/mipi_csi.c \
+../src/yolo_postprocess.c 
 
 C_DEPS += \
 ./src/camera_sensor.d \
 ./src/glcdc_display.d \
 ./src/hal_entry.d \
 ./src/i2c_control.d \
-./src/mipi_csi.d 
+./src/mipi_csi.d \
+./src/yolo_postprocess.d 
 
 CREF += \
 mipi_csi_ek_ra8p1_ep.cref 
@@ -25,7 +27,8 @@ OBJS += \
 ./src/glcdc_display.o \
 ./src/hal_entry.o \
 ./src/i2c_control.o \
-./src/mipi_csi.o 
+./src/mipi_csi.o \
+./src/yolo_postprocess.o 
 
 MAP += \
 mipi_csi_ek_ra8p1_ep.map 

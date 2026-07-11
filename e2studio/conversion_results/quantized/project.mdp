@@ -7,7 +7,7 @@ artifact_list:
   - model\input_desc.json
   quantizer:
   - qtz_conf.json
-  - build\MERAInterpreter\model.mir
   - build\MERAInterpreter\qtz_conf.json
+  - build\MERAInterpreter\model.mir
 compile_flow: MERA_INTERPRETER
 prj_version: 1

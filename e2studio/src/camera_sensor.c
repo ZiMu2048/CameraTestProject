@@ -87,10 +87,10 @@ static sensor_reg_t ov5640_mipi[] =
  {0x583c, 0x42}, {0x583d, 0xce}, {0x5000, 0xa7},
 
  /* Flip. */
- {TIMING_TC_REG20_REG, 0x40},
+ {TIMING_TC_REG20_REG, 0x46},
 
  /* Mirror. */
- {TIMING_TC_REG21_REG, 0x06},
+ {TIMING_TC_REG21_REG, 0x00},
 
  /* Timming. */
  {TIMING_X_INC, 0x31}, {TIMING_Y_INC, 0x31}, {TIMING_VS, 0x04},

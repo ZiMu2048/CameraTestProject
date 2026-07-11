@@ -42,6 +42,4 @@
 /* Public functions declarations */
 void handle_error (fsp_err_t err,  char *err_str);
 void mipi_csi_ep_entry(void);
-static void preprocess_frame_to_fomo(const uint8_t *src, int8_t *dst);
-static void draw_rect_rgb565(uint8_t *fb, int x0, int y0, int x1, int y1,uint16_t color, int fb_stride_pixels);
 #endif /* MIPI_CSI_H_ */

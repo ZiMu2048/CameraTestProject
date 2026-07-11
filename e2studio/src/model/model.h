@@ -47,28 +47,85 @@
  * limitations under the License.
  *
  */
-#ifndef __MODEL_H__
-#define __MODEL_H__
 
 #include <stddef.h>
 #include <stdint.h>
 
 // NPU unit addresses
-#include "sub_0000_tensors.h"
+#include "sub_0001_tensors.h"
+#include "sub_0003_tensors.h"
+#include "sub_0005_tensors.h"
+#include "sub_0007_tensors.h"
+#include "sub_0009_tensors.h"
+#include "sub_0011_tensors.h"
+#include "sub_0013_tensors.h"
+#include "sub_0015_tensors.h"
+#include "sub_0017_tensors.h"
+#include "sub_0019_tensors.h"
+#include "sub_0021_tensors.h"
+#include "sub_0023_tensors.h"
+#include "sub_0025_tensors.h"
+#include "sub_0027_tensors.h"
+#include "sub_0029_tensors.h"
 
 // Arenas for NPU units
-extern uint8_t sub_0000_arena[kArenaSize_sub_0000];
+extern uint8_t sub_0001_arena[kArenaSize_sub_0001];
+extern uint8_t sub_0003_arena[kArenaSize_sub_0003];
+extern uint8_t sub_0005_arena[kArenaSize_sub_0005];
+extern uint8_t sub_0007_arena[kArenaSize_sub_0007];
+extern uint8_t sub_0009_arena[kArenaSize_sub_0009];
+extern uint8_t sub_0011_arena[kArenaSize_sub_0011];
+extern uint8_t sub_0013_arena[kArenaSize_sub_0013];
+extern uint8_t sub_0015_arena[kArenaSize_sub_0015];
+extern uint8_t sub_0017_arena[kArenaSize_sub_0017];
+extern uint8_t sub_0019_arena[kArenaSize_sub_0019];
+extern uint8_t sub_0021_arena[kArenaSize_sub_0021];
+extern uint8_t sub_0023_arena[kArenaSize_sub_0023];
+extern uint8_t sub_0025_arena[kArenaSize_sub_0025];
+extern uint8_t sub_0027_arena[kArenaSize_sub_0027];
+extern uint8_t sub_0029_arena[kArenaSize_sub_0029];
 
 // Buffers
-extern int8_t buf_StatefulPartitionedCall_0_70066[4096];
+extern float buf_input_1[196608];
+extern int8_t buf__backbone_stage2_stage2_0_Concat_output_0_70249_70621_11085[49152];
+extern int8_t buf__backbone_stage2_stage2_0_Concat_output_0_70249_70622_11089[49152];
+extern int8_t buf__backbone_stage2_stage2_1_Concat_output_0_70257_70623_11093[49152];
+extern int8_t buf__backbone_stage2_stage2_1_Concat_output_0_70257_70624_11097[49152];
+extern int8_t buf__backbone_stage2_stage2_2_Concat_output_0_70265_70625_11109[49152];
+extern int8_t buf__backbone_stage2_stage2_2_Concat_output_0_70265_70626_11113[49152];
+extern int8_t buf__backbone_stage3_stage3_0_Concat_output_0_70282_70627_11133[24576];
+extern int8_t buf__backbone_stage3_stage3_0_Concat_output_0_70282_70628_11137[24576];
+extern int8_t buf__backbone_stage3_stage3_1_Concat_output_0_70290_70629_11141[24576];
+extern int8_t buf__backbone_stage3_stage3_1_Concat_output_0_70290_70630_11145[24576];
+extern int8_t buf__backbone_stage3_stage3_2_Concat_output_0_70298_70631_11157[24576];
+extern int8_t buf__backbone_stage3_stage3_2_Concat_output_0_70298_70632_11161[24576];
+extern int8_t buf__backbone_stage3_stage3_3_Concat_output_0_70306_70633_11173[24576];
+extern int8_t buf__backbone_stage3_stage3_3_Concat_output_0_70306_70634_11177[24576];
+extern int8_t buf__backbone_stage3_stage3_4_Concat_output_0_70314_70635_11189[24576];
+extern int8_t buf__backbone_stage3_stage3_4_Concat_output_0_70314_70636_11193[24576];
+extern int8_t buf__backbone_stage3_stage3_5_Concat_output_0_70322_70637_11205[24576];
+extern int8_t buf__backbone_stage3_stage3_5_Concat_output_0_70322_70638_11209[24576];
+extern int8_t buf__backbone_stage3_stage3_6_Concat_output_0_70330_70639_11221[24576];
+extern int8_t buf__backbone_stage3_stage3_6_Concat_output_0_70330_70640_11225[24576];
+extern int8_t buf__backbone_stage4_stage4_0_Concat_output_0_70347_70641_11245[12288];
+extern int8_t buf__backbone_stage4_stage4_0_Concat_output_0_70347_70642_11249[12288];
+extern int8_t buf__backbone_stage4_stage4_1_Concat_output_0_70355_70643_11253[12288];
+extern int8_t buf__backbone_stage4_stage4_1_Concat_output_0_70355_70644_11257[12288];
+extern int8_t buf__backbone_stage4_stage4_2_Concat_output_0_70363_70645_11269[12288];
+extern int8_t buf__backbone_stage4_stage4_2_Concat_output_0_70363_70646_11273[12288];
+extern int8_t buf__723_70392_70620_11081[1728];
+extern int8_t buf__backbone_stage4_stage4_3_Concat_output_0_70371_11357[12288];
+extern int8_t buf__722_70391_70619_11077[6912];
+extern float buf__722_70391_70619[6912];
+extern float buf__723_70392_70620[1728];
 
 
 void RunModel(bool clean_outputs);
 
   // Model input pointers
-int8_t* GetModelInputPtr_serving_default_x_0();
+float* GetModelInputPtr_input_1();
 
   // Model output pointers
-int8_t* GetModelOutputPtr_StatefulPartitionedCall_0_70066();
+float* GetModelOutputPtr__722_70391_70619();
+float* GetModelOutputPtr__723_70392_70620();
 
-#endif

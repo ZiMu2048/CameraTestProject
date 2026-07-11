@@ -1,0 +1,25 @@
+{
+  "skip_preprocess": "False",
+  "num_calibrate_samples": 1000,
+  "calibrate_method": "MinMax",
+  "percentile_value": 99.999,
+  "quant_options": "",
+  "drp_compiler_version": "100",
+  "cpu_data_type": "float16",
+  "nodes": [
+    {
+      "name": "input.1",
+      "calibrate_sample_dir": "E:\\Yolo-FastestV2-0.2\\SolarBoardData\\images\\train",
+      "mean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "std": [
+        255.0,
+        255.0,
+        255.0
+      ]
+    }
+  ]
+}
