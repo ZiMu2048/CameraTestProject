@@ -50,7 +50,7 @@
       <property id="config.bsp.fsp.sdram.arfi" value="config.bsp.fsp.sdram.arfi.10"/>
       <property id="config.bsp.fsp.sdram.arfc" value="config.bsp.fsp.sdram.arfc.8"/>
       <property id="config.bsp.fsp.sdram.prc" value="config.bsp.fsp.sdram.prc.3"/>
-      <property id="config.bsp.fsp.sdram.addr_shift" value="config.bsp.fsp.sdram.addr_shift.9"/>
+      <property id="config.bsp.fsp.sdram.addr_shift" value="config.bsp.fsp.sdram.addr_shift.8"/>
       <property id="config.bsp.fsp.sdram.endian_mode" value="config.bsp.fsp.sdram.endian_mode.little"/>
       <property id="config.bsp.fsp.sdram.continuous_access_mode" value="config.bsp.fsp.sdram.continuous_access_mode.enabled"/>
       <property id="config.bsp.fsp.sdram.bus_width" value="config.bsp.fsp.sdram.bus_width.32"/>
@@ -466,6 +466,46 @@
       <description>RA8P1-EK Board Support Files</description>
       <originalPack>Renesas.RA_board_ra8p1_ek.6.4.0.pack</originalPack>
     </component>
+    <component apiversion="" class="TFLM" condition="" group="Kernel" subgroup="Ethos-U" variant="" vendor="Google" version="25.2.0+renesas.0.fsp.6.4.0">
+      <description>TFLM Ethos-U kernel</description>
+      <originalPack>Google.TFLM-Ethos-U-Kernel.25.2.0+renesas.0.fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="TFLM" condition="" group="Kernel" subgroup="CMSIS-NN" variant="" vendor="Google" version="25.2.0+renesas.0.fsp.6.4.0">
+      <description>TFLM cmsis-nn kernel</description>
+      <originalPack>Google.TFLM-CMSIS-NN-Kernel.25.2.0+renesas.0.fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_ethosu" variant="" vendor="Renesas" version="6.4.0">
+      <description>Ethos-U Driver Wrapper</description>
+      <originalPack>Renesas.RA.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="TFLM" condition="" group="Core" subgroup="Lib" variant="" vendor="Google" version="25.2.0+renesas.0.fsp.6.4.0">
+      <description>TFLM Core Lib</description>
+      <originalPack>Google.TFLM-Core-Lib.25.2.0+renesas.0.fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Ethos-U" condition="" group="Core" subgroup="Driver" variant="" vendor="Arm" version="25.2.0+renesas.0.fsp.6.4.0">
+      <description>Ethos-U core driver</description>
+      <originalPack>Arm.Ethos-U-Core-Driver.25.2.0+renesas.0.fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Arm" condition="" group="Ethos-U" subgroup="Profiler" variant="" vendor="Arm" version="25.2.0+fsp.6.4.0">
+      <description>ARM Ethos-U Profiler</description>
+      <originalPack>Arm.Ethos-U-Profiler.25.2.0+fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="View" variant="" vendor="Arm" version="1.2.0+renesas.0.fsp.6.4.0">
+      <description>Arm CMSIS View Library Source</description>
+      <originalPack>Arm.CMSIS-View.1.2.0+renesas.0.fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Flatbuffers" condition="" group="Serialization" subgroup="Lib" variant="" vendor="Google" version="23.5.26+renesas.0.fsp.6.4.0">
+      <description>Flatbuffers</description>
+      <originalPack>Google.Flatbuffers.23.5.26+renesas.0.fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="NN" variant="" vendor="Arm" version="7.0.0+fsp.6.4.0">
+      <description>Arm NN Library Source</description>
+      <originalPack>Arm.CMSIS-NN.7.0.0+fsp.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="Main" subgroup="DSP" variant="" vendor="Arm" version="1.16.2+fsp.6.5.0">
+      <description>Arm DSP Library Source</description>
+      <originalPack>Arm.CMSIS-DSP.1.16.2+fsp.6.5.0.pack</originalPack>
+    </component>
   </raComponentSelection>
   <raElcConfiguration/>
   <raIcuConfiguration>
@@ -839,6 +879,24 @@
       <property id="module.driver.transfer.number_of_descriptors" value="1"/>
       <property id="module.driver.transfer.activation_source" value="_disabled"/>
     </module>
+    <module id="module.google.tflm.core.lib.1272736308"/>
+    <module id="module.google.flatbuffers.lib.588896588"/>
+    <module id="module.google.tflm.kernel.ethosu.2113233381"/>
+    <module id="module.middleware.rm_ethosu.315612042">
+      <property id="module.middleware.rm_ethosu.name" value="g_rm_ethosu0"/>
+      <property id="module.middleware.rm_ethosu.p_callback" value="NULL"/>
+      <property id="module.middleware.rm_ethosu.ipl" value="board.icu.common.irq.priority12"/>
+      <property id="module.middleware.rm_ethosu.secure_mode" value="module.middleware.rm_ethosu.secure_mode.enabled"/>
+      <property id="module.middleware.rm_ethosu.privilege_mode" value="module.middleware.rm_ethosu.privilege_mode.enabled"/>
+    </module>
+    <module id="module.arm.ethosu.core.driver.571848895">
+      <property id="module.arm.ethosu.core.driver.name" value="g_ethosu0"/>
+    </module>
+    <module id="module.arm.ethosu.profiler.1600994946"/>
+    <module id="module.arm.cmsis.view.1225660596"/>
+    <module id="module.google.tflm.kernel.cmsis.nn.538582832"/>
+    <module id="module.arm.cmsis.nn.1375807971"/>
+    <module id="module.arm.cmsis.dsp.346312363"/>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.0"/>
       <stack module="module.driver.i2c_on_iic_master.1941900491">
@@ -851,11 +909,31 @@
         </stack>
       </stack>
       <stack module="module.driver.display_on_glcdc.1357621213"/>
+      <stack module="module.google.tflm.core.lib.1272736308">
+        <stack module="module.google.flatbuffers.lib.588896588" requires="module.google.tflm.core.lib.requires.flatbuffers"/>
+        <stack module="module.google.tflm.kernel.cmsis.nn.538582832" requires="module.google.tflm.core.lib.requires.kernel.cmsis.nn">
+          <stack module="module.arm.cmsis.nn.1375807971" requires="module.google.tflm.kernel.cmsis.nn.requires.cmsis.nn">
+            <stack module="module.arm.cmsis.dsp.346312363" requires="module.arm.cmsis.nn.requires.dsp"/>
+          </stack>
+        </stack>
+        <stack module="module.google.tflm.kernel.ethosu.2113233381" requires="module.google.tflm.core.lib.requires.kernel.ethosu">
+          <stack module="module.middleware.rm_ethosu.315612042" requires="module.google.tflm.kernel.ethosu.requires.driver">
+            <stack module="module.arm.ethosu.core.driver.571848895" requires="module.middleware.rm_ethosu.requires.driver"/>
+          </stack>
+          <stack module="module.arm.ethosu.profiler.1600994946" requires="module.google.tflm.kernel.ethosu.requires.profiler">
+            <stack module="module.arm.cmsis.view.1225660596" requires="module.arm.ethosu.profiler.requires.view"/>
+          </stack>
+        </stack>
+      </stack>
     </context>
     <config id="config.driver.iic_master">
       <property id="config.driver.iic_master.param_checking_enable" value="config.driver.iic_master.param_checking_enable.bsp"/>
       <property id="config.driver.iic_master.dtc_enable" value="config.driver.iic_master.dtc_enable.enabled"/>
       <property id="config.driver.iic_master.addr_mode_10_bit_enable" value="config.driver.iic_master.addr_mode_10_bit_enable.disabled"/>
+    </config>
+    <config id="config.middleware.rm_ethosu">
+      <property id="config.middleware.rm_ethosu.param_checking_enable" value="config.middleware.rm_ethosu.param_checking_enable.bsp"/>
+      <property id="config.middleware.rm_ethosu.log_level" value="config.middleware.rm_ethosu.log_level.off"/>
     </config>
     <config id="config.driver.vin">
       <property id="config.driver.vin.param_checking_enable" value="config.driver.vin.param_checking_enable.bsp"/>
@@ -925,7 +1003,7 @@
     <symbolicName propertyId="p301.symbolic_name" value="SDRAM_DQ1"/>
     <symbolicName propertyId="p302.symbolic_name" value="SDRAM_DQ0"/>
     <symbolicName propertyId="p303.symbolic_name" value="USER_LED_GREEN"/>
-    <symbolicName propertyId="p304.symbolic_name" value="ETHERNET_TXD3_TDATA3"/>
+    <symbolicName propertyId="p304.symbolic_name" value="PWM"/>
     <symbolicName propertyId="p305.symbolic_name" value="ETHERNET_TXD2_TDATA2"/>
     <symbolicName propertyId="p306.symbolic_name" value="ETHERNET_TXD1_TDATA1"/>
     <symbolicName propertyId="p307.symbolic_name" value="ETHERNET_TXD0_TDATA0"/>
@@ -1101,7 +1179,6 @@
     <comment propertyId="p213.comment" value="Main clock"/>
     <comment propertyId="p214.comment" value="Subclock"/>
     <comment propertyId="p215.comment" value="Subclock"/>
-    <comment propertyId="p304.comment" value="Reference SW4 /  E44 / E18 in manual"/>
     <comment propertyId="p305.comment" value="Reference SW4 /  E45 / E19 in manual"/>
     <comment propertyId="p306.comment" value="Reference SW4 /  E46 / E20 in manual"/>
     <comment propertyId="p307.comment" value="Reference SW4 /  E47 / E21 in manual"/>
@@ -1162,21 +1239,6 @@
       <configSetting altId="cgc.extal.p212" configurationId="cgc.extal"/>
       <configSetting altId="cgc.mode.custom.free" configurationId="cgc.mode"/>
       <configSetting altId="cgc.xtal.p213" configurationId="cgc.xtal"/>
-      <configSetting altId="eswm_rgmii1.et1_mdc.p415" configurationId="eswm_rgmii1.et1_mdc"/>
-      <configSetting altId="eswm_rgmii1.et1_mdio.p414" configurationId="eswm_rgmii1.et1_mdio"/>
-      <configSetting altId="eswm_rgmii1.mode.custom.free" configurationId="eswm_rgmii1.mode"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_rx_ctl.p206" configurationId="eswm_rgmii1.rgmii1_rx_ctl"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_rxc.p905" configurationId="eswm_rgmii1.rgmii1_rxc"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_rxd0.p906" configurationId="eswm_rgmii1.rgmii1_rxd0"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_rxd1.p907" configurationId="eswm_rgmii1.rgmii1_rxd1"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_rxd2.p908" configurationId="eswm_rgmii1.rgmii1_rxd2"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_rxd3.p909" configurationId="eswm_rgmii1.rgmii1_rxd3"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_tx_ctl.p310" configurationId="eswm_rgmii1.rgmii1_tx_ctl"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_txc.p309" configurationId="eswm_rgmii1.rgmii1_txc"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_txd0.p307" configurationId="eswm_rgmii1.rgmii1_txd0"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_txd1.p306" configurationId="eswm_rgmii1.rgmii1_txd1"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_txd2.p305" configurationId="eswm_rgmii1.rgmii1_txd2"/>
-      <configSetting altId="eswm_rgmii1.rgmii1_txd3.p304" configurationId="eswm_rgmii1.rgmii1_txd3"/>
       <configSetting altId="glcdc.lcd_clk.p515" configurationId="glcdc.lcd_clk"/>
       <configSetting altId="glcdc.lcd_data0.p914" configurationId="glcdc.lcd_data0"/>
       <configSetting altId="glcdc.lcd_data1.p915" configurationId="glcdc.lcd_data1"/>
@@ -1299,9 +1361,6 @@
       <configSetting altId="p200.input" configurationId="p200"/>
       <configSetting altId="p200.gpio_irq.gpio_irq_enabled" configurationId="p200.gpio_irq"/>
       <configSetting altId="p200.gpio_mode.gpio_mode_in" configurationId="p200.gpio_mode"/>
-      <configSetting altId="p206.eswm_rgmii1.rgmii1_rx_ctl" configurationId="p206"/>
-      <configSetting altId="p206.gpio_speed.gpio_speed_h" configurationId="p206.gpio_drivecapacity"/>
-      <configSetting altId="p206.gpio_mode.gpio_mode_peripheral" configurationId="p206.gpio_mode"/>
       <configSetting altId="p207.glcdc.lcd_data9" configurationId="p207"/>
       <configSetting altId="p207.gpio_speed.gpio_speed_hh" configurationId="p207.gpio_drivecapacity"/>
       <configSetting altId="p207.gpio_mode.gpio_mode_peripheral" configurationId="p207.gpio_mode"/>
@@ -1333,24 +1392,6 @@
       <configSetting altId="p303.output.low" configurationId="p303"/>
       <configSetting altId="p303.gpio_speed.gpio_speed_h" configurationId="p303.gpio_drivecapacity"/>
       <configSetting altId="p303.gpio_mode.gpio_mode_out.low" configurationId="p303.gpio_mode"/>
-      <configSetting altId="p304.eswm_rgmii1.rgmii1_txd3" configurationId="p304"/>
-      <configSetting altId="p304.gpio_speed.gpio_speed_h" configurationId="p304.gpio_drivecapacity"/>
-      <configSetting altId="p304.gpio_mode.gpio_mode_peripheral" configurationId="p304.gpio_mode"/>
-      <configSetting altId="p305.eswm_rgmii1.rgmii1_txd2" configurationId="p305"/>
-      <configSetting altId="p305.gpio_speed.gpio_speed_h" configurationId="p305.gpio_drivecapacity"/>
-      <configSetting altId="p305.gpio_mode.gpio_mode_peripheral" configurationId="p305.gpio_mode"/>
-      <configSetting altId="p306.eswm_rgmii1.rgmii1_txd1" configurationId="p306"/>
-      <configSetting altId="p306.gpio_speed.gpio_speed_h" configurationId="p306.gpio_drivecapacity"/>
-      <configSetting altId="p306.gpio_mode.gpio_mode_peripheral" configurationId="p306.gpio_mode"/>
-      <configSetting altId="p307.eswm_rgmii1.rgmii1_txd0" configurationId="p307"/>
-      <configSetting altId="p307.gpio_speed.gpio_speed_h" configurationId="p307.gpio_drivecapacity"/>
-      <configSetting altId="p307.gpio_mode.gpio_mode_peripheral" configurationId="p307.gpio_mode"/>
-      <configSetting altId="p309.eswm_rgmii1.rgmii1_txc" configurationId="p309"/>
-      <configSetting altId="p309.gpio_speed.gpio_speed_h" configurationId="p309.gpio_drivecapacity"/>
-      <configSetting altId="p309.gpio_mode.gpio_mode_peripheral" configurationId="p309.gpio_mode"/>
-      <configSetting altId="p310.eswm_rgmii1.rgmii1_tx_ctl" configurationId="p310"/>
-      <configSetting altId="p310.gpio_speed.gpio_speed_h" configurationId="p310.gpio_drivecapacity"/>
-      <configSetting altId="p310.gpio_mode.gpio_mode_peripheral" configurationId="p310.gpio_mode"/>
       <configSetting altId="p402.ssie.audio_clk" configurationId="p402"/>
       <configSetting altId="p402.gpio_mode.gpio_mode_peripheral" configurationId="p402.gpio_mode"/>
       <configSetting altId="p403.ssie0.ssibck0" configurationId="p403"/>
@@ -1363,12 +1404,6 @@
       <configSetting altId="p408.usbhs.usbhs_vbus" configurationId="p408"/>
       <configSetting altId="p408.gpio_speed.gpio_speed_m" configurationId="p408.gpio_drivecapacity"/>
       <configSetting altId="p408.gpio_mode.gpio_mode_peripheral" configurationId="p408.gpio_mode"/>
-      <configSetting altId="p414.eswm_rgmii1.et1_mdio" configurationId="p414"/>
-      <configSetting altId="p414.gpio_speed.gpio_speed_m" configurationId="p414.gpio_drivecapacity"/>
-      <configSetting altId="p414.gpio_mode.gpio_mode_peripheral" configurationId="p414.gpio_mode"/>
-      <configSetting altId="p415.eswm_rgmii1.et1_mdc" configurationId="p415"/>
-      <configSetting altId="p415.gpio_speed.gpio_speed_m" configurationId="p415.gpio_drivecapacity"/>
-      <configSetting altId="p415.gpio_mode.gpio_mode_peripheral" configurationId="p415.gpio_mode"/>
       <configSetting altId="p500.usbfs.usb_vbusen" configurationId="p500"/>
       <configSetting altId="p500.gpio_mode.gpio_mode_peripheral" configurationId="p500.gpio_mode"/>
       <configSetting altId="p501.gpt12.gtioc12a" configurationId="p501"/>
@@ -1520,21 +1555,6 @@
       <configSetting altId="p904.glcdc.lcd_data8" configurationId="p904"/>
       <configSetting altId="p904.gpio_speed.gpio_speed_hh" configurationId="p904.gpio_drivecapacity"/>
       <configSetting altId="p904.gpio_mode.gpio_mode_peripheral" configurationId="p904.gpio_mode"/>
-      <configSetting altId="p905.eswm_rgmii1.rgmii1_rxc" configurationId="p905"/>
-      <configSetting altId="p905.gpio_speed.gpio_speed_h" configurationId="p905.gpio_drivecapacity"/>
-      <configSetting altId="p905.gpio_mode.gpio_mode_peripheral" configurationId="p905.gpio_mode"/>
-      <configSetting altId="p906.eswm_rgmii1.rgmii1_rxd0" configurationId="p906"/>
-      <configSetting altId="p906.gpio_speed.gpio_speed_h" configurationId="p906.gpio_drivecapacity"/>
-      <configSetting altId="p906.gpio_mode.gpio_mode_peripheral" configurationId="p906.gpio_mode"/>
-      <configSetting altId="p907.eswm_rgmii1.rgmii1_rxd1" configurationId="p907"/>
-      <configSetting altId="p907.gpio_speed.gpio_speed_h" configurationId="p907.gpio_drivecapacity"/>
-      <configSetting altId="p907.gpio_mode.gpio_mode_peripheral" configurationId="p907.gpio_mode"/>
-      <configSetting altId="p908.eswm_rgmii1.rgmii1_rxd2" configurationId="p908"/>
-      <configSetting altId="p908.gpio_speed.gpio_speed_h" configurationId="p908.gpio_drivecapacity"/>
-      <configSetting altId="p908.gpio_mode.gpio_mode_peripheral" configurationId="p908.gpio_mode"/>
-      <configSetting altId="p909.eswm_rgmii1.rgmii1_rxd3" configurationId="p909"/>
-      <configSetting altId="p909.gpio_speed.gpio_speed_h" configurationId="p909.gpio_drivecapacity"/>
-      <configSetting altId="p909.gpio_mode.gpio_mode_peripheral" configurationId="p909.gpio_mode"/>
       <configSetting altId="p910.glcdc.lcd_data4" configurationId="p910"/>
       <configSetting altId="p910.gpio_speed.gpio_speed_hh" configurationId="p910.gpio_drivecapacity"/>
       <configSetting altId="p910.gpio_mode.gpio_mode_peripheral" configurationId="p910.gpio_mode"/>

@@ -54,7 +54,7 @@ FSP_HEADER
 #define SDRAM_DQ1 (BSP_IO_PORT_03_PIN_01)
 #define SDRAM_DQ0 (BSP_IO_PORT_03_PIN_02)
 #define USER_LED_GREEN (BSP_IO_PORT_03_PIN_03)
-#define ETHERNET_TXD3_TDATA3 (BSP_IO_PORT_03_PIN_04) /* Reference SW4 /  E44 / E18 in manual */
+#define PWM (BSP_IO_PORT_03_PIN_04)
 #define ETHERNET_TXD2_TDATA2 (BSP_IO_PORT_03_PIN_05) /* Reference SW4 /  E45 / E19 in manual */
 #define ETHERNET_TXD1_TDATA1 (BSP_IO_PORT_03_PIN_06) /* Reference SW4 /  E46 / E20 in manual */
 #define ETHERNET_TXD0_TDATA0 (BSP_IO_PORT_03_PIN_07) /* Reference SW4 /  E47 / E21 in manual */
