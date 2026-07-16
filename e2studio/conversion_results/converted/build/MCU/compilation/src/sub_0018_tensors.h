@@ -8,7 +8,7 @@
 extern const TensorInfo sub_0018_tensors[];
 extern const size_t sub_0018_tensors_count;
 
-#define kArenaSize_sub_0018 131072
+#define kArenaSize_sub_0018 32768
 
 // Addresses for each input and output buffer inside of the arena
 extern const uint32_t sub_0018_address_functional_1_pan2_concat_1_concat_70277;

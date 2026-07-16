@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#define MAXTRUSTTHRESHOLD (0.50f)
+#define MAXTRUSTTHRESHOLD (0.40f)
 /* External variables */
 extern sensor_reg_t live_camera;
 extern const camera_config_t camera_profiles[RES_MAX];
@@ -42,7 +42,6 @@ static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1
 
 static const uint16_t g_yolo_class_colors[YOLO_CLASS_COUNT] =
 {
-    0xFFE0U, /* Dusty: yellow */
     0xF800U, /* PhysicalDamage: red */
 };
 
@@ -214,12 +213,6 @@ void mipi_csi_ep_entry(void)
 /***********************************************************************************************************************
 * End of function mipi_csi_ep_entry
 ***********************************************************************************************************************/
-
-
-
-
-
-
 
 /***********************************************************************************************************************
  *  Function Name: vin_callback
@@ -453,7 +446,7 @@ static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst)
 {
     const int crop_x = 212;
     const int crop_size = 600;
-    const int dst_size = 256;
+    const int dst_size = YOLO_INPUT_SIZE;
     const int src_stride_bytes = 2048;
 
     for (int dy = 0; dy < dst_size; dy++)

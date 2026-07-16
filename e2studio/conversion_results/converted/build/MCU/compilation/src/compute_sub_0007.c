@@ -65,16 +65,16 @@ void compute_sub_0007(
 
   // inputs
   
-  const int8_t functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_add_70237[4096], // 1,8,8,64
+  const int8_t functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_add_70237[1024], // 1,4,4,64
   
-  const int8_t functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234[4096], // 1,8,8,64
+  const int8_t functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234[1024], // 1,4,4,64
   
-  const int8_t functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split1_70231[4096], // 1,8,8,64
+  const int8_t functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split1_70231[1024], // 1,4,4,64
   
 
   // outputs
   
-  int8_t functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238[12288]  // 1,8,8,192
+  int8_t functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238[3072]  // 1,4,4,192
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -96,8 +96,8 @@ void compute_sub_0007(
 arm_concatenation_s8_x	(
       functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split1_70231
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238 
 
@@ -109,8 +109,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238 
 
@@ -122,8 +122,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_add_70237
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238 
 

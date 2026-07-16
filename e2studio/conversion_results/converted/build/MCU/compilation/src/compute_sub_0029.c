@@ -65,12 +65,12 @@ void compute_sub_0029(
 
   // inputs
   
-  const int8_t functional_1_box_decoding_1_mul_70353[21504], // 1,1344,4,4
+  const int8_t functional_1_box_decoding_1_mul_70353[5376], // 1,336,4,4
   
 
   // outputs
   
-  int8_t functional_1_box_decoding_1_Sum_70354[5376]  // 1,1344,4
+  int8_t functional_1_box_decoding_1_Sum_70354[1344]  // 1,336,4
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -95,7 +95,7 @@ void compute_sub_0029(
 // Sum
 //
 {
-int32_t input_shape[4] = { 1, 1344, 4, 4,  };
+int32_t input_shape[4] = { 1, 336, 4, 4,  };
 
 Sum(
   functional_1_box_decoding_1_mul_70353,   // input data
@@ -103,8 +103,8 @@ Sum(
   input_shape,   // input shape
   4,   // input dims
   -128,   // input zp
-  5376,   // output size
-  2146474971,   // output multiplier
+  1344,   // output size
+  2146351814,   // output multiplier
   0,   // output shift
   -128,   // output zp
   Int32VecConstant_70001,   // axes id

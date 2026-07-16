@@ -11,8 +11,8 @@
               "name": "Identity_70374",
               "shape": [
                 1,
-                1344,
-                6
+                336,
+                5
               ]
             }
           },
@@ -38,7 +38,7 @@
               "name": "functional_1_box_decoding_1_mul_1_70364",
               "shape": [
                 1,
-                1344,
+                336,
                 4
               ]
             },
@@ -48,8 +48,8 @@
               "name": "functional_1_o2m_1_o2m_class_concat_1_concat_70373",
               "shape": [
                 1,
-                1344,
-                2
+                336,
+                1
               ]
             }
           },
@@ -60,8 +60,21 @@
             "name": "Identity_70374",
             "shape": [
               1,
-              1344,
-              6
+              336,
+              5
+            ]
+          }
+        },
+        {
+          "attributes": {},
+          "input_names": {},
+          "op_name": "Int32VecConstant",
+          "output": {
+            "dt": "Int32",
+            "layout": "C",
+            "name": "Int32VecConstant_70000",
+            "shape": [
+              2
             ]
           }
         },
@@ -86,19 +99,6 @@
             "dt": "Int32",
             "layout": "C",
             "name": "Int32VecConstant_70002",
-            "shape": [
-              2
-            ]
-          }
-        },
-        {
-          "attributes": {},
-          "input_names": {},
-          "op_name": "Int32VecConstant",
-          "output": {
-            "dt": "Int32",
-            "layout": "C",
-            "name": "Int32VecConstant_70003",
             "shape": [
               2
             ]
@@ -204,7 +204,7 @@
             "layout": "C",
             "name": "Int32VecConstant_70012",
             "shape": [
-              2
+              1
             ]
           }
         },
@@ -425,7 +425,7 @@
             "layout": "C",
             "name": "Int32VecConstant_70049",
             "shape": [
-              2
+              1
             ]
           }
         },
@@ -594,7 +594,7 @@
             "layout": "C",
             "name": "Int32VecConstant_70075",
             "shape": [
-              2
+              1
             ]
           }
         },
@@ -1790,7 +1790,7 @@
             "layout": "OHWI",
             "name": "Int8VecConstant_70013",
             "shape": [
-              2,
+              1,
               1,
               1,
               100
@@ -1870,7 +1870,7 @@
             "layout": "HW",
             "name": "Int8VecConstant_70022",
             "shape": [
-              1344,
+              336,
               1
             ]
           }
@@ -1884,7 +1884,7 @@
             "layout": "HW",
             "name": "Int8VecConstant_70023_0",
             "shape": [
-              1344,
+              336,
               2
             ]
           }
@@ -1898,7 +1898,7 @@
             "layout": "HW",
             "name": "Int8VecConstant_70023_1",
             "shape": [
-              1344,
+              336,
               2
             ]
           }
@@ -2117,7 +2117,7 @@
             "layout": "OHWI",
             "name": "Int8VecConstant_70050",
             "shape": [
-              2,
+              1,
               1,
               1,
               100
@@ -2325,7 +2325,7 @@
             "layout": "OHWI",
             "name": "Int8VecConstant_70076",
             "shape": [
-              2,
+              1,
               1,
               1,
               100
@@ -3174,8 +3174,8 @@
               "name": "x",
               "shape": [
                 1,
-                256,
-                256,
+                128,
+                128,
                 3
               ]
             },
@@ -3198,8 +3198,8 @@
             "name": "functional_1_bb00_conv_1_activation_182_1_Relu6_functional_1_bb00_conv_1_batch_normalization_188_1_batchnorm_add_1_functional_1_bb00_conv_1_conv2d_170_1_convolution_functional_1_bb00_conv_1_batch_normalization_188_1_batchnorm_sub1_70179",
             "shape": [
               1,
-              128,
-              128,
+              64,
+              64,
               8
             ]
           }
@@ -3230,8 +3230,8 @@
               "name": "functional_1_bb00_conv_1_activation_182_1_Relu6_functional_1_bb00_conv_1_batch_normalization_188_1_batchnorm_add_1_functional_1_bb00_conv_1_conv2d_170_1_convolution_functional_1_bb00_conv_1_batch_normalization_188_1_batchnorm_sub1_70179",
               "shape": [
                 1,
-                128,
-                128,
+                64,
+                64,
                 8
               ]
             },
@@ -3254,8 +3254,8 @@
             "name": "functional_1_bb01_conv_1_activation_183_1_Relu6_functional_1_bb01_conv_1_batch_normalization_189_1_batchnorm_add_1_functional_1_bb01_conv_1_conv2d_171_1_convolution_functional_1_bb01_conv_1_batch_normalization_189_1_batchnorm_sub_70180",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               16
             ]
           }
@@ -3271,8 +3271,8 @@
               "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             },
@@ -3282,8 +3282,8 @@
               "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_activation_186_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_batch_normalization_192_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_conv2d_174_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_batch_normalization_192_1_batchnorm_sub_70189",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             }
@@ -3295,8 +3295,8 @@
             "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               8
             ]
           }
@@ -3327,8 +3327,8 @@
               "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             },
@@ -3351,8 +3351,8 @@
             "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_activation_185_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_batch_normalization_191_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_conv2d_173_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_batch_normalization_191_1_batchnorm_sub_70188",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               8
             ]
           }
@@ -3383,8 +3383,8 @@
               "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_activation_185_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_batch_normalization_191_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_conv2d_173_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_in_1_batch_normalization_191_1_batchnorm_sub_70188",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             },
@@ -3407,8 +3407,8 @@
             "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_activation_186_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_batch_normalization_192_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_conv2d_174_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_bb02_csp_bn_bottleneck_0_conv_out_1_batch_normalization_192_1_batchnorm_sub_70189",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               8
             ]
           }
@@ -3439,8 +3439,8 @@
               "name": "functional_1_bb01_conv_1_activation_183_1_Relu6_functional_1_bb01_conv_1_batch_normalization_189_1_batchnorm_add_1_functional_1_bb01_conv_1_conv2d_171_1_convolution_functional_1_bb01_conv_1_batch_normalization_189_1_batchnorm_sub_70180",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 16
               ]
             },
@@ -3463,8 +3463,8 @@
             "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_activation_184_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_batch_normalization_190_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_conv2d_172_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_batch_normalization_190_1_batchnorm_sub_70181",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               16
             ]
           }
@@ -3495,8 +3495,8 @@
               "name": "functional_1_bb02_csp_bn_1_concatenate_130_1_concat_70191",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 24
               ]
             },
@@ -3519,8 +3519,8 @@
             "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_activation_187_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_batch_normalization_193_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_conv2d_175_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_batch_normalization_193_1_batchnorm_sub_70192",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               16
             ]
           }
@@ -3537,8 +3537,8 @@
               "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             },
@@ -3548,8 +3548,8 @@
               "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             },
@@ -3559,8 +3559,8 @@
               "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 8
               ]
             }
@@ -3572,8 +3572,8 @@
             "name": "functional_1_bb02_csp_bn_1_concatenate_130_1_concat_70191",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               24
             ]
           }
@@ -3595,8 +3595,8 @@
               "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_activation_184_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_batch_normalization_190_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_conv2d_172_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_batch_normalization_190_1_batchnorm_sub_70181",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 16
               ]
             },
@@ -3616,8 +3616,8 @@
             "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               8
             ]
           }
@@ -3639,8 +3639,8 @@
               "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_activation_184_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_batch_normalization_190_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_conv2d_172_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_in_1_batch_normalization_190_1_batchnorm_sub_70181",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 16
               ]
             },
@@ -3660,8 +3660,8 @@
             "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184",
             "shape": [
               1,
-              64,
-              64,
+              32,
+              32,
               8
             ]
           }
@@ -3692,8 +3692,8 @@
               "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_activation_187_1_Relu6_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_batch_normalization_193_1_batchnorm_add_1_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_conv2d_175_1_convolution_functional_1_bb02_csp_bn_1_bb02_csp_bn_conv_out_1_batch_normalization_193_1_batchnorm_sub_70192",
               "shape": [
                 1,
-                64,
-                64,
+                32,
+                32,
                 16
               ]
             },
@@ -3716,8 +3716,8 @@
             "name": "functional_1_bb03_conv_1_activation_188_1_Relu6_functional_1_bb03_conv_1_batch_normalization_194_1_batchnorm_add_1_functional_1_bb03_conv_1_conv2d_176_1_convolution_functional_1_bb03_conv_1_batch_normalization_194_1_batchnorm_sub_70193",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               32
             ]
           }
@@ -3733,8 +3733,8 @@
               "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -3744,8 +3744,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_activation_191_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_batch_normalization_197_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_conv2d_179_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_batch_normalization_197_1_batchnorm_sub_70202",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             }
@@ -3757,8 +3757,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -3789,8 +3789,8 @@
               "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -3813,8 +3813,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_activation_190_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_batch_normalization_196_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_conv2d_178_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_batch_normalization_196_1_batchnorm_sub_70201",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -3845,8 +3845,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_activation_190_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_batch_normalization_196_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_conv2d_178_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_in_1_batch_normalization_196_1_batchnorm_sub_70201",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -3869,8 +3869,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_activation_191_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_batch_normalization_197_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_conv2d_179_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_bb04_csp_bn_bottleneck_0_conv_out_1_batch_normalization_197_1_batchnorm_sub_70202",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -3886,8 +3886,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -3897,8 +3897,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_activation_193_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_batch_normalization_199_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_conv2d_181_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_batch_normalization_199_1_batchnorm_sub_70205",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             }
@@ -3910,8 +3910,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_add_70206",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -3942,8 +3942,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -3966,8 +3966,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_activation_192_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_batch_normalization_198_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_conv2d_180_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_batch_normalization_198_1_batchnorm_sub_70204",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -3998,8 +3998,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_activation_192_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_batch_normalization_198_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_conv2d_180_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_in_1_batch_normalization_198_1_batchnorm_sub_70204",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -4022,8 +4022,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_activation_193_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_batch_normalization_199_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_conv2d_181_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_bb04_csp_bn_bottleneck_1_conv_out_1_batch_normalization_199_1_batchnorm_sub_70205",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -4054,8 +4054,8 @@
               "name": "functional_1_bb03_conv_1_activation_188_1_Relu6_functional_1_bb03_conv_1_batch_normalization_194_1_batchnorm_add_1_functional_1_bb03_conv_1_conv2d_176_1_convolution_functional_1_bb03_conv_1_batch_normalization_194_1_batchnorm_sub_70193",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -4078,8 +4078,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_activation_189_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_batch_normalization_195_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_conv2d_177_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_batch_normalization_195_1_batchnorm_sub_70194",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               32
             ]
           }
@@ -4110,8 +4110,8 @@
               "name": "functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 64
               ]
             },
@@ -4134,8 +4134,8 @@
             "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_activation_194_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_conv2d_182_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_sub_70208",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               32
             ]
           }
@@ -4152,8 +4152,8 @@
               "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split1_70197",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -4163,8 +4163,8 @@
               "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -4174,8 +4174,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -4185,8 +4185,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_add_70206",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             }
@@ -4198,8 +4198,8 @@
             "name": "functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               64
             ]
           }
@@ -4221,8 +4221,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_activation_189_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_batch_normalization_195_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_conv2d_177_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_batch_normalization_195_1_batchnorm_sub_70194",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -4242,8 +4242,8 @@
             "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -4265,8 +4265,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_activation_189_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_batch_normalization_195_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_conv2d_177_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_in_1_batch_normalization_195_1_batchnorm_sub_70194",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -4286,8 +4286,8 @@
             "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split1_70197",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -4318,8 +4318,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_activation_194_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_conv2d_182_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_sub_70208",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -4342,8 +4342,8 @@
             "name": "functional_1_bb05_scd_1_bb05_scd_conv_in_1_activation_195_1_Relu6_functional_1_bb05_scd_1_bb05_scd_conv_in_1_batch_normalization_201_1_batchnorm_add_1_functional_1_bb05_scd_1_bb05_scd_conv_in_1_conv2d_183_1_convolution_functional_1_bb05_scd_1_bb05_scd_conv_in_1_batch_normalization_201_1_batchnorm_sub_70209",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               64
             ]
           }
@@ -4374,8 +4374,8 @@
               "name": "functional_1_bb05_scd_1_bb05_scd_conv_in_1_activation_195_1_Relu6_functional_1_bb05_scd_1_bb05_scd_conv_in_1_batch_normalization_201_1_batchnorm_add_1_functional_1_bb05_scd_1_bb05_scd_conv_in_1_conv2d_183_1_convolution_functional_1_bb05_scd_1_bb05_scd_conv_in_1_batch_normalization_201_1_batchnorm_sub_70209",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 64
               ]
             },
@@ -4398,8 +4398,8 @@
             "name": "functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_add_1_functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_mul_1_functional_1_bb05_scd_1_bb05_scd_conv_out_1_depthwise_conv2d_42_1_depthwise_functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_mul_functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_sub_70210",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -4415,8 +4415,8 @@
               "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4426,8 +4426,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_activation_198_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_batch_normalization_205_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_conv2d_186_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_batch_normalization_205_1_batchnorm_sub_70219",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -4439,8 +4439,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4471,8 +4471,8 @@
               "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4495,8 +4495,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_activation_197_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_batch_normalization_204_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_conv2d_185_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_batch_normalization_204_1_batchnorm_sub_70218",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4527,8 +4527,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_activation_197_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_batch_normalization_204_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_conv2d_185_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_in_1_batch_normalization_204_1_batchnorm_sub_70218",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4551,8 +4551,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_activation_198_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_batch_normalization_205_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_conv2d_186_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_bb06_csp_bn_bottleneck_0_conv_out_1_batch_normalization_205_1_batchnorm_sub_70219",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4568,8 +4568,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4579,8 +4579,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_activation_200_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_batch_normalization_207_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_conv2d_188_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_batch_normalization_207_1_batchnorm_sub_70222",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -4592,8 +4592,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_add_70223",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4624,8 +4624,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4648,8 +4648,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_activation_199_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_batch_normalization_206_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_conv2d_187_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_batch_normalization_206_1_batchnorm_sub_70221",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4680,8 +4680,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_activation_199_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_batch_normalization_206_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_conv2d_187_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_in_1_batch_normalization_206_1_batchnorm_sub_70221",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4704,8 +4704,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_activation_200_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_batch_normalization_207_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_conv2d_188_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_bb06_csp_bn_bottleneck_1_conv_out_1_batch_normalization_207_1_batchnorm_sub_70222",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4736,8 +4736,8 @@
               "name": "functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_add_1_functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_mul_1_functional_1_bb05_scd_1_bb05_scd_conv_out_1_depthwise_conv2d_42_1_depthwise_functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_mul_functional_1_bb05_scd_1_bb05_scd_conv_out_1_batch_normalization_202_1_batchnorm_sub_70210",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -4760,8 +4760,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_activation_196_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_batch_normalization_203_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_conv2d_184_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_batch_normalization_203_1_batchnorm_sub_70211",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -4792,8 +4792,8 @@
               "name": "functional_1_bb06_csp_bn_1_concatenate_132_1_concat_70224",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 128
               ]
             },
@@ -4816,8 +4816,8 @@
             "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_activation_201_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_conv2d_189_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_sub_70225",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -4834,8 +4834,8 @@
               "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split1_70214",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4845,8 +4845,8 @@
               "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4856,8 +4856,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -4867,8 +4867,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_add_70223",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -4880,8 +4880,8 @@
             "name": "functional_1_bb06_csp_bn_1_concatenate_132_1_concat_70224",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               128
             ]
           }
@@ -4903,8 +4903,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_activation_196_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_batch_normalization_203_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_conv2d_184_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_batch_normalization_203_1_batchnorm_sub_70211",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -4924,8 +4924,8 @@
             "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -4947,8 +4947,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_activation_196_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_batch_normalization_203_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_conv2d_184_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_in_1_batch_normalization_203_1_batchnorm_sub_70211",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -4968,8 +4968,8 @@
             "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split1_70214",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -5000,8 +5000,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_activation_201_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_conv2d_189_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_sub_70225",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -5024,8 +5024,8 @@
             "name": "functional_1_bb07_scd_1_bb07_scd_conv_in_1_activation_202_1_Relu6_functional_1_bb07_scd_1_bb07_scd_conv_in_1_batch_normalization_209_1_batchnorm_add_1_functional_1_bb07_scd_1_bb07_scd_conv_in_1_conv2d_190_1_convolution_functional_1_bb07_scd_1_bb07_scd_conv_in_1_batch_normalization_209_1_batchnorm_sub_70226",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               128
             ]
           }
@@ -5056,8 +5056,8 @@
               "name": "functional_1_bb07_scd_1_bb07_scd_conv_in_1_activation_202_1_Relu6_functional_1_bb07_scd_1_bb07_scd_conv_in_1_batch_normalization_209_1_batchnorm_add_1_functional_1_bb07_scd_1_bb07_scd_conv_in_1_conv2d_190_1_convolution_functional_1_bb07_scd_1_bb07_scd_conv_in_1_batch_normalization_209_1_batchnorm_sub_70226",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 128
               ]
             },
@@ -5080,8 +5080,8 @@
             "name": "functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_add_1_functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_mul_1_functional_1_bb07_scd_1_bb07_scd_conv_out_1_depthwise_conv2d_43_1_depthwise_functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_mul_functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_sub_70227",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -5097,8 +5097,8 @@
               "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5108,8 +5108,8 @@
               "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_activation_205_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_batch_normalization_213_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_conv2d_193_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_batch_normalization_213_1_batchnorm_sub_70236",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5121,8 +5121,8 @@
             "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_add_70237",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5153,8 +5153,8 @@
               "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5177,8 +5177,8 @@
             "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_activation_204_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_batch_normalization_212_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_conv2d_192_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_batch_normalization_212_1_batchnorm_sub_70235",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5209,8 +5209,8 @@
               "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_activation_204_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_batch_normalization_212_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_conv2d_192_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_in_1_batch_normalization_212_1_batchnorm_sub_70235",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5233,8 +5233,8 @@
             "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_activation_205_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_batch_normalization_213_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_conv2d_193_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_bb08_csp_bn_bottleneck_0_conv_out_1_batch_normalization_213_1_batchnorm_sub_70236",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5265,8 +5265,8 @@
               "name": "functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_add_1_functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_mul_1_functional_1_bb07_scd_1_bb07_scd_conv_out_1_depthwise_conv2d_43_1_depthwise_functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_mul_functional_1_bb07_scd_1_bb07_scd_conv_out_1_batch_normalization_210_1_batchnorm_sub_70227",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -5289,8 +5289,8 @@
             "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_activation_203_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_batch_normalization_211_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_conv2d_191_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_batch_normalization_211_1_batchnorm_sub_70228",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -5321,8 +5321,8 @@
               "name": "functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 192
               ]
             },
@@ -5345,8 +5345,8 @@
             "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_activation_206_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_batch_normalization_214_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_conv2d_194_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_batch_normalization_214_1_batchnorm_sub_70239",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -5363,8 +5363,8 @@
               "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split1_70231",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5374,8 +5374,8 @@
               "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5385,8 +5385,8 @@
               "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_add_70237",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5398,8 +5398,8 @@
             "name": "functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               192
             ]
           }
@@ -5421,8 +5421,8 @@
               "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_activation_203_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_batch_normalization_211_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_conv2d_191_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_batch_normalization_211_1_batchnorm_sub_70228",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -5442,8 +5442,8 @@
             "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5465,8 +5465,8 @@
               "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_activation_203_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_batch_normalization_211_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_conv2d_191_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_in_1_batch_normalization_211_1_batchnorm_sub_70228",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -5486,8 +5486,8 @@
             "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split1_70231",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5518,8 +5518,8 @@
               "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_activation_206_1_Relu6_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_batch_normalization_214_1_batchnorm_add_1_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_conv2d_194_1_convolution_functional_1_bb08_csp_bn_1_bb08_csp_bn_conv_out_1_batch_normalization_214_1_batchnorm_sub_70239",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -5542,8 +5542,8 @@
             "name": "functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5574,8 +5574,8 @@
               "name": "functional_1_bb09_spp_1_concatenate_134_1_concat_70244",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 256
               ]
             },
@@ -5598,8 +5598,8 @@
             "name": "functional_1_bb09_spp_1_bb09_spp_conv_out_1_activation_208_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_out_1_batch_normalization_216_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_out_1_conv2d_196_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_out_1_batch_normalization_216_1_batchnorm_sub_70245",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -5616,8 +5616,8 @@
               "name": "functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5627,8 +5627,8 @@
               "name": "functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5638,8 +5638,8 @@
               "name": "functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5649,8 +5649,8 @@
               "name": "functional_1_bb09_spp_1_max_pooling2d_2_5_MaxPool2d_70243",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5662,8 +5662,8 @@
             "name": "functional_1_bb09_spp_1_concatenate_134_1_concat_70244",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               256
             ]
           }
@@ -5684,8 +5684,8 @@
               "name": "functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5697,8 +5697,8 @@
             "name": "functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5719,8 +5719,8 @@
               "name": "functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5732,8 +5732,8 @@
             "name": "functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5754,8 +5754,8 @@
               "name": "functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5767,8 +5767,8 @@
             "name": "functional_1_bb09_spp_1_max_pooling2d_2_5_MaxPool2d_70243",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5784,8 +5784,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_activation_214_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_mul_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_depthwise_conv2d_46_1_depthwise_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_mul_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_sub_70257",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5795,8 +5795,8 @@
               "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split11_70252",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -5808,8 +5808,8 @@
             "name": "functional_1_bb10_csp_cib_1_add_70258",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5840,8 +5840,8 @@
               "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split11_70252",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5864,8 +5864,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_activation_210_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_mul_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_depthwise_conv2d_44_1_depthwise_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_mul_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_sub_70253",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -5896,8 +5896,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_activation_210_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_mul_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_depthwise_conv2d_44_1_depthwise_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_mul_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv1_1_batch_normalization_218_1_batchnorm_sub_70253",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -5920,8 +5920,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_activation_211_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_batch_normalization_219_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_conv2d_198_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_batch_normalization_219_1_batchnorm_sub_70254",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -5952,8 +5952,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_activation_211_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_batch_normalization_219_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_conv2d_198_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv2_1_batch_normalization_219_1_batchnorm_sub_70254",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -5976,8 +5976,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_activation_212_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_mul_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_depthwise_conv2d_45_1_depthwise_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_mul_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_sub_70255",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -6008,8 +6008,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_activation_212_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_mul_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_depthwise_conv2d_45_1_depthwise_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_mul_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv3_1_batch_normalization_220_1_batchnorm_sub_70255",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -6032,8 +6032,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_activation_213_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_batch_normalization_221_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_conv2d_199_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_batch_normalization_221_1_batchnorm_sub_70256",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -6064,8 +6064,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_activation_213_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_batch_normalization_221_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_conv2d_199_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv4_1_batch_normalization_221_1_batchnorm_sub_70256",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -6088,8 +6088,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_activation_214_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_mul_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_depthwise_conv2d_46_1_depthwise_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_mul_functional_1_bb10_csp_cib_1_bb10_csp_cib_cib_conv5_1_batch_normalization_222_1_batchnorm_sub_70257",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -6120,8 +6120,8 @@
               "name": "functional_1_bb09_spp_1_bb09_spp_conv_out_1_activation_208_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_out_1_batch_normalization_216_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_out_1_conv2d_196_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_out_1_batch_normalization_216_1_batchnorm_sub_70245",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -6144,8 +6144,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_activation_209_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_batch_normalization_217_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_conv2d_197_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_batch_normalization_217_1_batchnorm_sub_70246",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -6159,8 +6159,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             }
@@ -6172,8 +6172,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub1_70261",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -6204,8 +6204,8 @@
               "name": "functional_1_bb10_csp_cib_1_concatenate_135_1_concat_70259",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 192
               ]
             },
@@ -6228,8 +6228,8 @@
             "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -6246,8 +6246,8 @@
               "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split1_70249",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -6257,8 +6257,8 @@
               "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split11_70252",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -6268,8 +6268,8 @@
               "name": "functional_1_bb10_csp_cib_1_add_70258",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -6281,8 +6281,8 @@
             "name": "functional_1_bb10_csp_cib_1_concatenate_135_1_concat_70259",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               192
             ]
           }
@@ -6304,8 +6304,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_activation_209_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_batch_normalization_217_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_conv2d_197_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_batch_normalization_217_1_batchnorm_sub_70246",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -6325,8 +6325,8 @@
             "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split11_70252",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -6348,8 +6348,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_activation_209_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_batch_normalization_217_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_conv2d_197_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_in_1_batch_normalization_217_1_batchnorm_sub_70246",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -6369,8 +6369,8 @@
             "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split1_70249",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -6384,7 +6384,7 @@
               "name": "functional_1_o2m_1_o2m_box_concat_1_concat_70350",
               "shape": [
                 1,
-                1344,
+                336,
                 16
               ]
             },
@@ -6404,7 +6404,7 @@
             "name": "functional_1_box_decoding_1_Reshape_70351",
             "shape": [
               1,
-              1344,
+              336,
               4,
               4
             ]
@@ -6421,7 +6421,7 @@
               "name": "functional_1_box_decoding_1_Reshape_70351",
               "shape": [
                 1,
-                1344,
+                336,
                 4,
                 4
               ]
@@ -6434,7 +6434,7 @@
             "name": "functional_1_box_decoding_1_Softmax_70352",
             "shape": [
               1,
-              1344,
+              336,
               4,
               4
             ]
@@ -6459,7 +6459,7 @@
               "name": "functional_1_box_decoding_1_mul_70353",
               "shape": [
                 1,
-                1344,
+                336,
                 4,
                 4
               ]
@@ -6472,7 +6472,7 @@
             "name": "functional_1_box_decoding_1_Sum_70354",
             "shape": [
               1,
-              1344,
+              336,
               4
             ]
           }
@@ -6488,7 +6488,7 @@
               "name": "functional_1_box_decoding_1_split_functional_1_box_decoding_1_split11_70360",
               "shape": [
                 1,
-                1344,
+                336,
                 2
               ]
             },
@@ -6497,7 +6497,7 @@
               "layout": "HW",
               "name": "Int8VecConstant_70023_0",
               "shape": [
-                1344,
+                336,
                 2
               ]
             }
@@ -6509,7 +6509,7 @@
             "name": "functional_1_box_decoding_1_add_70361",
             "shape": [
               1,
-              1344,
+              336,
               2
             ]
           }
@@ -6526,7 +6526,7 @@
               "name": "functional_1_box_decoding_1_sub_70362",
               "shape": [
                 1,
-                1344,
+                336,
                 2
               ]
             },
@@ -6536,7 +6536,7 @@
               "name": "functional_1_box_decoding_1_add_70361",
               "shape": [
                 1,
-                1344,
+                336,
                 2
               ]
             }
@@ -6548,7 +6548,7 @@
             "name": "functional_1_box_decoding_1_concat_70363",
             "shape": [
               1,
-              1344,
+              336,
               4
             ]
           }
@@ -6564,7 +6564,7 @@
               "name": "functional_1_box_decoding_1_concat_70363",
               "shape": [
                 1,
-                1344,
+                336,
                 4
               ]
             },
@@ -6573,7 +6573,7 @@
               "layout": "HW",
               "name": "Int8VecConstant_70022",
               "shape": [
-                1344,
+                336,
                 1
               ]
             }
@@ -6585,7 +6585,7 @@
             "name": "functional_1_box_decoding_1_mul_1_70364",
             "shape": [
               1,
-              1344,
+              336,
               4
             ]
           }
@@ -6601,7 +6601,7 @@
               "name": "functional_1_box_decoding_1_Softmax_70352",
               "shape": [
                 1,
-                1344,
+                336,
                 4,
                 4
               ]
@@ -6622,7 +6622,7 @@
             "name": "functional_1_box_decoding_1_mul_70353",
             "shape": [
               1,
-              1344,
+              336,
               4,
               4
             ]
@@ -6645,7 +6645,7 @@
               "name": "functional_1_box_decoding_1_Sum_70354",
               "shape": [
                 1,
-                1344,
+                336,
                 4
               ]
             },
@@ -6665,7 +6665,7 @@
             "name": "functional_1_box_decoding_1_split_functional_1_box_decoding_1_split11_70360",
             "shape": [
               1,
-              1344,
+              336,
               2
             ]
           }
@@ -6687,7 +6687,7 @@
               "name": "functional_1_box_decoding_1_Sum_70354",
               "shape": [
                 1,
-                1344,
+                336,
                 4
               ]
             },
@@ -6707,7 +6707,7 @@
             "name": "functional_1_box_decoding_1_split_functional_1_box_decoding_1_split1_70357",
             "shape": [
               1,
-              1344,
+              336,
               2
             ]
           }
@@ -6722,7 +6722,7 @@
               "layout": "HW",
               "name": "Int8VecConstant_70023_1",
               "shape": [
-                1344,
+                336,
                 2
               ]
             },
@@ -6732,7 +6732,7 @@
               "name": "functional_1_box_decoding_1_split_functional_1_box_decoding_1_split1_70357",
               "shape": [
                 1,
-                1344,
+                336,
                 2
               ]
             }
@@ -6744,7 +6744,7 @@
             "name": "functional_1_box_decoding_1_sub_70362",
             "shape": [
               1,
-              1344,
+              336,
               2
             ]
           }
@@ -6761,7 +6761,7 @@
               "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_final_reshape_1_Reshape_70293",
               "shape": [
                 1,
-                1024,
+                256,
                 16
               ]
             },
@@ -6771,7 +6771,7 @@
               "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_final_reshape_1_Reshape_70319",
               "shape": [
                 1,
-                256,
+                64,
                 16
               ]
             },
@@ -6781,7 +6781,7 @@
               "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_final_reshape_1_Reshape_70349",
               "shape": [
                 1,
-                64,
+                16,
                 16
               ]
             }
@@ -6793,7 +6793,7 @@
             "name": "functional_1_o2m_1_o2m_box_concat_1_concat_70350",
             "shape": [
               1,
-              1344,
+              336,
               16
             ]
           }
@@ -6824,8 +6824,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_activation_223_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_conv2d_208_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_sub_70289",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -6848,8 +6848,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_activation_255_1_Relu6_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_batch_normalization_264_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_conv2d_237_1_convolution_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_batch_normalization_264_1_batchnorm_sub_70290",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -6880,8 +6880,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_activation_255_1_Relu6_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_batch_normalization_264_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_conv2d_237_1_convolution_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_1_1_batch_normalization_264_1_batchnorm_sub_70290",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -6904,8 +6904,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_activation_256_1_Relu6_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_batch_normalization_265_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_conv2d_238_1_convolution_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_batch_normalization_265_1_batchnorm_sub_70291",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -6936,8 +6936,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_activation_256_1_Relu6_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_batch_normalization_265_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_conv2d_238_1_convolution_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_2_1_batch_normalization_265_1_batchnorm_sub_70291",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -6960,8 +6960,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_3_1_conv2d_239_1_add_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_3_1_conv2d_239_1_convolution_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_3_1_conv2d_239_1_Reshape_70292",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -6975,8 +6975,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_3_1_conv2d_239_1_add_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_3_1_conv2d_239_1_convolution_functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_box_3_1_conv2d_239_1_Reshape_70292",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -6996,7 +6996,7 @@
             "name": "functional_1_o2m_1_o2m_box_fpn0_1_o2m_box_fpn0_final_reshape_1_Reshape_70293",
             "shape": [
               1,
-              1024,
+              256,
               16
             ]
           }
@@ -7027,8 +7027,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_activation_228_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_conv2d_213_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_sub_70315",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -7051,8 +7051,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_activation_257_1_Relu6_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_batch_normalization_266_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_conv2d_240_1_convolution_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_batch_normalization_266_1_batchnorm_sub_70316",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               16
             ]
           }
@@ -7083,8 +7083,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_activation_257_1_Relu6_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_batch_normalization_266_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_conv2d_240_1_convolution_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_1_1_batch_normalization_266_1_batchnorm_sub_70316",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 16
               ]
             },
@@ -7107,8 +7107,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_activation_258_1_Relu6_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_batch_normalization_267_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_conv2d_241_1_convolution_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_batch_normalization_267_1_batchnorm_sub_70317",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               16
             ]
           }
@@ -7139,8 +7139,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_activation_258_1_Relu6_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_batch_normalization_267_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_conv2d_241_1_convolution_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_2_1_batch_normalization_267_1_batchnorm_sub_70317",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 16
               ]
             },
@@ -7163,8 +7163,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_3_1_conv2d_242_1_add_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_3_1_conv2d_242_1_convolution_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_3_1_conv2d_242_1_Reshape_70318",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               16
             ]
           }
@@ -7178,8 +7178,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_3_1_conv2d_242_1_add_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_3_1_conv2d_242_1_convolution_functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_box_3_1_conv2d_242_1_Reshape_70318",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 16
               ]
             },
@@ -7199,7 +7199,7 @@
             "name": "functional_1_o2m_1_o2m_box_fpn1_1_o2m_box_fpn1_final_reshape_1_Reshape_70319",
             "shape": [
               1,
-              256,
+              64,
               16
             ]
           }
@@ -7230,8 +7230,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_activation_236_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_batch_normalization_245_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_conv2d_218_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_batch_normalization_245_1_batchnorm_sub_70345",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -7254,8 +7254,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_activation_259_1_Relu6_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_batch_normalization_268_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_conv2d_243_1_convolution_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_batch_normalization_268_1_batchnorm_sub_70346",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               16
             ]
           }
@@ -7286,8 +7286,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_activation_259_1_Relu6_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_batch_normalization_268_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_conv2d_243_1_convolution_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_1_1_batch_normalization_268_1_batchnorm_sub_70346",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 16
               ]
             },
@@ -7310,8 +7310,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_activation_260_1_Relu6_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_batch_normalization_269_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_conv2d_244_1_convolution_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_batch_normalization_269_1_batchnorm_sub_70347",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               16
             ]
           }
@@ -7342,8 +7342,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_activation_260_1_Relu6_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_batch_normalization_269_1_batchnorm_add_1_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_conv2d_244_1_convolution_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_2_1_batch_normalization_269_1_batchnorm_sub_70347",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 16
               ]
             },
@@ -7366,8 +7366,8 @@
             "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_3_1_conv2d_245_1_add_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_3_1_conv2d_245_1_convolution_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_3_1_conv2d_245_1_Reshape_70348",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               16
             ]
           }
@@ -7381,8 +7381,8 @@
               "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_3_1_conv2d_245_1_add_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_3_1_conv2d_245_1_convolution_functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_box_3_1_conv2d_245_1_Reshape_70348",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 16
               ]
             },
@@ -7402,7 +7402,7 @@
             "name": "functional_1_o2m_1_o2m_box_fpn2_1_o2m_box_fpn2_final_reshape_1_Reshape_70349",
             "shape": [
               1,
-              64,
+              16,
               16
             ]
           }
@@ -7419,8 +7419,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_final_reshape_1_Reshape_70301",
               "shape": [
                 1,
-                1024,
-                2
+                256,
+                1
               ]
             },
             "in_1": {
@@ -7429,8 +7429,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_final_reshape_1_Reshape_70327",
               "shape": [
                 1,
-                256,
-                2
+                64,
+                1
               ]
             },
             "in_2": {
@@ -7439,8 +7439,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_final_reshape_1_Reshape_70372",
               "shape": [
                 1,
-                64,
-                2
+                16,
+                1
               ]
             }
           },
@@ -7451,8 +7451,8 @@
             "name": "functional_1_o2m_1_o2m_class_concat_1_concat_70373",
             "shape": [
               1,
-              1344,
-              2
+              336,
+              1
             ]
           }
         },
@@ -7482,8 +7482,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_activation_223_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_conv2d_208_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_sub_70289",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -7506,8 +7506,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_activation_261_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_depthwise_conv2d_57_1_depthwise_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_sub_70294",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               32
             ]
           }
@@ -7538,8 +7538,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_activation_261_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_depthwise_conv2d_57_1_depthwise_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_1_1_batch_normalization_270_1_batchnorm_sub_70294",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -7562,8 +7562,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_activation_262_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_batch_normalization_271_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_conv2d_246_1_convolution_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_batch_normalization_271_1_batchnorm_sub_70295",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               100
             ]
           }
@@ -7594,8 +7594,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_activation_262_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_batch_normalization_271_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_conv2d_246_1_convolution_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_2_1_batch_normalization_271_1_batchnorm_sub_70295",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 100
               ]
             },
@@ -7618,8 +7618,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_activation_263_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_depthwise_conv2d_58_1_depthwise_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_sub_70296",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               100
             ]
           }
@@ -7650,8 +7650,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_activation_263_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_depthwise_conv2d_58_1_depthwise_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_3_1_batch_normalization_272_1_batchnorm_sub_70296",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 100
               ]
             },
@@ -7674,8 +7674,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_activation_264_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_batch_normalization_273_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_conv2d_247_1_convolution_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_batch_normalization_273_1_batchnorm_sub_70297",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               100
             ]
           }
@@ -7689,9 +7689,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_act_1_Sigmoid_70299",
               "shape": [
                 1,
-                32,
-                32,
-                2
+                16,
+                16,
+                1
               ]
             }
           },
@@ -7702,9 +7702,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_act_1_Sigmoid1_70300",
             "shape": [
               1,
-              32,
-              32,
-              2
+              16,
+              16,
+              1
             ]
           }
         },
@@ -7717,9 +7717,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_logits_1_conv2d_248_1_add_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_logits_1_conv2d_248_1_convolution_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_logits_1_conv2d_248_1_Reshape_70298",
               "shape": [
                 1,
-                32,
-                32,
-                2
+                16,
+                16,
+                1
               ]
             }
           },
@@ -7730,9 +7730,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_act_1_Sigmoid_70299",
             "shape": [
               1,
-              32,
-              32,
-              2
+              16,
+              16,
+              1
             ]
           }
         },
@@ -7745,9 +7745,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_act_1_Sigmoid1_70300",
               "shape": [
                 1,
-                32,
-                32,
-                2
+                16,
+                16,
+                1
               ]
             },
             "shape": {
@@ -7766,8 +7766,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_final_reshape_1_Reshape_70301",
             "shape": [
               1,
-              1024,
-              2
+              256,
+              1
             ]
           }
         },
@@ -7788,7 +7788,7 @@
               "layout": "C",
               "name": "Int32VecConstant_70075",
               "shape": [
-                2
+                1
               ]
             },
             "input": {
@@ -7797,8 +7797,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_activation_264_1_Relu6_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_batch_normalization_273_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_conv2d_247_1_convolution_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_class_4_1_batch_normalization_273_1_batchnorm_sub_70297",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 100
               ]
             },
@@ -7807,7 +7807,7 @@
               "layout": "OHWI",
               "name": "Int8VecConstant_70076",
               "shape": [
-                2,
+                1,
                 1,
                 1,
                 100
@@ -7821,9 +7821,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_logits_1_conv2d_248_1_add_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_logits_1_conv2d_248_1_convolution_functional_1_o2m_1_o2m_class_fpn0_1_o2m_class_fpn0_logits_1_conv2d_248_1_Reshape_70298",
             "shape": [
               1,
-              32,
-              32,
-              2
+              16,
+              16,
+              1
             ]
           }
         },
@@ -7853,8 +7853,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_activation_228_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_conv2d_213_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_sub_70315",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -7877,8 +7877,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_activation_265_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_depthwise_conv2d_59_1_depthwise_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_sub_70320",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -7909,8 +7909,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_activation_265_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_depthwise_conv2d_59_1_depthwise_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_1_1_batch_normalization_274_1_batchnorm_sub_70320",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -7933,8 +7933,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_activation_266_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_batch_normalization_275_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_conv2d_249_1_convolution_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_batch_normalization_275_1_batchnorm_sub_70321",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               100
             ]
           }
@@ -7965,8 +7965,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_activation_266_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_batch_normalization_275_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_conv2d_249_1_convolution_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_2_1_batch_normalization_275_1_batchnorm_sub_70321",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 100
               ]
             },
@@ -7989,8 +7989,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_activation_267_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_depthwise_conv2d_60_1_depthwise_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_sub_70322",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               100
             ]
           }
@@ -8021,8 +8021,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_activation_267_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_depthwise_conv2d_60_1_depthwise_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_3_1_batch_normalization_276_1_batchnorm_sub_70322",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 100
               ]
             },
@@ -8045,8 +8045,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_activation_268_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_batch_normalization_277_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_conv2d_250_1_convolution_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_batch_normalization_277_1_batchnorm_sub_70323",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               100
             ]
           }
@@ -8060,9 +8060,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_act_1_Sigmoid_70325",
               "shape": [
                 1,
-                16,
-                16,
-                2
+                8,
+                8,
+                1
               ]
             }
           },
@@ -8073,9 +8073,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_act_1_Sigmoid1_70326",
             "shape": [
               1,
-              16,
-              16,
-              2
+              8,
+              8,
+              1
             ]
           }
         },
@@ -8088,9 +8088,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_logits_1_conv2d_251_1_add_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_logits_1_conv2d_251_1_convolution_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_logits_1_conv2d_251_1_Reshape_70324",
               "shape": [
                 1,
-                16,
-                16,
-                2
+                8,
+                8,
+                1
               ]
             }
           },
@@ -8101,9 +8101,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_act_1_Sigmoid_70325",
             "shape": [
               1,
-              16,
-              16,
-              2
+              8,
+              8,
+              1
             ]
           }
         },
@@ -8116,9 +8116,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_act_1_Sigmoid1_70326",
               "shape": [
                 1,
-                16,
-                16,
-                2
+                8,
+                8,
+                1
               ]
             },
             "shape": {
@@ -8137,8 +8137,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_final_reshape_1_Reshape_70327",
             "shape": [
               1,
-              256,
-              2
+              64,
+              1
             ]
           }
         },
@@ -8159,7 +8159,7 @@
               "layout": "C",
               "name": "Int32VecConstant_70049",
               "shape": [
-                2
+                1
               ]
             },
             "input": {
@@ -8168,8 +8168,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_activation_268_1_Relu6_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_batch_normalization_277_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_conv2d_250_1_convolution_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_class_4_1_batch_normalization_277_1_batchnorm_sub_70323",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 100
               ]
             },
@@ -8178,7 +8178,7 @@
               "layout": "OHWI",
               "name": "Int8VecConstant_70050",
               "shape": [
-                2,
+                1,
                 1,
                 1,
                 100
@@ -8192,9 +8192,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_logits_1_conv2d_251_1_add_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_logits_1_conv2d_251_1_convolution_functional_1_o2m_1_o2m_class_fpn1_1_o2m_class_fpn1_logits_1_conv2d_251_1_Reshape_70324",
             "shape": [
               1,
-              16,
-              16,
-              2
+              8,
+              8,
+              1
             ]
           }
         },
@@ -8224,8 +8224,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_activation_236_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_batch_normalization_245_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_conv2d_218_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_batch_normalization_245_1_batchnorm_sub_70345",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -8248,8 +8248,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_activation_269_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_depthwise_conv2d_61_1_depthwise_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_sub_70365",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -8280,8 +8280,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_activation_269_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_depthwise_conv2d_61_1_depthwise_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_1_1_batch_normalization_278_1_batchnorm_sub_70365",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -8304,8 +8304,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_activation_270_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_batch_normalization_279_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_conv2d_252_1_convolution_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_batch_normalization_279_1_batchnorm_sub_70366",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               100
             ]
           }
@@ -8336,8 +8336,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_activation_270_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_batch_normalization_279_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_conv2d_252_1_convolution_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_2_1_batch_normalization_279_1_batchnorm_sub_70366",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 100
               ]
             },
@@ -8360,8 +8360,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_activation_271_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_depthwise_conv2d_62_1_depthwise_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_sub_70367",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               100
             ]
           }
@@ -8392,8 +8392,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_activation_271_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_mul_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_depthwise_conv2d_62_1_depthwise_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_mul_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_3_1_batch_normalization_280_1_batchnorm_sub_70367",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 100
               ]
             },
@@ -8416,8 +8416,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_activation_272_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_batch_normalization_281_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_conv2d_253_1_convolution_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_batch_normalization_281_1_batchnorm_sub_70368",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               100
             ]
           }
@@ -8431,9 +8431,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_act_1_Sigmoid_70370",
               "shape": [
                 1,
-                8,
-                8,
-                2
+                4,
+                4,
+                1
               ]
             }
           },
@@ -8444,9 +8444,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_act_1_Sigmoid1_70371",
             "shape": [
               1,
-              8,
-              8,
-              2
+              4,
+              4,
+              1
             ]
           }
         },
@@ -8459,9 +8459,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_logits_1_conv2d_254_1_add_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_logits_1_conv2d_254_1_convolution_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_logits_1_conv2d_254_1_Reshape_70369",
               "shape": [
                 1,
-                8,
-                8,
-                2
+                4,
+                4,
+                1
               ]
             }
           },
@@ -8472,9 +8472,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_act_1_Sigmoid_70370",
             "shape": [
               1,
-              8,
-              8,
-              2
+              4,
+              4,
+              1
             ]
           }
         },
@@ -8487,9 +8487,9 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_act_1_Sigmoid1_70371",
               "shape": [
                 1,
-                8,
-                8,
-                2
+                4,
+                4,
+                1
               ]
             },
             "shape": {
@@ -8508,8 +8508,8 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_final_reshape_1_Reshape_70372",
             "shape": [
               1,
-              64,
-              2
+              16,
+              1
             ]
           }
         },
@@ -8530,7 +8530,7 @@
               "layout": "C",
               "name": "Int32VecConstant_70012",
               "shape": [
-                2
+                1
               ]
             },
             "input": {
@@ -8539,8 +8539,8 @@
               "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_activation_272_1_Relu6_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_batch_normalization_281_1_batchnorm_add_1_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_conv2d_253_1_convolution_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_class_4_1_batch_normalization_281_1_batchnorm_sub_70368",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 100
               ]
             },
@@ -8549,7 +8549,7 @@
               "layout": "OHWI",
               "name": "Int8VecConstant_70013",
               "shape": [
-                2,
+                1,
                 1,
                 1,
                 100
@@ -8563,9 +8563,9 @@
             "name": "functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_logits_1_conv2d_254_1_add_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_logits_1_conv2d_254_1_convolution_functional_1_o2m_1_o2m_class_fpn2_1_o2m_class_fpn2_logits_1_conv2d_254_1_Reshape_70369",
             "shape": [
               1,
-              8,
-              8,
-              2
+              4,
+              4,
+              1
             ]
           }
         },
@@ -8581,8 +8581,8 @@
               "name": "functional_1_pan1_upsample_1_resize_ResizeBilinear_70262",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 128
               ]
             },
@@ -8592,8 +8592,8 @@
               "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_activation_201_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_conv2d_189_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_sub_70225",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             }
@@ -8605,8 +8605,8 @@
             "name": "functional_1_pan1_concat_1_concat_70263",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               192
             ]
           }
@@ -8623,8 +8623,8 @@
               "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split1_70267",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -8634,8 +8634,8 @@
               "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split11_70270",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -8645,8 +8645,8 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_add_70273",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -8658,8 +8658,8 @@
             "name": "functional_1_pan1_csp_bn_1_concatenate_136_1_concat_70274",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               96
             ]
           }
@@ -8675,8 +8675,8 @@
               "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split11_70270",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -8686,8 +8686,8 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_activation_218_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_batch_normalization_226_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_conv2d_203_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_batch_normalization_226_1_batchnorm_sub_70272",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -8699,8 +8699,8 @@
             "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_add_70273",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -8731,8 +8731,8 @@
               "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split11_70270",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -8755,8 +8755,8 @@
             "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_activation_217_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_batch_normalization_225_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_conv2d_202_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_batch_normalization_225_1_batchnorm_sub_70271",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -8787,8 +8787,8 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_activation_217_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_batch_normalization_225_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_conv2d_202_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_in_1_batch_normalization_225_1_batchnorm_sub_70271",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -8811,8 +8811,8 @@
             "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_activation_218_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_batch_normalization_226_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_conv2d_203_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_pan1_csp_bn_bottleneck_0_conv_out_1_batch_normalization_226_1_batchnorm_sub_70272",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -8843,8 +8843,8 @@
               "name": "functional_1_pan1_concat_1_concat_70263",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 192
               ]
             },
@@ -8867,8 +8867,8 @@
             "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_activation_216_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_batch_normalization_224_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_conv2d_201_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_batch_normalization_224_1_batchnorm_sub_70264",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -8899,8 +8899,8 @@
               "name": "functional_1_pan1_csp_bn_1_concatenate_136_1_concat_70274",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 96
               ]
             },
@@ -8923,8 +8923,8 @@
             "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -8946,8 +8946,8 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_activation_216_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_batch_normalization_224_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_conv2d_201_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_batch_normalization_224_1_batchnorm_sub_70264",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -8967,8 +8967,8 @@
             "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split11_70270",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -8990,8 +8990,8 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_activation_216_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_batch_normalization_224_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_conv2d_201_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_in_1_batch_normalization_224_1_batchnorm_sub_70264",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -9011,8 +9011,8 @@
             "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split1_70267",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -9029,15 +9029,15 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub1_70261",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
             "size": {
               "dt": "Int32",
               "layout": "C",
-              "name": "Int32VecConstant_70002",
+              "name": "Int32VecConstant_70000",
               "shape": [
                 2
               ]
@@ -9050,8 +9050,8 @@
             "name": "functional_1_pan1_upsample_1_resize_ResizeBilinear_70262",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               128
             ]
           }
@@ -9068,8 +9068,8 @@
               "name": "functional_1_pan2_upsample_1_resize_ResizeBilinear_70276",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 64
               ]
             },
@@ -9079,8 +9079,8 @@
               "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_activation_194_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_conv2d_182_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_sub_70208",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             }
@@ -9092,8 +9092,8 @@
             "name": "functional_1_pan2_concat_1_concat_70277",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               96
             ]
           }
@@ -9110,8 +9110,8 @@
               "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split1_70281",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -9121,8 +9121,8 @@
               "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split11_70284",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -9132,8 +9132,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_add_70287",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             }
@@ -9145,8 +9145,8 @@
             "name": "functional_1_pan2_csp_bn_1_concatenate_137_1_concat_70288",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               48
             ]
           }
@@ -9162,8 +9162,8 @@
               "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split11_70284",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -9173,8 +9173,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_activation_222_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_batch_normalization_230_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_conv2d_207_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_batch_normalization_230_1_batchnorm_sub_70286",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             }
@@ -9186,8 +9186,8 @@
             "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_add_70287",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -9218,8 +9218,8 @@
               "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split11_70284",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -9242,8 +9242,8 @@
             "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_activation_221_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_batch_normalization_229_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_conv2d_206_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_batch_normalization_229_1_batchnorm_sub_70285",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -9274,8 +9274,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_activation_221_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_batch_normalization_229_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_conv2d_206_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_in_1_batch_normalization_229_1_batchnorm_sub_70285",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 16
               ]
             },
@@ -9298,8 +9298,8 @@
             "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_activation_222_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_batch_normalization_230_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_conv2d_207_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_pan2_csp_bn_bottleneck_0_conv_out_1_batch_normalization_230_1_batchnorm_sub_70286",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -9330,8 +9330,8 @@
               "name": "functional_1_pan2_concat_1_concat_70277",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 96
               ]
             },
@@ -9354,8 +9354,8 @@
             "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_activation_220_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_batch_normalization_228_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_conv2d_205_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_batch_normalization_228_1_batchnorm_sub_70278",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               32
             ]
           }
@@ -9386,8 +9386,8 @@
               "name": "functional_1_pan2_csp_bn_1_concatenate_137_1_concat_70288",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 48
               ]
             },
@@ -9410,8 +9410,8 @@
             "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_activation_223_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_conv2d_208_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_sub_70289",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               32
             ]
           }
@@ -9433,8 +9433,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_activation_220_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_batch_normalization_228_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_conv2d_205_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_batch_normalization_228_1_batchnorm_sub_70278",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -9454,8 +9454,8 @@
             "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split11_70284",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -9477,8 +9477,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_activation_220_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_batch_normalization_228_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_conv2d_205_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_in_1_batch_normalization_228_1_batchnorm_sub_70278",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -9498,8 +9498,8 @@
             "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split1_70281",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               16
             ]
           }
@@ -9516,15 +9516,15 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
             "size": {
               "dt": "Int32",
               "layout": "C",
-              "name": "Int32VecConstant_70003",
+              "name": "Int32VecConstant_70002",
               "shape": [
                 2
               ]
@@ -9537,8 +9537,8 @@
             "name": "functional_1_pan2_upsample_1_resize_ResizeBilinear_70276",
             "shape": [
               1,
-              32,
-              32,
+              16,
+              16,
               64
             ]
           }
@@ -9555,8 +9555,8 @@
               "name": "functional_1_pan3_conv_1_activation_224_1_Relu6_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_add_1_functional_1_pan3_conv_1_conv2d_209_1_convolution_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_sub_70302",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -9566,8 +9566,8 @@
               "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             }
@@ -9579,8 +9579,8 @@
             "name": "functional_1_pan3_concat_1_concat_70303",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               96
             ]
           }
@@ -9611,8 +9611,8 @@
               "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_activation_223_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_conv2d_208_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_sub_70289",
               "shape": [
                 1,
-                32,
-                32,
+                16,
+                16,
                 32
               ]
             },
@@ -9635,8 +9635,8 @@
             "name": "functional_1_pan3_conv_1_activation_224_1_Relu6_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_add_1_functional_1_pan3_conv_1_conv2d_209_1_convolution_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_sub_70302",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -9653,8 +9653,8 @@
               "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split1_70307",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -9664,8 +9664,8 @@
               "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split11_70310",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -9675,8 +9675,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_add_70313",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -9688,8 +9688,8 @@
             "name": "functional_1_pan3_csp_bn_1_concatenate_138_1_concat_70314",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               96
             ]
           }
@@ -9705,8 +9705,8 @@
               "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split11_70310",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -9716,8 +9716,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_activation_227_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_batch_normalization_235_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_conv2d_212_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_batch_normalization_235_1_batchnorm_sub_70312",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             }
@@ -9729,8 +9729,8 @@
             "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_add_70313",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -9761,8 +9761,8 @@
               "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split11_70310",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -9785,8 +9785,8 @@
             "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_activation_226_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_batch_normalization_234_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_conv2d_211_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_batch_normalization_234_1_batchnorm_sub_70311",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -9817,8 +9817,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_activation_226_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_batch_normalization_234_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_conv2d_211_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_in_1_batch_normalization_234_1_batchnorm_sub_70311",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 32
               ]
             },
@@ -9841,8 +9841,8 @@
             "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_activation_227_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_batch_normalization_235_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_conv2d_212_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_pan3_csp_bn_bottleneck_0_conv_out_1_batch_normalization_235_1_batchnorm_sub_70312",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -9873,8 +9873,8 @@
               "name": "functional_1_pan3_concat_1_concat_70303",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 96
               ]
             },
@@ -9897,8 +9897,8 @@
             "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_activation_225_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_batch_normalization_233_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_conv2d_210_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_batch_normalization_233_1_batchnorm_sub_70304",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -9929,8 +9929,8 @@
               "name": "functional_1_pan3_csp_bn_1_concatenate_138_1_concat_70314",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 96
               ]
             },
@@ -9953,8 +9953,8 @@
             "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_activation_228_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_conv2d_213_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_sub_70315",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -9976,8 +9976,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_activation_225_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_batch_normalization_233_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_conv2d_210_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_batch_normalization_233_1_batchnorm_sub_70304",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -9997,8 +9997,8 @@
             "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split11_70310",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -10020,8 +10020,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_activation_225_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_batch_normalization_233_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_conv2d_210_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_in_1_batch_normalization_233_1_batchnorm_sub_70304",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -10041,8 +10041,8 @@
             "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split1_70307",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               32
             ]
           }
@@ -10059,8 +10059,8 @@
               "name": "functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_depthwise_conv2d_47_1_depthwise_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_sub_70329",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10070,8 +10070,8 @@
               "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             }
@@ -10083,8 +10083,8 @@
             "name": "functional_1_pan4_concat_1_concat_70330",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               192
             ]
           }
@@ -10100,8 +10100,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_activation_235_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_mul_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_depthwise_conv2d_50_1_depthwise_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_mul_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_sub_70342",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10111,8 +10111,8 @@
               "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -10124,8 +10124,8 @@
             "name": "functional_1_pan4_csp_cib_1_add_70343",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10142,8 +10142,8 @@
               "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split1_70334",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10153,8 +10153,8 @@
               "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10164,8 +10164,8 @@
               "name": "functional_1_pan4_csp_cib_1_add_70343",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             }
@@ -10177,8 +10177,8 @@
             "name": "functional_1_pan4_csp_cib_1_concatenate_139_1_concat_70344",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               192
             ]
           }
@@ -10209,8 +10209,8 @@
               "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10233,8 +10233,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_activation_231_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_mul_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_depthwise_conv2d_48_1_depthwise_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_mul_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_sub_70338",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10265,8 +10265,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_activation_231_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_mul_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_depthwise_conv2d_48_1_depthwise_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_mul_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv1_1_batch_normalization_240_1_batchnorm_sub_70338",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10289,8 +10289,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_activation_232_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_batch_normalization_241_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_conv2d_216_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_batch_normalization_241_1_batchnorm_sub_70339",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -10321,8 +10321,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_activation_232_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_batch_normalization_241_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_conv2d_216_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv2_1_batch_normalization_241_1_batchnorm_sub_70339",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -10345,8 +10345,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_activation_233_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_mul_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_depthwise_conv2d_49_1_depthwise_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_mul_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_sub_70340",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -10377,8 +10377,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_activation_233_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_mul_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_depthwise_conv2d_49_1_depthwise_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_mul_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv3_1_batch_normalization_242_1_batchnorm_sub_70340",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -10401,8 +10401,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_activation_234_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_batch_normalization_243_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_conv2d_217_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_batch_normalization_243_1_batchnorm_sub_70341",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10433,8 +10433,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_activation_234_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_batch_normalization_243_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_conv2d_217_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv4_1_batch_normalization_243_1_batchnorm_sub_70341",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 64
               ]
             },
@@ -10457,8 +10457,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_activation_235_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_mul_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_depthwise_conv2d_50_1_depthwise_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_mul_functional_1_pan4_csp_cib_1_pan4_csp_cib_cib_conv5_1_batch_normalization_244_1_batchnorm_sub_70342",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10489,8 +10489,8 @@
               "name": "functional_1_pan4_concat_1_concat_70330",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 192
               ]
             },
@@ -10513,8 +10513,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_activation_230_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_batch_normalization_239_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_conv2d_215_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_batch_normalization_239_1_batchnorm_sub_70331",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -10545,8 +10545,8 @@
               "name": "functional_1_pan4_csp_cib_1_concatenate_139_1_concat_70344",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 192
               ]
             },
@@ -10569,8 +10569,8 @@
             "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_activation_236_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_batch_normalization_245_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_conv2d_218_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_out_1_batch_normalization_245_1_batchnorm_sub_70345",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               128
             ]
           }
@@ -10592,8 +10592,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_activation_230_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_batch_normalization_239_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_conv2d_215_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_batch_normalization_239_1_batchnorm_sub_70331",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -10613,8 +10613,8 @@
             "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10636,8 +10636,8 @@
               "name": "functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_activation_230_1_Relu6_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_batch_normalization_239_1_batchnorm_add_1_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_conv2d_215_1_convolution_functional_1_pan4_csp_cib_1_pan4_csp_cib_conv_in_1_batch_normalization_239_1_batchnorm_sub_70331",
               "shape": [
                 1,
-                8,
-                8,
+                4,
+                4,
                 128
               ]
             },
@@ -10657,8 +10657,8 @@
             "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split1_70334",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10689,8 +10689,8 @@
               "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_activation_228_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_conv2d_213_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_sub_70315",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -10713,8 +10713,8 @@
             "name": "functional_1_pan4_scd_1_pan4_scd_conv_in_1_activation_229_1_Relu6_functional_1_pan4_scd_1_pan4_scd_conv_in_1_batch_normalization_237_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_in_1_conv2d_214_1_convolution_functional_1_pan4_scd_1_pan4_scd_conv_in_1_batch_normalization_237_1_batchnorm_sub_70328",
             "shape": [
               1,
-              16,
-              16,
+              8,
+              8,
               64
             ]
           }
@@ -10745,8 +10745,8 @@
               "name": "functional_1_pan4_scd_1_pan4_scd_conv_in_1_activation_229_1_Relu6_functional_1_pan4_scd_1_pan4_scd_conv_in_1_batch_normalization_237_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_in_1_conv2d_214_1_convolution_functional_1_pan4_scd_1_pan4_scd_conv_in_1_batch_normalization_237_1_batchnorm_sub_70328",
               "shape": [
                 1,
-                16,
-                16,
+                8,
+                8,
                 64
               ]
             },
@@ -10769,8 +10769,8 @@
             "name": "functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_depthwise_conv2d_47_1_depthwise_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_sub_70329",
             "shape": [
               1,
-              8,
-              8,
+              4,
+              4,
               64
             ]
           }
@@ -10785,8 +10785,8 @@
             "name": "x",
             "shape": [
               1,
-              256,
-              256,
+              128,
+              128,
               3
             ]
           }

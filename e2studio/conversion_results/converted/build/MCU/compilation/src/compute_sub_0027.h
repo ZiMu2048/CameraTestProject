@@ -81,15 +81,15 @@ void compute_sub_0027(
 
   // inputs
   
-  const int8_t functional_1_pan4_csp_cib_1_add_70343[4096], // 1,8,8,64
+  const int8_t functional_1_pan4_csp_cib_1_add_70343[1024], // 1,4,4,64
   
-  const int8_t functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337[4096], // 1,8,8,64
+  const int8_t functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337[1024], // 1,4,4,64
   
-  const int8_t functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split1_70334[4096], // 1,8,8,64
+  const int8_t functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split1_70334[1024], // 1,4,4,64
   
 
   // outputs
   
-  int8_t functional_1_pan4_csp_cib_1_concatenate_139_1_concat_70344[12288]  // 1,8,8,192
+  int8_t functional_1_pan4_csp_cib_1_concatenate_139_1_concat_70344[3072]  // 1,4,4,192
   
 );

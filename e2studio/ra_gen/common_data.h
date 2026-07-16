@@ -74,7 +74,7 @@ void glcdc_vsync_isr(display_callback_args_t *p_args);
             extern uint8_t fb_background[2][DISPLAY_BUFFER_STRIDE_BYTES_INPUT0 * DISPLAY_VSIZE_INPUT0];
             #endif
 
-#define DISPLAY_IN_FORMAT_16BITS_RGB565_1
+#define DISPLAY_IN_FORMAT_16BITS_ARGB4444_1
 #if defined (DISPLAY_IN_FORMAT_32BITS_RGB888_1) || defined (DISPLAY_IN_FORMAT_32BITS_ARGB8888_1)
             #define DISPLAY_BITS_PER_PIXEL_INPUT1 (32)
             #elif defined (DISPLAY_IN_FORMAT_16BITS_RGB565_1) || defined (DISPLAY_IN_FORMAT_16BITS_ARGB1555_1) || defined (DISPLAY_IN_FORMAT_16BITS_ARGB4444_1)
@@ -86,12 +86,12 @@ void glcdc_vsync_isr(display_callback_args_t *p_args);
             #else
             #define DISPLAY_BITS_PER_PIXEL_INPUT1 (1)
             #endif
-#define DISPLAY_HSIZE_INPUT1                 (480)
-#define DISPLAY_VSIZE_INPUT1                 (854)
+#define DISPLAY_HSIZE_INPUT1                 (1024)
+#define DISPLAY_VSIZE_INPUT1                 (600)
 #define DISPLAY_BUFFER_STRIDE_BYTES_INPUT1   (((DISPLAY_HSIZE_INPUT1 * DISPLAY_BITS_PER_PIXEL_INPUT1 + 0x1FF) >> 9) << 6)
 #define DISPLAY_BUFFER_STRIDE_PIXELS_INPUT1  ((DISPLAY_BUFFER_STRIDE_BYTES_INPUT1 * 8) / DISPLAY_BITS_PER_PIXEL_INPUT1)
 #if GLCDC_CFG_LAYER_2_ENABLE
-            extern uint8_t fb_foreground[1][DISPLAY_BUFFER_STRIDE_BYTES_INPUT1 * DISPLAY_VSIZE_INPUT1];
+            extern uint8_t fb_foreground[2][DISPLAY_BUFFER_STRIDE_BYTES_INPUT1 * DISPLAY_VSIZE_INPUT1];
             #endif
 /* MIPI PHY on MIPI PHY Instance. */
 

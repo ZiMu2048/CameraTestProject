@@ -28,6 +28,7 @@ fsp_err_t glcdc_init(void)
 {
     fsp_err_t err = FSP_SUCCESS;
 
+
     /* Close opened GLCDC module*/
     if(DISPLAY_STATE_CLOSED != g_display_ctrl.state)
     {

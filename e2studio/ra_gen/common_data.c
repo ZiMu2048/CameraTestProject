@@ -27,7 +27,7 @@ const rm_ethosu_instance_t g_rm_ethosu0 =
 /** Graphics Layer 1 is specified not to be used when starting */
 #endif
 #if GLCDC_CFG_LAYER_2_ENABLE
-        uint8_t fb_foreground[1][DISPLAY_BUFFER_STRIDE_BYTES_INPUT1 * DISPLAY_VSIZE_INPUT1] BSP_ALIGN_VARIABLE(64) BSP_PLACE_IN_SECTION(BSP_UNINIT_SECTION_PREFIX ".sdram_noinit");
+        uint8_t fb_foreground[2][DISPLAY_BUFFER_STRIDE_BYTES_INPUT1 * DISPLAY_VSIZE_INPUT1] BSP_ALIGN_VARIABLE(64) BSP_PLACE_IN_SECTION(BSP_UNINIT_SECTION_PREFIX ".sdram_noinit");
         #else
 /** Graphics Layer 2 is specified not to be used when starting */
 #endif
@@ -163,7 +163,7 @@ const display_cfg_t g_display_cfg =
 #endif
             .hsize = DISPLAY_HSIZE_INPUT1,
             .vsize = DISPLAY_VSIZE_INPUT1, .hstride = DISPLAY_BUFFER_STRIDE_PIXELS_INPUT1, .format =
-                    DISPLAY_IN_FORMAT_16BITS_RGB565,
+                    DISPLAY_IN_FORMAT_16BITS_ARGB4444,
             .line_descending_enable = false, .lines_repeat_enable = false, .lines_repeat_times = 0 },
 
           /** Input1(Graphics1 layer) layer configuration */
@@ -291,7 +291,7 @@ const display_cfg_t g_display_cfg =
                 .hsize               = DISPLAY_HSIZE_INPUT1,
                 .vsize               = DISPLAY_VSIZE_INPUT1,
                 .hstride             = DISPLAY_BUFFER_STRIDE_PIXELS_INPUT1,
-                .format              = DISPLAY_IN_FORMAT_16BITS_RGB565,
+                .format              = DISPLAY_IN_FORMAT_16BITS_ARGB4444,
                 .line_descending_enable = false,
                 .lines_repeat_enable = false,
                 .lines_repeat_times  = 0

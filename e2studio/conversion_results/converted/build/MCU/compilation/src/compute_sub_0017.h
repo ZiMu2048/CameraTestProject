@@ -81,13 +81,13 @@ void compute_sub_0017(
 
   // inputs
   
-  const int8_t functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_activation_194_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_conv2d_182_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_sub_70208[32768], // 1,32,32,32
+  const int8_t functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_activation_194_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_conv2d_182_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_sub_70208[8192], // 1,16,16,32
   
-  const int8_t functional_1_pan2_upsample_1_resize_ResizeBilinear_70276[65536], // 1,32,32,64
+  const int8_t functional_1_pan2_upsample_1_resize_ResizeBilinear_70276[16384], // 1,16,16,64
   
 
   // outputs
   
-  int8_t functional_1_pan2_concat_1_concat_70277[98304]  // 1,32,32,96
+  int8_t functional_1_pan2_concat_1_concat_70277[24576]  // 1,16,16,96
   
 );

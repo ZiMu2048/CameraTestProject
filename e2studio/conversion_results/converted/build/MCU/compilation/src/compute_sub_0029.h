@@ -81,11 +81,11 @@ void compute_sub_0029(
 
   // inputs
   
-  const int8_t functional_1_box_decoding_1_mul_70353[21504], // 1,1344,4,4
+  const int8_t functional_1_box_decoding_1_mul_70353[5376], // 1,336,4,4
   
 
   // outputs
   
-  int8_t functional_1_box_decoding_1_Sum_70354[5376]  // 1,1344,4
+  int8_t functional_1_box_decoding_1_Sum_70354[1344]  // 1,336,4
   
 );

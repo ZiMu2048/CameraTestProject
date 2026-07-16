@@ -54,20 +54,20 @@
 #include <stdint.h>
 
 extern int8_t sub_0000_x[];
-#define sub_0000_x_SIZE (196608)
-#define sub_0000_x_COUNT (196608)
+#define sub_0000_x_SIZE (49152)
+#define sub_0000_x_COUNT (49152)
 
 extern int8_t sub_0000_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190[];
-#define sub_0000_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190_SIZE (32768)
-#define sub_0000_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190_COUNT (32768)
+#define sub_0000_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190_SIZE (8192)
+#define sub_0000_functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190_COUNT (8192)
 
 extern int8_t sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187[];
-#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187_SIZE (32768)
-#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187_COUNT (32768)
+#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187_SIZE (8192)
+#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187_COUNT (8192)
 
 extern int8_t sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184[];
-#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184_SIZE (32768)
-#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184_COUNT (32768)
+#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184_SIZE (8192)
+#define sub_0000_functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184_COUNT (8192)
 
 
 #endif // SUB_0000_MODEL_DATA_H

@@ -54,12 +54,12 @@
 #include <stdint.h>
 
 extern int8_t model_x[];
-#define model_x_SIZE (196608)
-#define model_x_COUNT (196608)
+#define model_x_SIZE (49152)
+#define model_x_COUNT (49152)
 
 extern int8_t model_Identity[];
-#define model_Identity_SIZE (8064)
-#define model_Identity_COUNT (8064)
+#define model_Identity_SIZE (1680)
+#define model_Identity_COUNT (1680)
 
 
 #endif // MODEL_MODEL_DATA_H

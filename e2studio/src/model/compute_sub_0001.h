@@ -81,15 +81,15 @@ void compute_sub_0001(
 
   // inputs
   
-  const int8_t functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190[32768], // 1,64,64,8
+  const int8_t functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190[8192], // 1,32,32,8
   
-  const int8_t functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187[32768], // 1,64,64,8
+  const int8_t functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187[8192], // 1,32,32,8
   
-  const int8_t functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184[32768], // 1,64,64,8
+  const int8_t functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184[8192], // 1,32,32,8
   
 
   // outputs
   
-  int8_t functional_1_bb02_csp_bn_1_concatenate_130_1_concat_70191[98304]  // 1,64,64,24
+  int8_t functional_1_bb02_csp_bn_1_concatenate_130_1_concat_70191[24576]  // 1,32,32,24
   
 );

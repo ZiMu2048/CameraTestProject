@@ -982,985 +982,985 @@
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 196608,
+        "bytes_size": 49152,
         "data_type": "int8",
         "name": "x",
         "offset": 0,
         "shape": [
           1,
-          256,
-          256,
+          128,
+          128,
           3
         ],
-        "size": 196608
+        "size": 49152
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_bb02_csp_bn_1_bb02_csp_bn_bottleneck_0_1_add_70190",
         "offset": 0,
         "shape": [
           1,
-          64,
-          64,
+          32,
+          32,
           8
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split11_70187",
         "offset": 0,
         "shape": [
           1,
-          64,
-          64,
+          32,
+          32,
           8
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_bb02_csp_bn_1_split_functional_1_bb02_csp_bn_1_split1_70184",
         "offset": 0,
         "shape": [
           1,
-          64,
-          64,
+          32,
+          32,
           8
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 98304,
+        "bytes_size": 24576,
         "data_type": "int8",
         "name": "functional_1_bb02_csp_bn_1_concatenate_130_1_concat_70191",
         "offset": 0,
         "shape": [
           1,
-          64,
-          64,
+          32,
+          32,
           24
         ],
-        "size": 98304
+        "size": 24576
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_add_70206",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split1_70197",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 65536,
+        "bytes_size": 16384,
         "data_type": "int8",
         "name": "functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           64
         ],
-        "size": 65536
+        "size": 16384
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_activation_194_1_Relu6_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_add_1_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_conv2d_182_1_convolution_functional_1_bb04_csp_bn_1_bb04_csp_bn_conv_out_1_batch_normalization_200_1_batchnorm_sub_70208",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           32
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_add_70223",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split1_70214",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_bb06_csp_bn_1_concatenate_132_1_concat_70224",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           128
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_activation_201_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_conv2d_189_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_sub_70225",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           64
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb08_csp_bn_1_bb08_csp_bn_bottleneck_0_1_add_70237",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split11_70234",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb08_csp_bn_1_split_functional_1_bb08_csp_bn_1_split1_70231",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 12288,
+        "bytes_size": 3072,
         "data_type": "int8",
         "name": "functional_1_bb08_csp_bn_1_concatenate_133_1_concat_70238",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           192
         ],
-        "size": 12288
+        "size": 3072
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb09_spp_1_max_pooling2d_2_5_MaxPool2d_70243",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_bb09_spp_1_concatenate_134_1_concat_70244",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           256
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb10_csp_cib_1_add_70258",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split11_70252",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_bb10_csp_cib_1_split_functional_1_bb10_csp_cib_1_split1_70249",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 12288,
+        "bytes_size": 3072,
         "data_type": "int8",
         "name": "functional_1_bb10_csp_cib_1_concatenate_135_1_concat_70259",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           192
         ],
-        "size": 12288
+        "size": 3072
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           128
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_pan1_upsample_1_resize_ResizeBilinear_70262",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           128
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 49152,
+        "bytes_size": 12288,
         "data_type": "int8",
         "name": "functional_1_pan1_concat_1_concat_70263",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           192
         ],
-        "size": 49152
+        "size": 12288
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_bottleneck_0_1_add_70273",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split11_70270",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan1_csp_bn_1_split_functional_1_pan1_csp_bn_1_split1_70267",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 24576,
+        "bytes_size": 6144,
         "data_type": "int8",
         "name": "functional_1_pan1_csp_bn_1_concatenate_136_1_concat_70274",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           96
         ],
-        "size": 24576
+        "size": 6144
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           64
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 65536,
+        "bytes_size": 16384,
         "data_type": "int8",
         "name": "functional_1_pan2_upsample_1_resize_ResizeBilinear_70276",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           64
         ],
-        "size": 65536
+        "size": 16384
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 98304,
+        "bytes_size": 24576,
         "data_type": "int8",
         "name": "functional_1_pan2_concat_1_concat_70277",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           96
         ],
-        "size": 98304
+        "size": 24576
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_bottleneck_0_1_add_70287",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split11_70284",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_pan2_csp_bn_1_split_functional_1_pan2_csp_bn_1_split1_70281",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           16
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 49152,
+        "bytes_size": 12288,
         "data_type": "int8",
         "name": "functional_1_pan2_csp_bn_1_concatenate_137_1_concat_70288",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           48
         ],
-        "size": 49152
+        "size": 12288
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 32768,
+        "bytes_size": 8192,
         "data_type": "int8",
         "name": "functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_activation_223_1_Relu6_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_add_1_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_conv2d_208_1_convolution_functional_1_pan2_csp_bn_1_pan2_csp_bn_conv_out_1_batch_normalization_231_1_batchnorm_sub_70289",
         "offset": 0,
         "shape": [
           1,
-          32,
-          32,
+          16,
+          16,
           32
         ],
-        "size": 32768
+        "size": 8192
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan3_conv_1_activation_224_1_Relu6_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_add_1_functional_1_pan3_conv_1_conv2d_209_1_convolution_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_sub_70302",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 24576,
+        "bytes_size": 6144,
         "data_type": "int8",
         "name": "functional_1_pan3_concat_1_concat_70303",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           96
         ],
-        "size": 24576
+        "size": 6144
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_bottleneck_0_1_add_70313",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split11_70310",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8192,
+        "bytes_size": 2048,
         "data_type": "int8",
         "name": "functional_1_pan3_csp_bn_1_split_functional_1_pan3_csp_bn_1_split1_70307",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           32
         ],
-        "size": 8192
+        "size": 2048
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 24576,
+        "bytes_size": 6144,
         "data_type": "int8",
         "name": "functional_1_pan3_csp_bn_1_concatenate_138_1_concat_70314",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           96
         ],
-        "size": 24576
+        "size": 6144
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 16384,
+        "bytes_size": 4096,
         "data_type": "int8",
         "name": "functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_activation_228_1_Relu6_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_add_1_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_conv2d_213_1_convolution_functional_1_pan3_csp_bn_1_pan3_csp_bn_conv_out_1_batch_normalization_236_1_batchnorm_sub_70315",
         "offset": 0,
         "shape": [
           1,
-          16,
-          16,
+          8,
+          8,
           64
         ],
-        "size": 16384
+        "size": 4096
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_depthwise_conv2d_47_1_depthwise_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_sub_70329",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 12288,
+        "bytes_size": 3072,
         "data_type": "int8",
         "name": "functional_1_pan4_concat_1_concat_70330",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           192
         ],
-        "size": 12288
+        "size": 3072
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_pan4_csp_cib_1_add_70343",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split11_70337",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 4096,
+        "bytes_size": 1024,
         "data_type": "int8",
         "name": "functional_1_pan4_csp_cib_1_split_functional_1_pan4_csp_cib_1_split1_70334",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           64
         ],
-        "size": 4096
+        "size": 1024
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 12288,
+        "bytes_size": 3072,
         "data_type": "int8",
         "name": "functional_1_pan4_csp_cib_1_concatenate_139_1_concat_70344",
         "offset": 0,
         "shape": [
           1,
-          8,
-          8,
+          4,
+          4,
           192
         ],
-        "size": 12288
+        "size": 3072
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 21504,
+        "bytes_size": 5376,
         "data_type": "int8",
         "name": "functional_1_box_decoding_1_mul_70353",
         "offset": 0,
         "shape": [
           1,
-          1344,
+          336,
           4,
           4
         ],
-        "size": 21504
+        "size": 5376
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 2688,
+        "bytes_size": 336,
         "data_type": "int8",
         "name": "functional_1_o2m_1_o2m_class_concat_1_concat_70373",
         "offset": 0,
         "shape": [
           1,
-          1344,
-          2
+          336,
+          1
         ],
-        "size": 2688
+        "size": 336
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 5376,
+        "bytes_size": 1344,
         "data_type": "int8",
         "name": "functional_1_box_decoding_1_Sum_70354",
         "offset": 0,
         "shape": [
           1,
-          1344,
+          336,
           4
         ],
-        "size": 5376
+        "size": 1344
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 2688,
+        "bytes_size": 672,
         "data_type": "int8",
         "name": "functional_1_box_decoding_1_add_70361",
         "offset": 0,
         "shape": [
           1,
-          1344,
+          336,
           2
         ],
-        "size": 2688
+        "size": 672
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 2688,
+        "bytes_size": 672,
         "data_type": "int8",
         "name": "functional_1_box_decoding_1_sub_70362",
         "offset": 0,
         "shape": [
           1,
-          1344,
+          336,
           2
         ],
-        "size": 2688
+        "size": 672
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 5376,
+        "bytes_size": 1344,
         "data_type": "int8",
         "name": "functional_1_box_decoding_1_concat_70363",
         "offset": 0,
         "shape": [
           1,
-          1344,
+          336,
           4
         ],
-        "size": 5376
+        "size": 1344
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 5376,
+        "bytes_size": 1344,
         "data_type": "int8",
         "name": "functional_1_box_decoding_1_mul_1_70364",
         "offset": 0,
         "shape": [
           1,
-          1344,
+          336,
           4
         ],
-        "size": 5376
+        "size": 1344
       },
       {
         "alignment": 256,
         "alloc_mode": "linux_malloc",
-        "bytes_size": 8064,
+        "bytes_size": 1680,
         "data_type": "int8",
         "name": "Identity_70374",
         "offset": 0,
         "shape": [
           1,
-          1344,
-          6
+          336,
+          5
         ],
-        "size": 8064
+        "size": 1680
       }
     ],
     "input_buffers": [

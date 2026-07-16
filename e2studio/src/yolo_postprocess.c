@@ -12,7 +12,6 @@
 
 const char * const g_yolo_class_names[YOLO_CLASS_COUNT] =
 {
-    "Dusty",
     "PhysicalDamage",
 };
 
@@ -33,7 +32,7 @@ static float yolo_clampf(float value, float lower, float upper)
     return value;
 }
 
-#if 0 /* Raw-head helpers are not used by the current decoded [1344,6] output. */
+#if 0 /* Raw-head helpers are not used by the current decoded [336,5] output. */
 static float yolo_sigmoid(float value)
 {
     /* 防止 expf() 因异常输出溢出。 */
@@ -112,8 +111,9 @@ int yolo_decode_int8_output(const int8_t * output,
                             int capacity,
                             float confidence_threshold)
 {
-    const float output_scale = 0.0058933664f;
-    const int output_zero_point = -93;
+    /* Renesas_YOLO_INT8_PhyD_0260716.tflite: scale=0.008431578986346722, zp=-58. */
+    const float output_scale = 0.0084315790f;
+    const int output_zero_point = -58;
     int count = 0;
 
     if ((output == NULL) || (detections == NULL) || (capacity <= 0))
@@ -129,11 +129,7 @@ int yolo_decode_int8_output(const int8_t * output,
         float y1 = (float) ((int) row[1] - output_zero_point) * output_scale;
         float x2 = (float) ((int) row[2] - output_zero_point) * output_scale;
         float y2 = (float) ((int) row[3] - output_zero_point) * output_scale;
-        float dusty = (float) ((int) row[4] - output_zero_point) * output_scale;
-        float damage = (float) ((int) row[5] - output_zero_point) * output_scale;
-
-        int class_id = (damage > dusty) ? 1 : 0;
-        float score = (damage > dusty) ? damage : dusty;
+        float score = (float) ((int) row[4] - output_zero_point) * output_scale;
 
         if (score < confidence_threshold)
         {
@@ -147,7 +143,7 @@ int yolo_decode_int8_output(const int8_t * output,
             .x2 = x2 * YOLO_INPUT_SIZE,
             .y2 = y2 * YOLO_INPUT_SIZE,
             .score = score,
-            .class_id = (uint8_t) class_id,
+            .class_id = 0U,
         };
 
         candidate.x1 = yolo_clampf(candidate.x1, 0.0f, (float) YOLO_INPUT_SIZE);

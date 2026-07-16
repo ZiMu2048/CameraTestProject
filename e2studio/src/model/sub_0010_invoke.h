@@ -6,11 +6,11 @@
 #include <stdint.h>
 
 // Declare arenas
-extern uint8_t sub_0010_arena[24576];
+extern uint8_t sub_0010_arena[6144];
 
 // Fast scratch arena not used for Ethos-U55
 // We will not create it for now and reuse the address of the other arena
-extern uint8_t* sub_0010_fast_scratch; // size: 24576
+extern uint8_t* sub_0010_fast_scratch; // size: 6144
 
 int sub_0010_invoke(bool clean_outputs);
 

@@ -10,10 +10,10 @@
 
 #include <stdint.h>
 
-#define YOLO_INPUT_SIZE             (256)
-#define YOLO_CLASS_COUNT            (2)
-#define YOLO_OUTPUT_BOX_COUNT       (1344)
-#define YOLO_OUTPUT_ATTRS           (6)
+#define YOLO_INPUT_SIZE             (128)
+#define YOLO_CLASS_COUNT            (1)
+#define YOLO_OUTPUT_BOX_COUNT       (336)
+#define YOLO_OUTPUT_ATTRS           (5)
 #define YOLO_MAX_DETECTIONS         (64)
 
 typedef struct st_yolo_detection

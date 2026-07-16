@@ -65,18 +65,18 @@ void compute_sub_0003(
 
   // inputs
   
-  const int8_t functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203[16384], // 1,32,32,16
+  const int8_t functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203[4096], // 1,16,16,16
   
-  const int8_t functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_add_70206[16384], // 1,32,32,16
+  const int8_t functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_add_70206[4096], // 1,16,16,16
   
-  const int8_t functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200[16384], // 1,32,32,16
+  const int8_t functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200[4096], // 1,16,16,16
   
-  const int8_t functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split1_70197[16384], // 1,32,32,16
+  const int8_t functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split1_70197[4096], // 1,16,16,16
   
 
   // outputs
   
-  int8_t functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207[65536]  // 1,32,32,64
+  int8_t functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207[16384]  // 1,16,16,64
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -98,8 +98,8 @@ void compute_sub_0003(
 arm_concatenation_s8_x	(
       functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split1_70197
     , 16
-    , 32
-    , 32
+    , 16
+    , 16
     , 1
     , functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207 
 
@@ -111,8 +111,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb04_csp_bn_1_split_functional_1_bb04_csp_bn_1_split11_70200
     , 16
-    , 32
-    , 32
+    , 16
+    , 16
     , 1
     , functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207 
 
@@ -124,8 +124,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_0_1_add_70203
     , 16
-    , 32
-    , 32
+    , 16
+    , 16
     , 1
     , functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207 
 
@@ -137,8 +137,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb04_csp_bn_1_bb04_csp_bn_bottleneck_1_1_add_70206
     , 16
-    , 32
-    , 32
+    , 16
+    , 16
     , 1
     , functional_1_bb04_csp_bn_1_concatenate_131_1_concat_70207 
 

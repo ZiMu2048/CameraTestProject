@@ -15,10 +15,10 @@
 #include "ethosu_driver.h"
 
 // Define arenas with allocation and 16-byte alignment
-__attribute__((aligned(32), section(".sdram_noinit_nocache"))) uint8_t sub_0032_arena[5376];
+__attribute__((aligned(16))) uint8_t sub_0032_arena[1344];
 // Fast scratch arena not used for Ethos-U55
 //  We will not create it for now and reuse the address of the other arena
-// __attribute__((aligned(16))) static uint8_t sub_0032_fast_scratch[5376];
+// __attribute__((aligned(16))) static uint8_t sub_0032_fast_scratch[1344];
 uint8_t* sub_0032_fast_scratch = sub_0032_arena;
 
 int sub_0032_invoke(bool clean_outputs) {
@@ -32,27 +32,27 @@ int sub_0032_invoke(bool clean_outputs) {
   int cms_size = 0;
 
   // Prepare base_addrs and base_addrs_size arrays
-  // Buffer sub_0032_model with size 1344 and address: 4294967295
+  // Buffer sub_0032_model with size 336 and address: 4294967295
   base_addrs[0] = (uint64_t)(uintptr_t)sub_0032_model_data;
   base_addrs_size[0] = sub_0032_model_data_size;
-  // Buffer sub_0032_arena with size 5376 and address: 0
+  // Buffer sub_0032_arena with size 1344 and address: 0
   base_addrs[1] = (uint64_t)(uintptr_t) (sub_0032_arena+0);
-  base_addrs_size[1] = 5376;
+  base_addrs_size[1] = 1344;
 
-  // Buffer sub_0032_fast_scratch with size 5376 and address: 0
+  // Buffer sub_0032_fast_scratch with size 1344 and address: 0
   base_addrs[2] = (uint64_t)(uintptr_t) (sub_0032_arena+0);
-  base_addrs_size[2] = 5376;
+  base_addrs_size[2] = 1344;
 
-  // Buffer input_tensor_0 with size 5376 and address: 0
+  // Buffer input_tensor_0 with size 1344 and address: 0
   base_addrs[3] = (uint64_t)(uintptr_t) (sub_0032_arena+0);
-  base_addrs_size[3] = 5376;
+  base_addrs_size[3] = 1344;
 
-  // Buffer output_tensor_0 with size 5376 and address: 0
+  // Buffer output_tensor_0 with size 1344 and address: 0
   if (clean_outputs) {
-    memset(sub_0032_arena + 0, 0, 5376);
+    memset(sub_0032_arena + 0, 0, 1344);
   }
   base_addrs[4] = (uint64_t)(uintptr_t) (sub_0032_arena+0);
-  base_addrs_size[4] = 5376;
+  base_addrs_size[4] = 1344;
 
   // Command stream data
   cms_data = (uint8_t*)sub_0032_command_stream;

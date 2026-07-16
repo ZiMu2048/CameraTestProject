@@ -65,18 +65,18 @@ void compute_sub_0009(
 
   // inputs
   
-  const int8_t functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240[4096], // 1,8,8,64
+  const int8_t functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240[1024], // 1,4,4,64
   
-  const int8_t functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241[4096], // 1,8,8,64
+  const int8_t functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241[1024], // 1,4,4,64
   
-  const int8_t functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242[4096], // 1,8,8,64
+  const int8_t functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242[1024], // 1,4,4,64
   
-  const int8_t functional_1_bb09_spp_1_max_pooling2d_2_5_MaxPool2d_70243[4096], // 1,8,8,64
+  const int8_t functional_1_bb09_spp_1_max_pooling2d_2_5_MaxPool2d_70243[1024], // 1,4,4,64
   
 
   // outputs
   
-  int8_t functional_1_bb09_spp_1_concatenate_134_1_concat_70244[16384]  // 1,8,8,256
+  int8_t functional_1_bb09_spp_1_concatenate_134_1_concat_70244[4096]  // 1,4,4,256
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -98,8 +98,8 @@ void compute_sub_0009(
 arm_concatenation_s8_x	(
       functional_1_bb09_spp_1_bb09_spp_conv_in_1_activation_207_1_Relu6_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_add_1_functional_1_bb09_spp_1_bb09_spp_conv_in_1_conv2d_195_1_convolution_functional_1_bb09_spp_1_bb09_spp_conv_in_1_batch_normalization_215_1_batchnorm_sub_70240
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb09_spp_1_concatenate_134_1_concat_70244 
 
@@ -111,8 +111,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb09_spp_1_max_pooling2d_2_1_MaxPool2d_70241
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb09_spp_1_concatenate_134_1_concat_70244 
 
@@ -124,8 +124,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb09_spp_1_max_pooling2d_2_3_MaxPool2d_70242
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb09_spp_1_concatenate_134_1_concat_70244 
 
@@ -137,8 +137,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb09_spp_1_max_pooling2d_2_5_MaxPool2d_70243
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_bb09_spp_1_concatenate_134_1_concat_70244 
 

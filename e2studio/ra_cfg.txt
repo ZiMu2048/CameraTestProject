@@ -1169,14 +1169,14 @@ FSP Configuration
       Input: Graphics Layer 1: Fading: Mode: None
       Input: Graphics Layer 1: Fading: Speed: 255
       Input: Graphics Layer 2: General: Enabled: No
-      Input: Graphics Layer 2: General: Horizontal size: 480
-      Input: Graphics Layer 2: General: Vertical size: 854
+      Input: Graphics Layer 2: General: Horizontal size: 1024
+      Input: Graphics Layer 2: General: Vertical size: 600
       Input: Graphics Layer 2: General: Horizontal position: 0
       Input: Graphics Layer 2: General: Vertical position: 0
       Input: Graphics Layer 2: Framebuffer: Framebuffer name: fb_foreground
-      Input: Graphics Layer 2: Framebuffer: Number of framebuffers: 1
+      Input: Graphics Layer 2: Framebuffer: Number of framebuffers: 2
       Input: Graphics Layer 2: Framebuffer: Section for framebuffer allocation: .sdram_noinit
-      Input: Graphics Layer 2: General: Color format: RGB565 (16-bit)
+      Input: Graphics Layer 2: General: Color format: ARGB4444 (16-bit)
       Input: Graphics Layer 2: General: Line descending mode: Disabled
       Input: Graphics Layer 2: Line Repeat: Enable: Off
       Input: Graphics Layer 2: Line Repeat: Repeat count: 0

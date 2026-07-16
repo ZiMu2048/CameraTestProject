@@ -81,13 +81,13 @@ void compute_sub_0033(
 
   // inputs
   
-  const int8_t functional_1_box_decoding_1_mul_1_70364[5376], // 1,1344,4
+  const int8_t functional_1_box_decoding_1_mul_1_70364[1344], // 1,336,4
   
-  const int8_t functional_1_o2m_1_o2m_class_concat_1_concat_70373[2688], // 1,1344,2
+  const int8_t functional_1_o2m_1_o2m_class_concat_1_concat_70373[336], // 1,336,1
   
 
   // outputs
   
-  int8_t Identity_70374[8064]  // 1,1344,6
+  int8_t Identity_70374[1680]  // 1,336,5
   
 );

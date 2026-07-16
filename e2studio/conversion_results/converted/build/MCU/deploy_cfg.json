@@ -6,7 +6,7 @@
         "CPU",
         "EC_C_CODEGEN"
     ],
-    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\Renesas_YOLO_Int8_0260716.tflite",
+    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\Renesas_YOLO_INT8_PhyD_0260716.tflite",
     "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\conversion_results\\converted\\build\\MCU",
     "symbolic_dimensions": {},
     "model_info": {},

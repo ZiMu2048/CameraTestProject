@@ -65,14 +65,14 @@ void compute_sub_0031(
 
   // inputs
   
-  const int8_t functional_1_box_decoding_1_add_70361[2688], // 1,1344,2
+  const int8_t functional_1_box_decoding_1_add_70361[672], // 1,336,2
   
-  const int8_t functional_1_box_decoding_1_sub_70362[2688], // 1,1344,2
+  const int8_t functional_1_box_decoding_1_sub_70362[672], // 1,336,2
   
 
   // outputs
   
-  int8_t functional_1_box_decoding_1_concat_70363[5376]  // 1,1344,4
+  int8_t functional_1_box_decoding_1_concat_70363[1344]  // 1,336,4
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -95,7 +95,7 @@ arm_concatenation_s8_y	(
       functional_1_box_decoding_1_sub_70362
     , 1
     , 2
-    , 1344
+    , 336
     , 1
     , functional_1_box_decoding_1_concat_70363 
 
@@ -108,7 +108,7 @@ arm_concatenation_s8_y	(
       functional_1_box_decoding_1_add_70361
     , 1
     , 2
-    , 1344
+    , 336
     , 1
     , functional_1_box_decoding_1_concat_70363 
 

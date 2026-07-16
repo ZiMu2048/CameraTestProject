@@ -65,14 +65,14 @@ void compute_sub_0021(
 
   // inputs
   
-  const int8_t functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275[16384], // 1,16,16,64
+  const int8_t functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275[4096], // 1,8,8,64
   
-  const int8_t functional_1_pan3_conv_1_activation_224_1_Relu6_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_add_1_functional_1_pan3_conv_1_conv2d_209_1_convolution_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_sub_70302[8192], // 1,16,16,32
+  const int8_t functional_1_pan3_conv_1_activation_224_1_Relu6_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_add_1_functional_1_pan3_conv_1_conv2d_209_1_convolution_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_sub_70302[2048], // 1,8,8,32
   
 
   // outputs
   
-  int8_t functional_1_pan3_concat_1_concat_70303[24576]  // 1,16,16,96
+  int8_t functional_1_pan3_concat_1_concat_70303[6144]  // 1,8,8,96
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -94,8 +94,8 @@ void compute_sub_0021(
 arm_concatenation_s8_x	(
       functional_1_pan3_conv_1_activation_224_1_Relu6_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_add_1_functional_1_pan3_conv_1_conv2d_209_1_convolution_functional_1_pan3_conv_1_batch_normalization_232_1_batchnorm_sub_70302
     , 32
-    , 16
-    , 16
+    , 8
+    , 8
     , 1
     , functional_1_pan3_concat_1_concat_70303 
 
@@ -107,8 +107,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_activation_219_1_Relu6_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_add_1_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_conv2d_204_1_convolution_functional_1_pan1_csp_bn_1_pan1_csp_bn_conv_out_1_batch_normalization_227_1_batchnorm_sub_70275
     , 64
-    , 16
-    , 16
+    , 8
+    , 8
     , 1
     , functional_1_pan3_concat_1_concat_70303 
 

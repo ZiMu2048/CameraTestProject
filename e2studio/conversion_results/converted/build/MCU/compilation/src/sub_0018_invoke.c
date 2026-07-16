@@ -15,10 +15,10 @@
 #include "ethosu_driver.h"
 
 // Define arenas with allocation and 16-byte alignment
-__attribute__((aligned(16))) uint8_t sub_0018_arena[131072];
+__attribute__((aligned(16))) uint8_t sub_0018_arena[32768];
 // Fast scratch arena not used for Ethos-U55
 //  We will not create it for now and reuse the address of the other arena
-// __attribute__((aligned(16))) static uint8_t sub_0018_fast_scratch[131072];
+// __attribute__((aligned(16))) static uint8_t sub_0018_fast_scratch[32768];
 uint8_t* sub_0018_fast_scratch = sub_0018_arena;
 
 int sub_0018_invoke(bool clean_outputs) {
@@ -35,38 +35,38 @@ int sub_0018_invoke(bool clean_outputs) {
   // Buffer sub_0018_model with size 9072 and address: 4294967295
   base_addrs[0] = (uint64_t)(uintptr_t)sub_0018_model_data;
   base_addrs_size[0] = sub_0018_model_data_size;
-  // Buffer sub_0018_arena with size 131072 and address: 0
+  // Buffer sub_0018_arena with size 32768 and address: 0
   base_addrs[1] = (uint64_t)(uintptr_t) (sub_0018_arena+0);
-  base_addrs_size[1] = 131072;
+  base_addrs_size[1] = 32768;
 
-  // Buffer sub_0018_fast_scratch with size 131072 and address: 0
+  // Buffer sub_0018_fast_scratch with size 32768 and address: 0
   base_addrs[2] = (uint64_t)(uintptr_t) (sub_0018_arena+0);
-  base_addrs_size[2] = 131072;
+  base_addrs_size[2] = 32768;
 
-  // Buffer input_tensor_0 with size 98304 and address: 32768
-  base_addrs[3] = (uint64_t)(uintptr_t) (sub_0018_arena+32768);
-  base_addrs_size[3] = 98304;
+  // Buffer input_tensor_0 with size 24576 and address: 8192
+  base_addrs[3] = (uint64_t)(uintptr_t) (sub_0018_arena+8192);
+  base_addrs_size[3] = 24576;
 
-  // Buffer output_tensor_0 with size 16384 and address: 32768
+  // Buffer output_tensor_0 with size 4096 and address: 8192
   if (clean_outputs) {
-    memset(sub_0018_arena + 32768, 0, 16384);
+    memset(sub_0018_arena + 8192, 0, 4096);
   }
-  base_addrs[4] = (uint64_t)(uintptr_t) (sub_0018_arena+32768);
-  base_addrs_size[4] = 16384;
+  base_addrs[4] = (uint64_t)(uintptr_t) (sub_0018_arena+8192);
+  base_addrs_size[4] = 4096;
 
-  // Buffer output_tensor_1 with size 16384 and address: 49152
+  // Buffer output_tensor_1 with size 4096 and address: 12288
   if (clean_outputs) {
-    memset(sub_0018_arena + 49152, 0, 16384);
+    memset(sub_0018_arena + 12288, 0, 4096);
   }
-  base_addrs[5] = (uint64_t)(uintptr_t) (sub_0018_arena+49152);
-  base_addrs_size[5] = 16384;
+  base_addrs[5] = (uint64_t)(uintptr_t) (sub_0018_arena+12288);
+  base_addrs_size[5] = 4096;
 
-  // Buffer output_tensor_2 with size 16384 and address: 0
+  // Buffer output_tensor_2 with size 4096 and address: 0
   if (clean_outputs) {
-    memset(sub_0018_arena + 0, 0, 16384);
+    memset(sub_0018_arena + 0, 0, 4096);
   }
   base_addrs[6] = (uint64_t)(uintptr_t) (sub_0018_arena+0);
-  base_addrs_size[6] = 16384;
+  base_addrs_size[6] = 4096;
 
   // Command stream data
   cms_data = (uint8_t*)sub_0018_command_stream;

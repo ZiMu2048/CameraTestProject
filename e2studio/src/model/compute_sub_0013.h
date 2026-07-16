@@ -81,13 +81,13 @@ void compute_sub_0013(
 
   // inputs
   
-  const int8_t functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_activation_201_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_conv2d_189_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_sub_70225[16384], // 1,16,16,64
+  const int8_t functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_activation_201_1_Relu6_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_add_1_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_conv2d_189_1_convolution_functional_1_bb06_csp_bn_1_bb06_csp_bn_conv_out_1_batch_normalization_208_1_batchnorm_sub_70225[4096], // 1,8,8,64
   
-  const int8_t functional_1_pan1_upsample_1_resize_ResizeBilinear_70262[32768], // 1,16,16,128
+  const int8_t functional_1_pan1_upsample_1_resize_ResizeBilinear_70262[8192], // 1,8,8,128
   
 
   // outputs
   
-  int8_t functional_1_pan1_concat_1_concat_70263[49152]  // 1,16,16,192
+  int8_t functional_1_pan1_concat_1_concat_70263[12288]  // 1,8,8,192
   
 );

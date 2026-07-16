@@ -65,14 +65,14 @@ void compute_sub_0025(
 
   // inputs
   
-  const int8_t functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260[8192], // 1,8,8,128
+  const int8_t functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260[2048], // 1,4,4,128
   
-  const int8_t functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_depthwise_conv2d_47_1_depthwise_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_sub_70329[4096], // 1,8,8,64
+  const int8_t functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_depthwise_conv2d_47_1_depthwise_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_sub_70329[1024], // 1,4,4,64
   
 
   // outputs
   
-  int8_t functional_1_pan4_concat_1_concat_70330[12288]  // 1,8,8,192
+  int8_t functional_1_pan4_concat_1_concat_70330[3072]  // 1,4,4,192
   
 ) {
   // Buffers allocated on the main storage (note: depends on the execution order)
@@ -94,8 +94,8 @@ void compute_sub_0025(
 arm_concatenation_s8_x	(
       functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_add_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_1_functional_1_pan4_scd_1_pan4_scd_conv_out_1_depthwise_conv2d_47_1_depthwise_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_mul_functional_1_pan4_scd_1_pan4_scd_conv_out_1_batch_normalization_238_1_batchnorm_sub_70329
     , 64
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_pan4_concat_1_concat_70330 
 
@@ -107,8 +107,8 @@ arm_concatenation_s8_x	(
 arm_concatenation_s8_x	(
       functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_activation_215_1_Relu6_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_add_1_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_conv2d_200_1_convolution_functional_1_bb10_csp_cib_1_bb10_csp_cib_conv_out_1_batch_normalization_223_1_batchnorm_sub_70260
     , 128
-    , 8
-    , 8
+    , 4
+    , 4
     , 1
     , functional_1_pan4_concat_1_concat_70330 
 

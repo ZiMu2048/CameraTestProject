@@ -54,16 +54,16 @@
 #include <stdint.h>
 
 extern int8_t sub_0030_functional_1_box_decoding_1_Sum_70354[];
-#define sub_0030_functional_1_box_decoding_1_Sum_70354_SIZE (5376)
-#define sub_0030_functional_1_box_decoding_1_Sum_70354_COUNT (5376)
+#define sub_0030_functional_1_box_decoding_1_Sum_70354_SIZE (1344)
+#define sub_0030_functional_1_box_decoding_1_Sum_70354_COUNT (1344)
 
 extern int8_t sub_0030_functional_1_box_decoding_1_add_70361[];
-#define sub_0030_functional_1_box_decoding_1_add_70361_SIZE (2688)
-#define sub_0030_functional_1_box_decoding_1_add_70361_COUNT (2688)
+#define sub_0030_functional_1_box_decoding_1_add_70361_SIZE (672)
+#define sub_0030_functional_1_box_decoding_1_add_70361_COUNT (672)
 
 extern int8_t sub_0030_functional_1_box_decoding_1_sub_70362[];
-#define sub_0030_functional_1_box_decoding_1_sub_70362_SIZE (2688)
-#define sub_0030_functional_1_box_decoding_1_sub_70362_COUNT (2688)
+#define sub_0030_functional_1_box_decoding_1_sub_70362_SIZE (672)
+#define sub_0030_functional_1_box_decoding_1_sub_70362_COUNT (672)
 
 
 #endif // SUB_0030_MODEL_DATA_H

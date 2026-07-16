@@ -81,17 +81,17 @@ void compute_sub_0005(
 
   // inputs
   
-  const int8_t functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220[8192], // 1,16,16,32
+  const int8_t functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_0_1_add_70220[2048], // 1,8,8,32
   
-  const int8_t functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_add_70223[8192], // 1,16,16,32
+  const int8_t functional_1_bb06_csp_bn_1_bb06_csp_bn_bottleneck_1_1_add_70223[2048], // 1,8,8,32
   
-  const int8_t functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217[8192], // 1,16,16,32
+  const int8_t functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split11_70217[2048], // 1,8,8,32
   
-  const int8_t functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split1_70214[8192], // 1,16,16,32
+  const int8_t functional_1_bb06_csp_bn_1_split_functional_1_bb06_csp_bn_1_split1_70214[2048], // 1,8,8,32
   
 
   // outputs
   
-  int8_t functional_1_bb06_csp_bn_1_concatenate_132_1_concat_70224[32768]  // 1,16,16,128
+  int8_t functional_1_bb06_csp_bn_1_concatenate_132_1_concat_70224[8192]  // 1,8,8,128
   
 );

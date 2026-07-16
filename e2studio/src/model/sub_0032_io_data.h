@@ -54,12 +54,12 @@
 #include <stdint.h>
 
 extern int8_t sub_0032_functional_1_box_decoding_1_concat_70363[];
-#define sub_0032_functional_1_box_decoding_1_concat_70363_SIZE (5376)
-#define sub_0032_functional_1_box_decoding_1_concat_70363_COUNT (5376)
+#define sub_0032_functional_1_box_decoding_1_concat_70363_SIZE (1344)
+#define sub_0032_functional_1_box_decoding_1_concat_70363_COUNT (1344)
 
 extern int8_t sub_0032_functional_1_box_decoding_1_mul_1_70364[];
-#define sub_0032_functional_1_box_decoding_1_mul_1_70364_SIZE (5376)
-#define sub_0032_functional_1_box_decoding_1_mul_1_70364_COUNT (5376)
+#define sub_0032_functional_1_box_decoding_1_mul_1_70364_SIZE (1344)
+#define sub_0032_functional_1_box_decoding_1_mul_1_70364_COUNT (1344)
 
 
 #endif // SUB_0032_MODEL_DATA_H
