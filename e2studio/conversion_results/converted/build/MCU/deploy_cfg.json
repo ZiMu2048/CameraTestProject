@@ -6,7 +6,7 @@
         "CPU",
         "EC_C_CODEGEN"
     ],
-    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\conversion_results\\quantized\\model.mera",
+    "model_path": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\Renesas_YOLO_Int8_0260716.tflite",
     "output_dir": "D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\conversion_results\\converted\\build\\MCU",
     "symbolic_dimensions": {},
     "model_info": {},
@@ -27,7 +27,7 @@
         "ccodegen": {
             "enable_ethos": true,
             "enable_ospi": false,
-            "enable_ref_data": false,
+            "enable_ref_data": true,
             "convert_canonical": false
         },
         "dnax": {

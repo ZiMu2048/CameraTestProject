@@ -7,14 +7,13 @@
 *
 * SPDX-License-Identifier: BSD-3-Clause
 ***********************************************************************************************************************/
-
 #include "mipi_csi.h"
 #include "model.h"
 #include "yolo_postprocess.h"
 
 #include <stdio.h>
 #include <string.h>
-
+#define MAXTRUSTTHRESHOLD (0.50f)
 /* External variables */
 extern sensor_reg_t live_camera;
 extern const camera_config_t camera_profiles[RES_MAX];
@@ -27,13 +26,13 @@ extern volatile uint8_t g_vsync_flag;
 uint8_t * gp_next_buffer;
 uint16_t g_image_width = RESET_VALUE;
 uint16_t g_image_height = RESET_VALUE;
-
 vin_extended_cfg_t g_vin_cfg_run_time_extend;
 capture_cfg_t g_vin_cfg_run_time;
 
+
 static fsp_err_t vin_camera_start(capture_cfg_t const * p_cfg);
 static fsp_err_t vin_scale_image(uint16_t new_width, uint16_t new_height);
-static void preprocess_frame_to_yolo(const uint8_t * src, float * dst);
+static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst);
 static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
                              uint16_t color, int fb_stride_pixels);
 static void draw_text_rgb565(uint8_t * fb, int x, int y, char const * text,
@@ -41,27 +40,10 @@ static void draw_text_rgb565(uint8_t * fb, int x, int y, char const * text,
 static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
                                     uint16_t color, int fb_stride_pixels);
 
-/* Anchors generated from E:/Yolo-FastestV2-0.2/data/anchors6.txt. */
-static const float g_yolo_anchors_22[YOLO_ANCHOR_COUNT][2] =
-{
-    {15.07f,  14.51f },
-    {38.95f,  36.46f },
-    {84.24f, 105.83f},
-};
-
-static const float g_yolo_anchors_11[YOLO_ANCHOR_COUNT][2] =
-{
-    {98.50f, 48.46f },
-    {172.04f, 140.44f},
-    {224.08f, 228.56f},
-};
-
 static const uint16_t g_yolo_class_colors[YOLO_CLASS_COUNT] =
 {
-    0xF800U, /* BirdDrop: red */
-    0xFFE0U, /* Cracked : yellow */
-    0x07FFU, /* Dusty   : cyan */
-    0x07E0U, /* Panel   : green */
+    0xFFE0U, /* Dusty: yellow */
+    0xF800U, /* PhysicalDamage: red */
 };
 
 /***********************************************************************************************************************
@@ -74,6 +56,10 @@ void mipi_csi_ep_entry(void)
 {
     fsp_pack_version_t  version = {RESET_VALUE};
     fsp_err_t           err     = FSP_SUCCESS;
+#if (DISPLAY_OUTPUT == 1U)
+    /* GLCDC starts with fb_background[0]. CPU always renders the other buffer. */
+    uint8_t draw_buffer_index = 1U;
+#endif
 
     /* Initialize the terminal */
     TERM_INIT();
@@ -138,6 +124,8 @@ void mipi_csi_ep_entry(void)
     while(true)
     {
 #if (DISPLAY_OUTPUT == 1U)
+        uint8_t * p_draw_buffer = fb_background[draw_buffer_index];
+
         g_vsync_flag = RESET_FLAG;
         /* Wait for a Vsync event */
         while(!g_vsync_flag);
@@ -145,106 +133,93 @@ void mipi_csi_ep_entry(void)
         // 1. 把 VIN 最新帧复制到显示 framebuffer
         if (gp_next_buffer != NULL)
         {
-            memcpy(fb_background[0], gp_next_buffer, VIN_BYTES_PER_FRAME);
+            memcpy(p_draw_buffer, gp_next_buffer, VIN_BYTES_PER_FRAME);
         }
 
         // 2.填入模型输入
         if (gp_next_buffer != NULL)
         {
-            float * model_input = GetModelInputPtr_input_1();
-            preprocess_frame_to_yolo(gp_next_buffer, model_input);
+
+
+            int8_t * model_input = GetModelInputPtr_x();
+            preprocess_frame_to_yolo(gp_next_buffer, model_input);//输入图像伸缩预处理
 
             // 3. 运行模型推理
             RunModel(false);
 
+            int8_t * output = GetModelOutputPtr_Identity_70374();
+
+            yolo_detection_t detections[YOLO_MAX_DETECTIONS];
+            int detection_count = yolo_decode_int8_output(output, detections,
+                                                           YOLO_MAX_DETECTIONS, MAXTRUSTTHRESHOLD);
+            detection_count = yolo_nms(detections, detection_count, 0.45f);
+
+            for (int index = 0; index < detection_count; index++)
             {
-                float * output_22 = GetModelOutputPtr__722_70391_70619();
-                float * output_11 = GetModelOutputPtr__723_70392_70620();
-                yolo_detection_t detections[YOLO_MAX_DETECTIONS];
-                int detection_count = 0;
+                yolo_detection_t const * p_detection = &detections[index];
+                uint16_t color = g_yolo_class_colors[p_detection->class_id];
+                int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
+                int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
+                int x1 = 212 + (int) (p_detection->x2 * 600.0f / YOLO_INPUT_SIZE);
+                int y1 =       (int) (p_detection->y2 * 600.0f / YOLO_INPUT_SIZE);
+                char label[32];
+                unsigned int confidence =
+                    (unsigned int) (p_detection->score * 100.0f + 0.5f);
+                int text_x;
+                int text_y;
+                int text_width;
 
-                detection_count = yolo_decode_head(output_22, 16, g_yolo_anchors_22,
-                                                    0.50f, detections,
-                                                    YOLO_MAX_DETECTIONS, detection_count);
-                detection_count = yolo_decode_head(output_11, 8, g_yolo_anchors_11,
-                                                    0.50f, detections,
-                                                    YOLO_MAX_DETECTIONS, detection_count);
-                detection_count = yolo_nms(detections, detection_count, 0.45f);
+                draw_rect_rgb565(p_draw_buffer, x0, y0, x1, y1, color,
+                                 DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
 
-                for (int index = 0; index < detection_count; index++)
-                {
-                    yolo_detection_t const * p_detection = &detections[index];
-                    uint16_t color = g_yolo_class_colors[p_detection->class_id];
-                    int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
-                    int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
-                    int x1 = 212 + (int) (p_detection->x2 * 600.0f / YOLO_INPUT_SIZE);
-                    int y1 =       (int) (p_detection->y2 * 600.0f / YOLO_INPUT_SIZE);
-                    char label[32];
-                    unsigned int confidence =
-                        (unsigned int) (p_detection->score * 100.0f + 0.5f);
-                    int text_x;
-                    int text_y;
-                    int text_width;
-
-                    draw_rect_rgb565(fb_background[0], x0, y0, x1, y1, color,
-                                      DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-
-                    (void) snprintf(label, sizeof(label), "%s:%u",
+                (void) snprintf(label, sizeof(label), "%s:%u",
                                     g_yolo_class_names[p_detection->class_id], confidence);
-                    text_x = x0;
-                    text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
-                    text_width = ((int) strlen(label) * 6 * 2) + 2;
+                text_x = x0;
+                text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
+                text_width = ((int) strlen(label) * 6 * 2) + 2;
 
-                    draw_filled_rect_rgb565(fb_background[0], text_x - 1, text_y - 1,
-                                             text_x + text_width, text_y + 15,
-                                             0x0000U, DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-                    draw_text_rgb565(fb_background[0], text_x, text_y, label, color, 2,
-                                      DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-                }
+                draw_filled_rect_rgb565(p_draw_buffer, text_x - 1, text_y - 1,
+                                         text_x + text_width, text_y + 15,
+                                         0x0000U, DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+                draw_text_rgb565(p_draw_buffer, text_x, text_y, label, color, 2,
+                                  DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
             }
-
             // 4. 读取输出并在 fb_background[0] 上画框
-#if 0 /* Previous FOMO decoder; replaced by the YOLO decoder above. */
-            int8_t *output = GetModelOutputPtr_StatefulPartitionedCall_0_70066();
-
-            const int8_t DETECT_THRESHOLD = 60;  // int8格式，0对应量化后的中间值，可调
-            const int BOX_HALF = 20;  // 框的半径（像素，在1024x600坐标系中）
-
-            for (int row = 0; row < 32; row++) {
-                for (int col = 0; col < 32; col++) {
-                    for (int cls = 1; cls < 4; cls++) {  // 跳过背景cls=0
-                        int8_t score = output[row * 32 * 4 + col * 4 + cls];
-                        if (score > DETECT_THRESHOLD) {
-                            // 映射到 fb 坐标
-                            int cx = 212 + (col * 8 + 4) * 600 / 256;
-                            int cy =   0 + (row * 8 + 4) * 600 / 256;
-                            // 画红色框 (RGB565红色 = 0xF800)
-                            draw_rect_rgb565(fb_background[0],
-                                             cx - BOX_HALF, cy - BOX_HALF,
-                                             cx + BOX_HALF, cy + BOX_HALF,
-                                             0xF800,
-                                             DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-                            APP_PRINT("Detected cls=%d at grid(%d,%d)\r\n", cls, col, row);
-                        }
-                    }
-                }
-            }
-#endif
         }
 
+        /*
+         * The line-detect interrupt is at the end of active display. Submit
+         * here so GLCDC latches the completed back buffer at the immediately
+         * following Vsync, before this buffer index is reused.
+         */
+        g_vsync_flag = RESET_FLAG;
+        while(!g_vsync_flag);
 
         /* Update new frame for GLCDC display */
-        err = R_GLCDC_BufferChange(&g_display_ctrl, (uint8_t * const) fb_background[0], DISPLAY_FRAME_LAYER_1);
-        if (FSP_ERR_INVALID_UPDATE_TIMING != err)
+        err = R_GLCDC_BufferChange(&g_display_ctrl, p_draw_buffer, DISPLAY_FRAME_LAYER_1);
+        if (FSP_SUCCESS == err)
+        {
+            /* The following frame is rendered into the old front buffer. */
+            draw_buffer_index ^= 1U;
+        }
+        else if (FSP_ERR_INVALID_UPDATE_TIMING != err)
         {
             handle_error(err, "** R_GLCDC_BufferChange API FAILED **\r\n");
         }
 #endif /* DISPLAY_OUTPUT */
     }
+
+    //ENDWHILE
 }
 /***********************************************************************************************************************
 * End of function mipi_csi_ep_entry
 ***********************************************************************************************************************/
+
+
+
+
+
+
 
 /***********************************************************************************************************************
  *  Function Name: vin_callback
@@ -474,36 +449,34 @@ void handle_error (fsp_err_t err, char * err_str)
 // 把 VIN 的 RGB565 1024x600 帧 → FOMO 输入 int8 RGB 256x256
 // src: VIN帧缓冲指针(RGB565, stride=2048字节)
 // dst: 模型输入指针(RGB888 int8, 256x256x3)
-static void preprocess_frame_to_yolo(const uint8_t *src, float *dst)
+static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst)
 {
-    const int crop_x = 212;      // 1024x600 中间的 600x600
-    const int crop_y = 0;
+    const int crop_x = 212;
     const int crop_size = 600;
     const int dst_size = 256;
     const int src_stride_bytes = 2048;
-    const int plane = dst_size * dst_size;
 
     for (int dy = 0; dy < dst_size; dy++)
     {
-        int sy = crop_y + dy * crop_size / dst_size;
+        int sy = dy * crop_size / dst_size;
 
         for (int dx = 0; dx < dst_size; dx++)
         {
             int sx = crop_x + dx * crop_size / dst_size;
             int pos = sy * src_stride_bytes + sx * 2;
+            uint16_t pixel = (uint16_t) (((uint16_t) src[pos] << 8) | src[pos + 1]);
 
-            uint16_t pixel = ((uint16_t) src[pos] << 8) | src[pos + 1];
-            float r = ((pixel >> 11) & 0x1F) * (1.0f / 31.0f);
-            float g = ((pixel >>  5) & 0x3F) * (1.0f / 63.0f);
-            float b = ((pixel >>  0) & 0x1F) * (1.0f / 31.0f);
+            uint8_t r = (uint8_t) ((((pixel >> 11) & 0x1FU) * 255U) / 31U);
+            uint8_t g = (uint8_t) ((((pixel >>  5) & 0x3FU) * 255U) / 63U);
+            uint8_t b = (uint8_t) ((((pixel >>  0) & 0x1FU) * 255U) / 31U);
 
-            int i = dy * dst_size + dx;
+            int index = (dy * dst_size + dx) * 3;
 
-            /* Yolo-FastestV2 常见训练脚本经 OpenCV 读图，通常为 BGR。
-             * 必须与训练/ONNX 导出时完全一致；若训练用 RGB，则交换 r/b。 */
-            dst[0 * plane + i] = b;
-            dst[1 * plane + i] = g;
-            dst[2 * plane + i] = r;
+            /* Edge Impulse RGB input in NHWC layout.  With scale=1/255 and
+             * zero_point=-128, INT8 value = RGB_8bit - 128. */
+            dst[index + 0] = (int8_t) ((int)r - 128);  /* Edge Impulse RGB input */
+            dst[index + 1] = (int8_t) ((int)g - 128);
+            dst[index + 2] = (int8_t) ((int)b - 128);
         }
     }
 }

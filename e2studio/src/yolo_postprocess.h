@@ -10,11 +10,10 @@
 
 #include <stdint.h>
 
-/* 与当前 YOLO 导出模型一致：输入 [1,3,352,352]，每个 anchor 9 个值。 */
 #define YOLO_INPUT_SIZE             (256)
-#define YOLO_CLASS_COUNT            (4)
-#define YOLO_ANCHOR_COUNT           (3)
-#define YOLO_ATTRS_PER_ANCHOR       (5 + YOLO_CLASS_COUNT)  /* xywh + obj + classes */
+#define YOLO_CLASS_COUNT            (2)
+#define YOLO_OUTPUT_BOX_COUNT       (1344)
+#define YOLO_OUTPUT_ATTRS           (6)
 #define YOLO_MAX_DETECTIONS         (64)
 
 typedef struct st_yolo_detection
@@ -37,13 +36,10 @@ extern const char * const g_yolo_class_names[YOLO_CLASS_COUNT];
  *
  * 返回写入 detections 后的总数量。
  */
-int yolo_decode_head(const float * output,
-                     int grid_size,
-                     const float anchors[YOLO_ANCHOR_COUNT][2],
-                     float confidence_threshold,
-                     yolo_detection_t * detections,
-                     int capacity,
-                     int count);
+int yolo_decode_int8_output(const int8_t * output,
+                            yolo_detection_t * detections,
+                            int capacity,
+                            float confidence_threshold);
 
 /**
  * 按类别执行非极大值抑制。

@@ -12,11 +12,11 @@
 
 const char * const g_yolo_class_names[YOLO_CLASS_COUNT] =
 {
-    "BirdDrop",
-    "Cracked",
     "Dusty",
-    "Panel",
+    "PhysicalDamage",
 };
+
+
 
 static float yolo_clampf(float value, float lower, float upper)
 {
@@ -33,6 +33,7 @@ static float yolo_clampf(float value, float lower, float upper)
     return value;
 }
 
+#if 0 /* Raw-head helpers are not used by the current decoded [1344,6] output. */
 static float yolo_sigmoid(float value)
 {
     /* 防止 expf() 因异常输出溢出。 */
@@ -45,6 +46,8 @@ static float yolo_safe_exp(float value)
     value = yolo_clampf(value, -10.0f, 10.0f);
     return expf(value);
 }
+
+#endif
 
 static float yolo_iou(const yolo_detection_t *a,
                       const yolo_detection_t *b)
@@ -104,98 +107,61 @@ static void yolo_add_candidate(yolo_detection_t *detections,
     }
 }
 
-int yolo_decode_head(const float *output,
-                     int grid_size,
-                     const float anchors[YOLO_ANCHOR_COUNT][2],
-                     float confidence_threshold,
-                     yolo_detection_t *detections,
-                     int capacity,
-                     int count)
+int yolo_decode_int8_output(const int8_t * output,
+                            yolo_detection_t * detections,
+                            int capacity,
+                            float confidence_threshold)
 {
-    if ((output == NULL) || (anchors == NULL) || (detections == NULL) ||
-        (grid_size <= 0) || (capacity <= 0) || (count < 0))
+    const float output_scale = 0.0058933664f;
+    const int output_zero_point = -93;
+    int count = 0;
+
+    if ((output == NULL) || (detections == NULL) || (capacity <= 0))
     {
         return 0;
     }
 
-    if (count > capacity)
+    for (int i = 0; i < YOLO_OUTPUT_BOX_COUNT; i++)
     {
-        count = capacity;
-    }
+        const int8_t * row = &output[i * YOLO_OUTPUT_ATTRS];
 
-    const int plane = grid_size * grid_size;
-    const float stride = (float) YOLO_INPUT_SIZE / (float) grid_size;
+        float x1 = (float) ((int) row[0] - output_zero_point) * output_scale;
+        float y1 = (float) ((int) row[1] - output_zero_point) * output_scale;
+        float x2 = (float) ((int) row[2] - output_zero_point) * output_scale;
+        float y2 = (float) ((int) row[3] - output_zero_point) * output_scale;
+        float dusty = (float) ((int) row[4] - output_zero_point) * output_scale;
+        float damage = (float) ((int) row[5] - output_zero_point) * output_scale;
 
-    for (int anchor_id = 0; anchor_id < YOLO_ANCHOR_COUNT; anchor_id++)
-    {
-        for (int grid_y = 0; grid_y < grid_size; grid_y++)
+        int class_id = (damage > dusty) ? 1 : 0;
+        float score = (damage > dusty) ? damage : dusty;
+
+        if (score < confidence_threshold)
         {
-            for (int grid_x = 0; grid_x < grid_size; grid_x++)
-            {
-                const int cell = grid_y * grid_size + grid_x;
-                const int base_channel = anchor_id * YOLO_ATTRS_PER_ANCHOR;
-
-                /* output 是 [1, 27, H, W]，所以每个 channel 跨一个 H*W 平面。 */
-                const float tx = output[(base_channel + 0) * plane + cell];
-                const float ty = output[(base_channel + 1) * plane + cell];
-                const float tw = output[(base_channel + 2) * plane + cell];
-                const float th = output[(base_channel + 3) * plane + cell];
-
-                const float objectness = yolo_sigmoid(
-                    output[(base_channel + 4) * plane + cell]);
-
-                int best_class = 0;
-                float best_class_probability = 0.0f;
-
-                for (int class_id = 0; class_id < YOLO_CLASS_COUNT; class_id++)
-                {
-                    float class_probability = yolo_sigmoid(
-                        output[(base_channel + 5 + class_id) * plane + cell]);
-
-                    if (class_probability > best_class_probability)
-                    {
-                        best_class_probability = class_probability;
-                        best_class = class_id;
-                    }
-                }
-
-                const float confidence = objectness * best_class_probability;
-
-                if (confidence < confidence_threshold)
-                {
-                    continue;
-                }
-
-                /* YOLO 原始 head：中心位置为 grid 偏移，宽高相对 anchor 解码。 */
-                const float center_x =
-                    (yolo_sigmoid(tx) + (float) grid_x) * stride;
-                const float center_y =
-                    (yolo_sigmoid(ty) + (float) grid_y) * stride;
-                const float width = yolo_safe_exp(tw) * anchors[anchor_id][0];
-                const float height = yolo_safe_exp(th) * anchors[anchor_id][1];
-
-                yolo_detection_t candidate;
-
-                candidate.x1 = yolo_clampf(center_x - width * 0.5f,
-                                           0.0f, (float) YOLO_INPUT_SIZE);
-                candidate.y1 = yolo_clampf(center_y - height * 0.5f,
-                                           0.0f, (float) YOLO_INPUT_SIZE);
-                candidate.x2 = yolo_clampf(center_x + width * 0.5f,
-                                           0.0f, (float) YOLO_INPUT_SIZE);
-                candidate.y2 = yolo_clampf(center_y + height * 0.5f,
-                                           0.0f, (float) YOLO_INPUT_SIZE);
-                candidate.score = confidence;
-                candidate.class_id = (uint8_t) best_class;
-
-                if ((candidate.x2 <= candidate.x1) ||
-                    (candidate.y2 <= candidate.y1))
-                {
-                    continue;
-                }
-
-                yolo_add_candidate(detections, capacity, &count, &candidate);
-            }
+            continue;
         }
+
+        yolo_detection_t candidate =
+        {
+            .x1 = x1 * YOLO_INPUT_SIZE,
+            .y1 = y1 * YOLO_INPUT_SIZE,
+            .x2 = x2 * YOLO_INPUT_SIZE,
+            .y2 = y2 * YOLO_INPUT_SIZE,
+            .score = score,
+            .class_id = (uint8_t) class_id,
+        };
+
+        candidate.x1 = yolo_clampf(candidate.x1, 0.0f, (float) YOLO_INPUT_SIZE);
+        candidate.y1 = yolo_clampf(candidate.y1, 0.0f, (float) YOLO_INPUT_SIZE);
+        candidate.x2 = yolo_clampf(candidate.x2, 0.0f, (float) YOLO_INPUT_SIZE);
+        candidate.y2 = yolo_clampf(candidate.y2, 0.0f, (float) YOLO_INPUT_SIZE);
+
+        if ((candidate.x2 <= candidate.x1) || (candidate.y2 <= candidate.y1))
+        {
+            continue;
+        }
+
+        /* 复用你现有的候选框限流逻辑即可。 */
+        yolo_add_candidate(detections, capacity, &count, &candidate);
     }
 
     return count;

@@ -116,7 +116,7 @@ void hal_entry(void)
     uint64_t total_npu_cycles = 0;
 
     for (int n = 0; n < ntimes; n += 1) {
-        memcpy(GetModelInputPtr_input_1(), model_input_1, model_input_1_SIZE);
+        memcpy(GetModelInputPtr_x(), model_x, model_x_SIZE);
 
         ETHOSU_PMU_CYCCNT_Reset(&g_ethosu0);
         ETHOSU_PMU_EVCNTR_ALL_Reset(&g_ethosu0);
@@ -149,21 +149,11 @@ void hal_entry(void)
     // Comparing outputs
     {
         SEGGER_RTT_printf(0, "Comparing output 0\r\n");
-        int misses = CompareOutput(model__722_70391_70619, GetModelOutputPtr__722_70391_70619(), model__722_70391_70619_COUNT, 0.1f);
+        int misses = CompareOutput(model_Identity_70374, GetModelOutputPtr_Identity_70374(), model_Identity_70374_COUNT, 0.1f);
         if (misses == 0) {
             SEGGER_RTT_WriteString(0, "MATCH\r\n");
         } else {
-            SEGGER_RTT_printf(0, "FAILED: %d/%d misses\r\n", misses, model__722_70391_70619_COUNT);
-        }
-    }
-
-    {
-        SEGGER_RTT_printf(0, "Comparing output 1\r\n");
-        int misses = CompareOutput(model__723_70392_70620, GetModelOutputPtr__723_70392_70620(), model__723_70392_70620_COUNT, 0.1f);
-        if (misses == 0) {
-            SEGGER_RTT_WriteString(0, "MATCH\r\n");
-        } else {
-            SEGGER_RTT_printf(0, "FAILED: %d/%d misses\r\n", misses, model__723_70392_70620_COUNT);
+            SEGGER_RTT_printf(0, "FAILED: %d/%d misses\r\n", misses, model_Identity_70374_COUNT);
         }
     }
 

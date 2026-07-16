@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <settings>
-                                            
+                                                    
+    
+    
     
     
     
@@ -11,7 +13,7 @@
     
     
     <AppInfo>
-                                                                                        
+                                                                                                        
         
         
         
@@ -21,8 +23,12 @@
         
         
         
-        <item key="ImportData">{"formatVersion":"2.0","locale":"","supportedIdeOS":"Windows","supportedDevelopmentOS":"","category":"BYOM","icon":"","device":"RA8P1","title":"","description":"","framework":"","frameworkUrl":"","task":"","function":"","model":"Renesas_YOLO_FP32_256.onnx","dataset":"","accuracy":"","note":"","board":"","tags":"BYOM","url":"","projectUrl":"","projectNote":"","projectBuilderSetup":"","mainSourceFile":"src/hal_entry.c","supportUrl":"","projectDebugCopy":"","boardSettingUrl":"","boardSetup":"","customFrameworkGuideURL":"","rzvAiTlt":""}</item>
-                                                                                    
+        
+        
+        <item key="ImportData">{"formatVersion":"2.0","locale":"","supportedIdeOS":"Windows","supportedDevelopmentOS":"","category":"BYOM","icon":"","device":"RA8P1","title":"","description":"","framework":"","frameworkUrl":"","task":"","function":"","model":"Renesas_YOLO_Int8_0260716.tflite","dataset":"","accuracy":"","note":"","board":"","tags":"BYOM","url":"","projectUrl":"","projectNote":"","projectBuilderSetup":"","mainSourceFile":"src/hal_entry.c","supportUrl":"","projectDebugCopy":"","boardSettingUrl":"","boardSetup":"","customFrameworkGuideURL":"","rzvAiTlt":""}</item>
+                                                                                                    
+    
+    
     
     
     
@@ -33,7 +39,9 @@
     
     
     </AppInfo>
-                                        
+                                                
+
+
 
 
 
