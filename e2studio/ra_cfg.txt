@@ -957,6 +957,11 @@ FSP Configuration
   Module "Google TFLM CMSIS-NN Kernel"
   Module "Arm CMSIS NN Library Source"
   Module "Arm CMSIS DSP Library Source"
+  Module "D/AVE 2D (r_drw)"
+  Module "D/AVE 2D Port Interface (r_drw)"
+    Allow Indirect Mode: Enabled
+    Memory Allocation: Default
+    
   HAL
     Instance "g_ioport I/O Port (r_ioport)"
       Name: g_ioport
@@ -1339,3 +1344,8 @@ FSP Configuration
             
         Instance "Arm Ethos-U Profiler"
           Instance "Arm CMSIS View Library Source"
+    Instance "D/AVE 2D Port Interface (r_drw)"
+      D2 Device Handle Name: d2_handle0
+      DRW Interrupt Priority: Priority 2
+      
+      Instance "D/AVE 2D (r_drw)"

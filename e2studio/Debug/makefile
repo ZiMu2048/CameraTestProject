@@ -18,6 +18,7 @@ RM := rm -rf
 -include src/SEGGER_RTT/subdir.mk
 -include src/subdir.mk
 -include ra_gen/subdir.mk
+-include ra/tes/dave2d/src/subdir.mk
 -include ra/npu/tflite-micro/tensorflow/lite/schema/subdir.mk
 -include ra/npu/tflite-micro/tensorflow/lite/micro/tflite_bridge/subdir.mk
 -include ra/npu/tflite-micro/tensorflow/lite/kernels/internal/subdir.mk
@@ -39,6 +40,7 @@ RM := rm -rf
 -include ra/fsp/src/r_iic_master/subdir.mk
 -include ra/fsp/src/r_glcdc/subdir.mk
 -include ra/fsp/src/r_dtc/subdir.mk
+-include ra/fsp/src/r_drw/subdir.mk
 -include ra/fsp/src/bsp/mcu/ra8p1/subdir.mk
 -include ra/fsp/src/bsp/mcu/all/subdir.mk
 -include ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/subdir.mk
@@ -140,29 +142,29 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 OBJCOPY += \
-mipi_csi_ek_ra8p1_ep.hex \
+RA8P1_CAM_GLCDC_AI.hex \
 
 SECONDARY_SIZE += \
-mipi_csi_ek_ra8p1_ep.siz \
+RA8P1_CAM_GLCDC_AI.siz \
 
 
 # All Target
-all: mipi_csi_ek_ra8p1_ep.elf secondary-outputs
+all: RA8P1_CAM_GLCDC_AI.elf secondary-outputs
 
 # Tool invocations
-mipi_csi_ek_ra8p1_ep.elf: $(OBJS) $(USER_OBJS) $(LIBRARY_GENERATOR_OUTPUTTYPE_OUTPUTS) $(LINKER_SCRIPT)
-	$(file > mipi_csi_ek_ra8p1_ep.elf.in,-mcpu=cortex-m85 -mlittle-endian -mfloat-abi=hard -Os -ffunction-sections -fdata-sections -fmessage-length=0 -funsigned-char -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wno-parentheses-equality -Wfloat-equal -gdwarf-4 -g3 -o "mipi_csi_ek_ra8p1_ep.elf" $(OBJS) $(USER_OBJS) -T "fsp.lld" -L"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio/script" -L"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\Debug" -Wl,-Map=mipi_csi_ek_ra8p1_ep.map -Wl,--start-group -lcrt0 -lc++abi  -Wl,--end-group -Wl,--gc-sections -Wl,--cref -Wl,-z,norelro -Wl,--icf=none -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\src" -I"." -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\fsp\\inc" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\fsp\\inc\\api" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\fsp\\inc\\instances" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS_6\\CMSIS\\Core\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra_gen" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra_cfg\\fsp_cfg\\bsp" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra_cfg\\fsp_cfg" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\fsp\\src\\r_mipi_csi" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\fsp\\src\\r_vin" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-DSP\\PrivateInclude" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-DSP\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\fsp\\src\\rm_ethosu" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\tflite-micro" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ruy" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\gemmlowp" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-driver\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\layer_by_layer_profiler\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\ethosu_monitor\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\ethosu_profiler\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\crc\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\arm_profiler\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-View\\EventRecorder\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-View\\EventRecorder\\Config" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\npu\\flatbuffers\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-NN\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RenesasCup_EK_RA8P1\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-NN")
-	@echo Building target: $@ && clang  --target=arm-none-eabi @"mipi_csi_ek_ra8p1_ep.elf.in"> mipi_csi_ek_ra8p1_ep.cref
-mipi_csi_ek_ra8p1_ep.hex: mipi_csi_ek_ra8p1_ep.elf
-	llvm-objcopy "mipi_csi_ek_ra8p1_ep.elf" -O ihex  "mipi_csi_ek_ra8p1_ep.hex"
-mipi_csi_ek_ra8p1_ep.siz: mipi_csi_ek_ra8p1_ep.elf
-	llvm-size --format=berkeley "mipi_csi_ek_ra8p1_ep.elf"
+RA8P1_CAM_GLCDC_AI.elf: $(OBJS) $(USER_OBJS) $(LIBRARY_GENERATOR_OUTPUTTYPE_OUTPUTS) $(LINKER_SCRIPT)
+	$(file > RA8P1_CAM_GLCDC_AI.elf.in,-mcpu=cortex-m85 -mlittle-endian -mfloat-abi=hard -Os -ffunction-sections -fdata-sections -fmessage-length=0 -funsigned-char -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wno-parentheses-equality -Wfloat-equal -gdwarf-4 -g3 -o "RA8P1_CAM_GLCDC_AI.elf" $(OBJS) $(USER_OBJS) -T "fsp.lld" -L"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio/script" -L"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\Debug" -Wl,-Map=RA8P1_CAM_GLCDC_AI.map -Wl,--start-group -lcrt0 -lc++abi  -Wl,--end-group -Wl,--gc-sections -Wl,--cref -Wl,-z,norelro -Wl,--icf=none -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\src" -I"." -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\inc" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\inc\\api" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\inc\\instances" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS_6\\CMSIS\\Core\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra_gen" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra_cfg\\fsp_cfg\\bsp" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra_cfg\\fsp_cfg" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\src\\r_mipi_csi" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\src\\r_vin" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-DSP\\PrivateInclude" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-DSP\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\src\\rm_ethosu" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\tflite-micro" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ruy" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\gemmlowp" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-driver\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\layer_by_layer_profiler\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\ethosu_monitor\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\ethosu_profiler\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\crc\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\ethos-u-core-software\\lib\\arm_profiler\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-View\\EventRecorder\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-View\\EventRecorder\\Config" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\npu\\flatbuffers\\include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-NN\\Include" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\arm\\CMSIS-NN" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\tes\\dave2d\\inc" -I"D:\\Lab\\Lab_MCU\\Renesas_RA\\RA8P1_CAM_GLCDC_AI\\CameraTestProject\\e2studio\\ra\\fsp\\src\\r_drw")
+	@echo Building target: $@ && clang  --target=arm-none-eabi @"RA8P1_CAM_GLCDC_AI.elf.in"> RA8P1_CAM_GLCDC_AI.cref
+RA8P1_CAM_GLCDC_AI.hex: RA8P1_CAM_GLCDC_AI.elf
+	llvm-objcopy "RA8P1_CAM_GLCDC_AI.elf" -O ihex  "RA8P1_CAM_GLCDC_AI.hex"
+RA8P1_CAM_GLCDC_AI.siz: RA8P1_CAM_GLCDC_AI.elf
+	llvm-size --format=berkeley "RA8P1_CAM_GLCDC_AI.elf"
 # Other Targets
 clean:
 	-$(file > clean_file.tmp,  $(JMP_DEPS)  $(FSY_DEPS)  $(C_UPPER_DEPS)  $(SECONDARY_SIZE)  $(SRC_UPPER_DEPS)  $(P_UPPER_DEPS)  $(S_DEPS)  $(PP_UPPER_DEPS)  $(P_DEPS)  $(FSY_UPPER_DEPS)  $(C_DEPS)  $(CREF)  $(SRC_DEPS)  $(OBJCOPY)  $(JMP_UPPER_DEPS)  $(PP_DEPS)  $(SX_DEPS)  $(ASM_UPPER_DEPS)  $(OBJS)  $(SX_UPPER_DEPS)  $(ASM_DEPS)  $(MAP)  $(S_UPPER_DEPS) )
 	-@ xargs -P 2 -s 32000 -t -a clean_file.tmp $(RM)
 	-@$(RM) clean_file.tmp
-	-$(RM)  mipi_csi_ek_ra8p1_ep.elf
+	-$(RM)  RA8P1_CAM_GLCDC_AI.elf
 	-@echo ' '
 
 secondary-outputs: $(OBJCOPY) $(SECONDARY_SIZE)

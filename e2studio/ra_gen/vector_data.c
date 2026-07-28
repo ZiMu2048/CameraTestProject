@@ -16,10 +16,11 @@
             [9] = glcdc_underflow_1_isr, /* GLCDC UNDERFLOW 1 (Graphic 1 underflow) */
             [10] = glcdc_underflow_2_isr, /* GLCDC UNDERFLOW 2 (Graphic 2 underflow) */
             [11] = rm_ethosu_isr, /* NPU IRQ (NPU IRQ) */
-            [12] = sci_b_uart_rxi_isr, /* SCI8 RXI (Receive data full) */
-            [13] = sci_b_uart_txi_isr, /* SCI8 TXI (Transmit data empty) */
-            [14] = sci_b_uart_tei_isr, /* SCI8 TEI (Transmit end) */
-            [15] = sci_b_uart_eri_isr, /* SCI8 ERI (Receive error) */
+            [12] = drw_int_isr, /* DRW INT (DRW interrupt) */
+            [13] = sci_b_uart_rxi_isr, /* SCI8 RXI (Receive data full) */
+            [14] = sci_b_uart_txi_isr, /* SCI8 TXI (Transmit data empty) */
+            [15] = sci_b_uart_tei_isr, /* SCI8 TEI (Transmit end) */
+            [16] = sci_b_uart_eri_isr, /* SCI8 ERI (Receive error) */
         };
         #if BSP_FEATURE_ICU_HAS_IELSR
         const bsp_interrupt_event_t g_interrupt_event_link_select[BSP_ICU_VECTOR_NUM_ENTRIES] =
@@ -36,10 +37,11 @@
             [9] = BSP_PRV_VECT_ENUM(EVENT_GLCDC_UNDERFLOW_1,GROUP1), /* GLCDC UNDERFLOW 1 (Graphic 1 underflow) */
             [10] = BSP_PRV_VECT_ENUM(EVENT_GLCDC_UNDERFLOW_2,GROUP2), /* GLCDC UNDERFLOW 2 (Graphic 2 underflow) */
             [11] = BSP_PRV_VECT_ENUM(EVENT_NPU_IRQ,GROUP3), /* NPU IRQ (NPU IRQ) */
-            [12] = BSP_PRV_VECT_ENUM(EVENT_SCI8_RXI,GROUP4), /* SCI8 RXI (Receive data full) */
-            [13] = BSP_PRV_VECT_ENUM(EVENT_SCI8_TXI,GROUP5), /* SCI8 TXI (Transmit data empty) */
-            [14] = BSP_PRV_VECT_ENUM(EVENT_SCI8_TEI,GROUP6), /* SCI8 TEI (Transmit end) */
-            [15] = BSP_PRV_VECT_ENUM(EVENT_SCI8_ERI,GROUP7), /* SCI8 ERI (Receive error) */
+            [12] = BSP_PRV_VECT_ENUM(EVENT_DRW_INT,GROUP4), /* DRW INT (DRW interrupt) */
+            [13] = BSP_PRV_VECT_ENUM(EVENT_SCI8_RXI,GROUP5), /* SCI8 RXI (Receive data full) */
+            [14] = BSP_PRV_VECT_ENUM(EVENT_SCI8_TXI,GROUP6), /* SCI8 TXI (Transmit data empty) */
+            [15] = BSP_PRV_VECT_ENUM(EVENT_SCI8_TEI,GROUP7), /* SCI8 TEI (Transmit end) */
+            [16] = BSP_PRV_VECT_ENUM(EVENT_SCI8_ERI,GROUP0), /* SCI8 ERI (Receive error) */
         };
         #endif
         #endif

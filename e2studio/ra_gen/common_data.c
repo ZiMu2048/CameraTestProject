@@ -1,5 +1,7 @@
 /* generated common source file - do not edit */
 #include "common_data.h"
+const uint8_t DRW_INT_IPL = (2);
+d2_device *d2_handle0;
 #include "ethosu_driver.h"
 struct ethosu_driver g_ethosu0;
 rm_ethosu_extended_cfg_t g_rm_ethosu0_ext_cfg =

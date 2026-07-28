@@ -3,6 +3,7 @@
 #define COMMON_DATA_H_
 #include <stdint.h>
 #include "bsp_api.h"
+#include "dave_driver.h"
 #include "rm_ethosu_api.h"
 #include "rm_ethosu.h"
 #include "arm_math.h"
@@ -16,6 +17,10 @@
 #include "r_ioport.h"
 #include "bsp_pin_cfg.h"
 FSP_HEADER
+#if DRW_CFG_CUSTOM_MALLOC
+            void * d1_malloc(size_t size);
+            void   d1_free(void * ptr);
+            #endif
 #include "ethosu_driver.h"
 extern struct ethosu_driver g_ethosu0;
 extern rm_ethosu_instance_ctrl_t g_rm_ethosu0_ctrl;

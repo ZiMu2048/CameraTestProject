@@ -506,6 +506,14 @@
       <description>Arm NN Library Source</description>
       <originalPack>Arm.CMSIS-NN.7.0.0+fsp.6.4.0.pack</originalPack>
     </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_drw" variant="" vendor="Renesas" version="6.4.0">
+      <description>TES D/AVE 2D Port</description>
+      <originalPack>Renesas.RA.6.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="TES" condition="" group="all" subgroup="dave2d" variant="" vendor="Renesas" version="3.8.0+fsp.6.4.0">
+      <description>TES DAVE 2D Drawing Engine</description>
+      <originalPack>TES.Dave2D.3.8.0+fsp.6.4.0.pack</originalPack>
+    </component>
   </raComponentSelection>
   <raElcConfiguration/>
   <raIcuConfiguration>
@@ -897,6 +905,11 @@
     <module id="module.google.tflm.kernel.cmsis.nn.538582832"/>
     <module id="module.arm.cmsis.nn.1375807971"/>
     <module id="module.arm.cmsis.dsp.346312363"/>
+    <module id="module.driver.tes.dave2d.140024093"/>
+    <module id="module.driver.drw.1315112683">
+      <property id="module.driver.drw.handle_name" value="d2_handle0"/>
+      <property id="module.driver.drw.int_ipl" value="board.icu.common.irq.priority2"/>
+    </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.0"/>
       <stack module="module.driver.i2c_on_iic_master.1941900491">
@@ -925,6 +938,9 @@
           </stack>
         </stack>
       </stack>
+      <stack module="module.driver.drw.1315112683">
+        <stack module="module.driver.tes.dave2d.140024093" requires="module.driver.drw.requires.dave2d_driver"/>
+      </stack>
     </context>
     <config id="config.driver.iic_master">
       <property id="config.driver.iic_master.param_checking_enable" value="config.driver.iic_master.param_checking_enable.bsp"/>
@@ -952,6 +968,10 @@
     </config>
     <config id="config.driver.mipi_csi">
       <property id="config.driver.mipi_csi.param_checking_enable" value="config.driver.mipi_csi.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.driver.drw">
+      <property id="config.driver.drw.indirect" value="config.driver.drw.indirect.on"/>
+      <property id="config.driver.drw.malloc" value="config.driver.drw.malloc.default"/>
     </config>
   </raModuleConfiguration>
   <raPinConfiguration>

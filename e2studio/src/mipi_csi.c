@@ -10,6 +10,7 @@
 #include "mipi_csi.h"
 #include "model.h"
 #include "yolo_postprocess.h"
+#include "dave2D_overlay.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -91,6 +92,18 @@ void mipi_csi_ep_entry(void)
     handle_error(err, "glcdc_init FAILED \r\n");
     R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);/*New delay here at 2026/6/2 */
 #endif /* DISPLAY_OUTPUT */
+
+    if (!dave2d_overlay_init())
+    {
+        int32_t d2_error = dave2d_overlay_get_last_error();
+
+        /* 先在这里打断点，观察 d2_error。 */
+        (void) d2_error;
+
+        handle_error(FSP_ERR_INTERNAL,
+                    "** DAVE 2D INITIALIZATION FAILED **\r\n");
+    }
+    R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);
 
     /* Clear old images in SDRAM */
     memset(vin_image_buffer_1, RESET_VALUE, VIN_BYTES_PER_FRAME);
@@ -193,6 +206,25 @@ void mipi_csi_ep_entry(void)
          */
         g_vsync_flag = RESET_FLAG;
         while(!g_vsync_flag);
+
+
+    bool d2_ok =
+        dave2d_overlay_draw_test_rect(
+            p_draw_buffer,
+            1024,
+            600,
+            1024);
+
+    if (!d2_ok)
+    {
+        int32_t d2_error = dave2d_overlay_get_last_error();
+
+        /* 调试阶段先在这里设置断点。 */
+        (void) d2_error;
+
+        handle_error(FSP_ERR_INTERNAL,
+                    "** DAVE 2D DRAW FAILED **\r\n");
+    }
 
         /* Update new frame for GLCDC display */
         err = R_GLCDC_BufferChange(&g_display_ctrl, p_draw_buffer, DISPLAY_FRAME_LAYER_1);
