@@ -14,7 +14,21 @@
 
 #include <stdio.h>
 #include <string.h>
-#define MAXTRUSTTHRESHOLD (0.40f)
+
+#define MAXTRUSTTHRESHOLD          (0.40f)//最大置信度
+
+/*
+ * 检测框绘制路径选择：
+ *   1U：使用 D/AVE 2D 批量绘制检测框
+ *   0U：使用 CPU 逐像素绘制，保留用于显示效果和性能 A/B 对照
+ */
+#ifndef USE_DAVE2D_BOX
+#define USE_DAVE2D_BOX             (1U)
+#endif
+
+/* 第一轮迁移保持与原 CPU 版本一致，边框宽度使用 1 像素。 */
+#define DAVE2D_BOX_LINE_WIDTH      (1)
+
 /* External variables */
 extern sensor_reg_t live_camera;
 extern const camera_config_t camera_profiles[RES_MAX];
@@ -34,8 +48,10 @@ capture_cfg_t g_vin_cfg_run_time;
 static fsp_err_t vin_camera_start(capture_cfg_t const * p_cfg);
 static fsp_err_t vin_scale_image(uint16_t new_width, uint16_t new_height);
 static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst);
+#if (USE_DAVE2D_BOX == 0U)
 static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
                              uint16_t color, int fb_stride_pixels);
+#endif
 static void draw_text_rgb565(uint8_t * fb, int x, int y, char const * text,
                              uint16_t color, int scale, int fb_stride_pixels);
 static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
@@ -93,6 +109,7 @@ void mipi_csi_ep_entry(void)
     R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);/*New delay here at 2026/6/2 */
 #endif /* DISPLAY_OUTPUT */
 
+#if (DISPLAY_OUTPUT == 1U) && (USE_DAVE2D_BOX == 1U)
     if (!dave2d_overlay_init())
     {
         int32_t d2_error = dave2d_overlay_get_last_error();
@@ -104,6 +121,7 @@ void mipi_csi_ep_entry(void)
                     "** DAVE 2D INITIALIZATION FAILED **\r\n");
     }
     R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);
+#endif
 
     /* Clear old images in SDRAM */
     memset(vin_image_buffer_1, RESET_VALUE, VIN_BYTES_PER_FRAME);
@@ -166,6 +184,66 @@ void mipi_csi_ep_entry(void)
                                                            YOLO_MAX_DETECTIONS, MAXTRUSTTHRESHOLD);
             detection_count = yolo_nms(detections, detection_count, 0.45f);
 
+#if (USE_DAVE2D_BOX == 1U)
+            /*
+             * 一帧只打开和提交一次 D/AVE 2D render buffer。
+             * 循环中的每个 draw_rect() 只向同一张命令表追加四条画线命令。
+             */
+            if (detection_count > 0)
+            {
+                bool d2_ok =
+                    dave2d_overlay_begin(p_draw_buffer,
+                                         (int) CAMERA_IMAGE_WIDTH,
+                                         (int) CAMERA_IMAGE_HEIGHT,
+                                         DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+
+                if (!d2_ok)
+                {
+                    int32_t d2_error = dave2d_overlay_get_last_error();
+                    (void) d2_error;
+                    handle_error(FSP_ERR_INTERNAL,
+                                 "** DAVE 2D BEGIN FAILED **\r\n");
+                }
+
+                for (int index = 0; index < detection_count; index++)
+                {
+                    yolo_detection_t const * p_detection = &detections[index];
+                    uint16_t color = g_yolo_class_colors[p_detection->class_id];
+                    int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
+                    int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
+                    int x1 = 212 + (int) (p_detection->x2 * 600.0f / YOLO_INPUT_SIZE);
+                    int y1 =       (int) (p_detection->y2 * 600.0f / YOLO_INPUT_SIZE);
+
+                    d2_ok = dave2d_overlay_draw_rect(x0,
+                                                     y0,
+                                                     x1,
+                                                     y1,
+                                                     color,
+                                                     DAVE2D_BOX_LINE_WIDTH);
+                    if (!d2_ok)
+                    {
+                        int32_t d2_error = dave2d_overlay_get_last_error();
+                        (void) d2_error;
+                        handle_error(FSP_ERR_INTERNAL,
+                                     "** DAVE 2D DRAW RECT FAILED **\r\n");
+                    }
+                }
+
+                /*
+                 * execute + flush 必须在 CPU 绘制标签之前完成。
+                 * 这样标签背景和文字仍然覆盖在检测框上方，保持原 CPU 版本的图层顺序。
+                 */
+                d2_ok = dave2d_overlay_end();
+                if (!d2_ok)
+                {
+                    int32_t d2_error = dave2d_overlay_get_last_error();
+                    (void) d2_error;
+                    handle_error(FSP_ERR_INTERNAL,
+                                 "** DAVE 2D END FAILED **\r\n");
+                }
+            }
+#else
+            /* CPU 画框对照路径：通过 USE_DAVE2D_BOX = 0U 临时恢复。 */
             for (int index = 0; index < detection_count; index++)
             {
                 yolo_detection_t const * p_detection = &detections[index];
@@ -174,6 +252,22 @@ void mipi_csi_ep_entry(void)
                 int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
                 int x1 = 212 + (int) (p_detection->x2 * 600.0f / YOLO_INPUT_SIZE);
                 int y1 =       (int) (p_detection->y2 * 600.0f / YOLO_INPUT_SIZE);
+
+                draw_rect_rgb565(p_draw_buffer, x0, y0, x1, y1, color,
+                                 DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+            }
+#endif
+
+            /*
+             * 标签背景和文字暂时继续由 CPU 绘制。
+             * 此循环位于 D/AVE 2D flush 之后，保证标签处于检测框上层。
+             */
+            for (int index = 0; index < detection_count; index++)
+            {
+                yolo_detection_t const * p_detection = &detections[index];
+                uint16_t color = g_yolo_class_colors[p_detection->class_id];
+                int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
+                int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
                 char label[32];
                 unsigned int confidence =
                     (unsigned int) (p_detection->score * 100.0f + 0.5f);
@@ -181,11 +275,8 @@ void mipi_csi_ep_entry(void)
                 int text_y;
                 int text_width;
 
-                draw_rect_rgb565(p_draw_buffer, x0, y0, x1, y1, color,
-                                 DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-
                 (void) snprintf(label, sizeof(label), "%s:%u",
-                                    g_yolo_class_names[p_detection->class_id], confidence);
+                                g_yolo_class_names[p_detection->class_id], confidence);
                 text_x = x0;
                 text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
                 text_width = ((int) strlen(label) * 6 * 2) + 2;
@@ -196,7 +287,6 @@ void mipi_csi_ep_entry(void)
                 draw_text_rgb565(p_draw_buffer, text_x, text_y, label, color, 2,
                                   DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
             }
-            // 4. 读取输出并在 fb_background[0] 上画框
         }
 
         /*
@@ -206,25 +296,6 @@ void mipi_csi_ep_entry(void)
          */
         g_vsync_flag = RESET_FLAG;
         while(!g_vsync_flag);
-
-
-    bool d2_ok =
-        dave2d_overlay_draw_test_rect(
-            p_draw_buffer,
-            1024,
-            600,
-            1024);
-
-    if (!d2_ok)
-    {
-        int32_t d2_error = dave2d_overlay_get_last_error();
-
-        /* 调试阶段先在这里设置断点。 */
-        (void) d2_error;
-
-        handle_error(FSP_ERR_INTERNAL,
-                    "** DAVE 2D DRAW FAILED **\r\n");
-    }
 
         /* Update new frame for GLCDC display */
         err = R_GLCDC_BufferChange(&g_display_ctrl, p_draw_buffer, DISPLAY_FRAME_LAYER_1);
@@ -506,8 +577,9 @@ static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst)
     }
 }
 
-static void draw_rect_rgb565(uint8_t *fb, int x0, int y0, int x1, int y1,
-                               uint16_t color, int fb_stride_pixels)
+#if (USE_DAVE2D_BOX == 0U)
+static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
+                             uint16_t color, int fb_stride_pixels)
 {
     // 越界保护
     if (x0 < 0) x0 = 0;
@@ -528,6 +600,7 @@ static void draw_rect_rgb565(uint8_t *fb, int x0, int y0, int x1, int y1,
         pixels[y * fb_stride_pixels + x1] = color;
     }
 }
+#endif
 
 static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
                                     uint16_t color, int fb_stride_pixels)
