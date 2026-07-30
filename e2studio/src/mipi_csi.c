@@ -54,8 +54,10 @@ static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
 #endif
 static void draw_text_rgb565(uint8_t * fb, int x, int y, char const * text,
                              uint16_t color, int scale, int fb_stride_pixels);
+#if (USE_DAVE2D_BOX == 0U)
 static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
                                     uint16_t color, int fb_stride_pixels);
+#endif
 
 static const uint16_t g_yolo_class_colors[YOLO_CLASS_COUNT] =
 {
@@ -154,35 +156,33 @@ void mipi_csi_ep_entry(void)
     while(true)
     {
 #if (DISPLAY_OUTPUT == 1U)
+        /*双缓冲*/
         uint8_t * p_draw_buffer = fb_background[draw_buffer_index];
 
+        /*垂直同步*/
         g_vsync_flag = RESET_FLAG;
-        /* Wait for a Vsync event */
         while(!g_vsync_flag);
 
-        // 1. 把 VIN 最新帧复制到显示 framebuffer
+        /*把 VIN 最新帧复制到显示 framebuffer*/
         if (gp_next_buffer != NULL)
         {
             memcpy(p_draw_buffer, gp_next_buffer, VIN_BYTES_PER_FRAME);
         }
 
-        // 2.填入模型输入
+        /*算子工作*/
         if (gp_next_buffer != NULL)
         {
-
-
-            int8_t * model_input = GetModelInputPtr_x();
+            int8_t * model_input = GetModelInputPtr_x();//获取模型输入缓冲区指针
             preprocess_frame_to_yolo(gp_next_buffer, model_input);//输入图像伸缩预处理
 
-            // 3. 运行模型推理
-            RunModel(false);
+            RunModel(false);//调用模型推理
 
-            int8_t * output = GetModelOutputPtr_Identity_70374();
+            int8_t * output = GetModelOutputPtr_Identity_70374();//获取模型输出缓冲区指针
 
             yolo_detection_t detections[YOLO_MAX_DETECTIONS];
             int detection_count = yolo_decode_int8_output(output, detections,
-                                                           YOLO_MAX_DETECTIONS, MAXTRUSTTHRESHOLD);
-            detection_count = yolo_nms(detections, detection_count, 0.45f);
+                                                           YOLO_MAX_DETECTIONS, MAXTRUSTTHRESHOLD);//解码模型输出，得到检测框
+            detection_count = yolo_nms(detections, detection_count, 0.45f);//非极大值抑制，去除重叠框
 
 #if (USE_DAVE2D_BOX == 1U)
             /*
@@ -213,6 +213,25 @@ void mipi_csi_ep_entry(void)
                     int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
                     int x1 = 212 + (int) (p_detection->x2 * 600.0f / YOLO_INPUT_SIZE);
                     int y1 =       (int) (p_detection->y2 * 600.0f / YOLO_INPUT_SIZE);
+                    char label[32];
+                    unsigned int confidence =
+                        (unsigned int) (p_detection->score * 100.0f + 0.5f);
+                    int text_x;
+                    int text_y;
+                    int text_width;
+
+                    /*
+                     * 标签布局暂时仍沿用原 CPU 版本：
+                     * 每个字符占 6×7 个字模单位，scale=2，标签优先放在检测框上方。
+                     */
+                    (void) snprintf(label,
+                                    sizeof(label),
+                                    "%s:%u",
+                                    g_yolo_class_names[p_detection->class_id],
+                                    confidence);
+                    text_x = x0;
+                    text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
+                    text_width = ((int) strlen(label) * 6 * 2) + 2;
 
                     d2_ok = dave2d_overlay_draw_rect(x0,
                                                      y0,
@@ -226,6 +245,24 @@ void mipi_csi_ep_entry(void)
                         (void) d2_error;
                         handle_error(FSP_ERR_INTERNAL,
                                      "** DAVE 2D DRAW RECT FAILED **\r\n");
+                    }
+
+                    /*
+                     * 黑色标签背景也追加到当前 render buffer。
+                     * 此处仍然只录制命令，真正执行发生在循环后的 dave2d_overlay_end()。
+                     */
+                    d2_ok =
+                        dave2d_overlay_draw_filled_rect(text_x - 1,
+                                                        text_y - 1,
+                                                        text_x + text_width,
+                                                        text_y + 15,
+                                                        0x0000U);
+                    if (!d2_ok)
+                    {
+                        int32_t d2_error = dave2d_overlay_get_last_error();
+                        (void) d2_error;
+                        handle_error(FSP_ERR_INTERNAL,
+                                     "** DAVE 2D DRAW LABEL BACKGROUND FAILED **\r\n");
                     }
                 }
 
@@ -273,17 +310,29 @@ void mipi_csi_ep_entry(void)
                     (unsigned int) (p_detection->score * 100.0f + 0.5f);
                 int text_x;
                 int text_y;
+#if (USE_DAVE2D_BOX == 0U)
                 int text_width;
+#endif
 
                 (void) snprintf(label, sizeof(label), "%s:%u",
                                 g_yolo_class_names[p_detection->class_id], confidence);
                 text_x = x0;
                 text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
+#if (USE_DAVE2D_BOX == 0U)
                 text_width = ((int) strlen(label) * 6 * 2) + 2;
 
-                draw_filled_rect_rgb565(p_draw_buffer, text_x - 1, text_y - 1,
-                                         text_x + text_width, text_y + 15,
-                                         0x0000U, DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+                /*
+                 * CPU 对照模式需要自行绘制标签黑底；
+                 * D/AVE 2D 模式已经在 end() 前完成黑底，因此不再重复写 framebuffer。
+                 */
+                draw_filled_rect_rgb565(p_draw_buffer,
+                                        text_x - 1,
+                                        text_y - 1,
+                                        text_x + text_width,
+                                        text_y + 15,
+                                        0x0000U,
+                                        DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+#endif
                 draw_text_rgb565(p_draw_buffer, text_x, text_y, label, color, 2,
                                   DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
             }
@@ -602,6 +651,7 @@ static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
 }
 #endif
 
+#if (USE_DAVE2D_BOX == 0U)
 static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
                                     uint16_t color, int fb_stride_pixels)
 {
@@ -625,6 +675,7 @@ static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1
         }
     }
 }
+#endif
 
 /* 5x7 glyphs. Only the characters used by the four class names, ':' and the
  * confidence digits are stored. Bit 0 is the top pixel of a glyph column. */

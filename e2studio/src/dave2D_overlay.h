@@ -28,4 +28,11 @@ bool dave2d_overlay_end(void);
 /* 获取最近一次适配层或 D/AVE 2D API 返回的错误码。 */
 int32_t dave2d_overlay_get_last_error(void);
 
+/* 向当前帧命令缓冲区追加一个实心矩形，不立即提交硬件执行。 */
+bool dave2d_overlay_draw_filled_rect(int x0,
+                                     int y0,
+                                     int x1,
+                                     int y1,
+                                     uint16_t rgb565);
+
 #endif // DAVE2D_OVERLAY_H

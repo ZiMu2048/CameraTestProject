@@ -440,3 +440,93 @@ bool dave2d_overlay_end(void)
 
     return true;
 }
+
+/***********************************************************************************************************************
+ * 函数名称：dave2d_overlay_draw_filled_rect
+ * 功能说明：向当前帧的 D/AVE 2D render buffer 中追加一个纯色实心矩形命令。
+ *           本函数只录制命令，不提交 render buffer，也不等待硬件执行完成。
+ * 输入参数：
+ *   x0、y0 - 矩形第一个对角点的像素坐标
+ *   x1、y1 - 矩形第二个对角点的像素坐标，两个端点都包含在填充区域内
+ *   rgb565 - 填充颜色，格式为 RGB565
+ * 返回值：
+ *   true  - 实心矩形命令录制成功，或矩形完全位于 framebuffer 外而无需绘制
+ *   false - 当前不在有效绘制帧内、设备无效或 D/AVE 2D API 调用失败；
+ *           可通过 dave2d_overlay_get_last_error() 查询具体错误码
+ * 调用约束：
+ *   只能在 dave2d_overlay_begin() 成功之后、dave2d_overlay_end() 之前调用。
+ **********************************************************************************************************************/
+bool dave2d_overlay_draw_filled_rect(int x0,
+                                     int y0,
+                                     int x1,
+                                     int y1,
+                                     uint16_t rgb565)
+{
+    /*检查设备和帧状态*/
+    if(NULL == gp_d2_device)
+    {
+        g_d2_last_error = D2_INVALIDDEVICE;
+        return false;
+    }
+    if(!g_frame_active)
+    {
+        g_d2_last_error = D2_INVALIDCONTEXT;
+        return false;
+    }
+
+    /*统一坐标方向*/
+    if (x0 > x1)
+    {
+        x0 ^= x1;
+        x1 ^= x0;
+        x0 ^= x1;
+    }
+    if (y0 > y1)
+    {
+        y0 ^= y1;
+        y1 ^= y0;
+        y0 ^= y1;
+    }
+
+    /*判断矩形是否完全在屏幕外*/
+    if ((x1 < 0) ||
+        (y1 < 0) ||
+        (x0 >= g_framebuffer_width) ||
+        (y0 >= g_framebuffer_height))
+        {
+            g_d2_last_error = D2_OK;
+            return true;
+        }
+
+    /*裁剪到有效区域(framebuffer范围)*/
+    if (x0 < 0)                         { x0 = 0; }
+    if (y0 < 0)                         { y0 = 0; }
+    if (x1 >= g_framebuffer_width)      { x1 = g_framebuffer_width - 1; }
+    if (y1 >= g_framebuffer_height)     { y1 = g_framebuffer_height - 1; }
+
+    /*矩形尺寸计算*/
+    int box_width  = x1 - x0 + 1;
+    int box_height = y1 - y0 + 1;
+
+    /*设置颜色*/
+    g_d2_last_error = d2_setcolor(gp_d2_device,
+                                  0,
+                                  rgb565_to_d2_color(rgb565));
+    if (D2_OK != g_d2_last_error)
+    {
+        return false;
+    }
+
+    /*录入绘制矩形命令*/
+    g_d2_last_error =d2_renderbox(gp_d2_device,
+                                  (d2_point) D2_FIX4(x0),
+                                  (d2_point) D2_FIX4(y0),
+                                  (d2_width) D2_FIX4(box_width),
+                                  (d2_width) D2_FIX4(box_height));
+    if (D2_OK != g_d2_last_error)
+    {
+        return false;
+    }
+
+    return true;
+}
