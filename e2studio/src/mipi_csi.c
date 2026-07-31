@@ -11,23 +11,18 @@
 #include "model.h"
 #include "yolo_postprocess.h"
 #include "dave2D_overlay.h"
+#include "SEGGER_RTT/bsp_print.h"
 
 #include <stdio.h>
 #include <string.h>
 
-#define MAXTRUSTTHRESHOLD          (0.40f)//最大置信度
+#define MAXTRUSTTHRESHOLD          (0.50f)//最大置信度
 
-/*
- * 检测框绘制路径选择：
- *   1U：使用 D/AVE 2D 批量绘制检测框
- *   0U：使用 CPU 逐像素绘制，保留用于显示效果和性能 A/B 对照
- */
-#ifndef USE_DAVE2D_BOX
-#define USE_DAVE2D_BOX             (1U)
-#endif
+/* 检测框边框宽度，单位为显示像素。 */
+#define DAVE2D_BOX_LINE_WIDTH      (2)
 
-/* 第一轮迁移保持与原 CPU 版本一致，边框宽度使用 1 像素。 */
-#define DAVE2D_BOX_LINE_WIDTH      (1)
+/* 5×7 标签字模的整数放大倍数。 */
+#define DAVE2D_TEXT_SCALE          (2)
 
 /* External variables */
 extern sensor_reg_t live_camera;
@@ -48,16 +43,6 @@ capture_cfg_t g_vin_cfg_run_time;
 static fsp_err_t vin_camera_start(capture_cfg_t const * p_cfg);
 static fsp_err_t vin_scale_image(uint16_t new_width, uint16_t new_height);
 static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst);
-#if (USE_DAVE2D_BOX == 0U)
-static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
-                             uint16_t color, int fb_stride_pixels);
-#endif
-static void draw_text_rgb565(uint8_t * fb, int x, int y, char const * text,
-                             uint16_t color, int scale, int fb_stride_pixels);
-#if (USE_DAVE2D_BOX == 0U)
-static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
-                                    uint16_t color, int fb_stride_pixels);
-#endif
 
 static const uint16_t g_yolo_class_colors[YOLO_CLASS_COUNT] =
 {
@@ -82,12 +67,7 @@ void mipi_csi_ep_entry(void)
     /* Initialize the terminal */
     TERM_INIT();
 
-    /* Version get API for FSP pack information */
-    R_FSP_VersionGet(&version);
-
-    /* Example Project information printed on the RTT */
-    APP_PRINT (BANNER_INFO, EP_VERSION, version.version_id_b.major, version.version_id_b.minor, version.version_id_b.patch);
-    APP_PRINT (EP_INFO);
+    g_printf("HELLOWORLD\r\n");
 
     /* Initialize IIC module to control the switch onboard and the camera sensor */
     err = i2c_control_init();
@@ -111,12 +91,11 @@ void mipi_csi_ep_entry(void)
     R_BSP_SoftwareDelay(10,BSP_DELAY_UNITS_MILLISECONDS);/*New delay here at 2026/6/2 */
 #endif /* DISPLAY_OUTPUT */
 
-#if (DISPLAY_OUTPUT == 1U) && (USE_DAVE2D_BOX == 1U)
+#if (DISPLAY_OUTPUT == 1U)
     if (!dave2d_overlay_init())
     {
         int32_t d2_error = dave2d_overlay_get_last_error();
 
-        /* 先在这里打断点，观察 d2_error。 */
         (void) d2_error;
 
         handle_error(FSP_ERR_INTERNAL,
@@ -163,6 +142,7 @@ void mipi_csi_ep_entry(void)
         g_vsync_flag = RESET_FLAG;
         while(!g_vsync_flag);
 
+
         /*把 VIN 最新帧复制到显示 framebuffer*/
         if (gp_next_buffer != NULL)
         {
@@ -184,10 +164,9 @@ void mipi_csi_ep_entry(void)
                                                            YOLO_MAX_DETECTIONS, MAXTRUSTTHRESHOLD);//解码模型输出，得到检测框
             detection_count = yolo_nms(detections, detection_count, 0.45f);//非极大值抑制，去除重叠框
 
-#if (USE_DAVE2D_BOX == 1U)
             /*
              * 一帧只打开和提交一次 D/AVE 2D render buffer。
-             * 循环中的每个 draw_rect() 只向同一张命令表追加四条画线命令。
+             * 检测框、标签背景和文字都只向同一张命令表追加命令。
              */
             if (detection_count > 0)
             {
@@ -221,8 +200,7 @@ void mipi_csi_ep_entry(void)
                     int text_width;
 
                     /*
-                     * 标签布局暂时仍沿用原 CPU 版本：
-                     * 每个字符占 6×7 个字模单位，scale=2，标签优先放在检测框上方。
+                     * 每个字符占 6×7 个字模单位，标签优先放在检测框上方。
                      */
                     (void) snprintf(label,
                                     sizeof(label),
@@ -231,7 +209,7 @@ void mipi_csi_ep_entry(void)
                                     confidence);
                     text_x = x0;
                     text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
-                    text_width = ((int) strlen(label) * 6 * 2) + 2;
+                    text_width = ((int) strlen(label) * 6 * DAVE2D_TEXT_SCALE) + 2;
 
                     d2_ok = dave2d_overlay_draw_rect(x0,
                                                      y0,
@@ -264,11 +242,12 @@ void mipi_csi_ep_entry(void)
                         handle_error(FSP_ERR_INTERNAL,
                                      "** DAVE 2D DRAW LABEL BACKGROUND FAILED **\r\n");
                     }
+
                 }
 
                 /*
-                 * execute + flush 必须在 CPU 绘制标签之前完成。
-                 * 这样标签背景和文字仍然覆盖在检测框上方，保持原 CPU 版本的图层顺序。
+                 * 保持可显示旧版的提交边界：
+                 * 先一次性执行并等待本帧的检测框和标签背景命令。
                  */
                 d2_ok = dave2d_overlay_end();
                 if (!d2_ok)
@@ -276,65 +255,79 @@ void mipi_csi_ep_entry(void)
                     int32_t d2_error = dave2d_overlay_get_last_error();
                     (void) d2_error;
                     handle_error(FSP_ERR_INTERNAL,
-                                 "** DAVE 2D END FAILED **\r\n");
+                                     "** DAVE 2D END FAILED **\r\n");
                 }
-            }
-#else
-            /* CPU 画框对照路径：通过 USE_DAVE2D_BOX = 0U 临时恢复。 */
-            for (int index = 0; index < detection_count; index++)
-            {
-                yolo_detection_t const * p_detection = &detections[index];
-                uint16_t color = g_yolo_class_colors[p_detection->class_id];
-                int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
-                int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
-                int x1 = 212 + (int) (p_detection->x2 * 600.0f / YOLO_INPUT_SIZE);
-                int y1 =       (int) (p_detection->y2 * 600.0f / YOLO_INPUT_SIZE);
-
-                draw_rect_rgb565(p_draw_buffer, x0, y0, x1, y1, color,
-                                 DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-            }
-#endif
-
-            /*
-             * 标签背景和文字暂时继续由 CPU 绘制。
-             * 此循环位于 D/AVE 2D flush 之后，保证标签处于检测框上层。
-             */
-            for (int index = 0; index < detection_count; index++)
-            {
-                yolo_detection_t const * p_detection = &detections[index];
-                uint16_t color = g_yolo_class_colors[p_detection->class_id];
-                int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
-                int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
-                char label[32];
-                unsigned int confidence =
-                    (unsigned int) (p_detection->score * 100.0f + 0.5f);
-                int text_x;
-                int text_y;
-#if (USE_DAVE2D_BOX == 0U)
-                int text_width;
-#endif
-
-                (void) snprintf(label, sizeof(label), "%s:%u",
-                                g_yolo_class_names[p_detection->class_id], confidence);
-                text_x = x0;
-                text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
-#if (USE_DAVE2D_BOX == 0U)
-                text_width = ((int) strlen(label) * 6 * 2) + 2;
 
                 /*
-                 * CPU 对照模式需要自行绘制标签黑底；
-                 * D/AVE 2D 模式已经在 end() 前完成黑底，因此不再重复写 framebuffer。
+                 * 文字仍由 D/AVE 2D 绘制，但每个标签使用一个独立的小命令批次。
+                 *
+                 * 这样既保持旧版“框和黑底先提交、文字后绘制”的稳定顺序，
+                 * 又避免把一帧中所有字符的贴图命令堆积在同一个 render buffer 中。
                  */
-                draw_filled_rect_rgb565(p_draw_buffer,
-                                        text_x - 1,
-                                        text_y - 1,
-                                        text_x + text_width,
-                                        text_y + 15,
-                                        0x0000U,
-                                        DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
-#endif
-                draw_text_rgb565(p_draw_buffer, text_x, text_y, label, color, 2,
-                                  DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+                for (int index = 0; index < detection_count; index++)
+                {
+                    yolo_detection_t const * p_detection = &detections[index];
+                    uint16_t color = g_yolo_class_colors[p_detection->class_id];
+                    int x0 = 212 + (int) (p_detection->x1 * 600.0f / YOLO_INPUT_SIZE);
+                    int y0 =       (int) (p_detection->y1 * 600.0f / YOLO_INPUT_SIZE);
+                    char label[32];
+                    unsigned int confidence =
+                        (unsigned int) (p_detection->score * 100.0f + 0.5f);
+                    int text_x = x0;
+                    int text_y = (y0 >= 18) ? (y0 - 18) : (y0 + 2);
+
+                    (void) snprintf(label,
+                                    sizeof(label),
+                                    "%s:%u",
+                                    g_yolo_class_names[p_detection->class_id],
+                                    confidence);
+
+                    bool text_begin_ok =
+                        dave2d_overlay_begin(p_draw_buffer,
+                                             (int) CAMERA_IMAGE_WIDTH,
+                                             (int) CAMERA_IMAGE_HEIGHT,
+                                             DISPLAY_BUFFER_STRIDE_PIXELS_INPUT0);
+
+                    if (!text_begin_ok)
+                    {
+                        /*
+                         * 文字叠加属于附加功能。即使本次命令批次无法建立，
+                         * 也必须继续执行后面的 GLCDC 换帧，让摄像头原图正常显示。
+                         */
+                        int32_t d2_error = dave2d_overlay_get_last_error();
+                        (void) d2_error;
+                        break;
+                    }
+
+                    bool text_draw_ok =
+                        dave2d_overlay_draw_text(text_x,
+                                                 text_y,
+                                                 label,
+                                                 color,
+                                                 DAVE2D_TEXT_SCALE);
+                    //g_printf("text_draw_ok = %d\r\n",text_draw_ok);
+
+                    int32_t text_draw_error = dave2d_overlay_get_last_error();
+                    /*
+                     * begin() 成功后必须调用 end() 关闭本次绘制会话。
+                     * 即使文字命令录制失败，也要恢复 g_frame_active，避免下一帧一直报告 DEVICEBUSY。
+                     */
+                    bool text_end_ok = dave2d_overlay_end();
+
+                    if ((!text_draw_ok) || (!text_end_ok))
+                    {
+                        int32_t d2_error = text_draw_ok ?
+                                           dave2d_overlay_get_last_error() :
+                                           text_draw_error;
+                        (void) d2_error;
+
+                        /*
+                         * 不调用 handle_error()，因为它最终会执行 BKPT 并阻止
+                         * R_GLCDC_BufferChange()。本帧只放弃剩余文字，摄像头画面继续显示。
+                         */
+                        break;
+                    }
+                }
             }
         }
 
@@ -343,6 +336,7 @@ void mipi_csi_ep_entry(void)
          * here so GLCDC latches the completed back buffer at the immediately
          * following Vsync, before this buffer index is reused.
          */
+
         g_vsync_flag = RESET_FLAG;
         while(!g_vsync_flag);
 
@@ -359,7 +353,6 @@ void mipi_csi_ep_entry(void)
         }
 #endif /* DISPLAY_OUTPUT */
     }
-
     //ENDWHILE
 }
 /***********************************************************************************************************************
@@ -589,8 +582,6 @@ void handle_error (fsp_err_t err, char * err_str)
 /***********************************************************************************************************************
 * End of function handle_error
 ***********************************************************************************************************************/
-
-
 // 把 VIN 的 RGB565 1024x600 帧 → FOMO 输入 int8 RGB 256x256
 // src: VIN帧缓冲指针(RGB565, stride=2048字节)
 // dst: 模型输入指针(RGB888 int8, 256x256x3)
@@ -623,187 +614,5 @@ static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst)
             dst[index + 1] = (int8_t) ((int)g - 128);
             dst[index + 2] = (int8_t) ((int)b - 128);
         }
-    }
-}
-
-#if (USE_DAVE2D_BOX == 0U)
-static void draw_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
-                             uint16_t color, int fb_stride_pixels)
-{
-    // 越界保护
-    if (x0 < 0) x0 = 0;
-    if (y0 < 0) y0 = 0;
-    if (x1 >= 1024) x1 = 1023;
-    if (y1 >= 600)  y1 = 599;
-
-    uint16_t *pixels = (uint16_t *)fb;
-
-    // 上边和下边（水平线）
-    for (int x = x0; x <= x1; x++) {
-        pixels[y0 * fb_stride_pixels + x] = color;
-        pixels[y1 * fb_stride_pixels + x] = color;
-    }
-    // 左边和右边（竖线）
-    for (int y = y0; y <= y1; y++) {
-        pixels[y * fb_stride_pixels + x0] = color;
-        pixels[y * fb_stride_pixels + x1] = color;
-    }
-}
-#endif
-
-#if (USE_DAVE2D_BOX == 0U)
-static void draw_filled_rect_rgb565(uint8_t * fb, int x0, int y0, int x1, int y1,
-                                    uint16_t color, int fb_stride_pixels)
-{
-    if ((fb == NULL) || (x0 > 1023) || (y0 > 599) || (x1 < 0) || (y1 < 0))
-    {
-        return;
-    }
-
-    if (x0 < 0)    { x0 = 0; }
-    if (y0 < 0)    { y0 = 0; }
-    if (x1 > 1023) { x1 = 1023; }
-    if (y1 > 599)  { y1 = 599; }
-
-    uint16_t * pixels = (uint16_t *) fb;
-
-    for (int y = y0; y <= y1; y++)
-    {
-        for (int x = x0; x <= x1; x++)
-        {
-            pixels[y * fb_stride_pixels + x] = color;
-        }
-    }
-}
-#endif
-
-/* 5x7 glyphs. Only the characters used by the four class names, ':' and the
- * confidence digits are stored. Bit 0 is the top pixel of a glyph column. */
-static void font5x7_get_glyph(char character, uint8_t glyph[5])
-{
-    static const uint8_t unknown[5] = {0x02U, 0x01U, 0x59U, 0x09U, 0x06U};
-    static const uint8_t space[5] = {0x00U, 0x00U, 0x00U, 0x00U, 0x00U};
-    static const uint8_t colon[5] = {0x00U, 0x36U, 0x36U, 0x00U, 0x00U};
-    static const uint8_t digit_0[5] = {0x3EU, 0x51U, 0x49U, 0x45U, 0x3EU};
-    static const uint8_t digit_1[5] = {0x00U, 0x42U, 0x7FU, 0x40U, 0x00U};
-    static const uint8_t digit_2[5] = {0x42U, 0x61U, 0x51U, 0x49U, 0x46U};
-    static const uint8_t digit_3[5] = {0x21U, 0x41U, 0x45U, 0x4BU, 0x31U};
-    static const uint8_t digit_4[5] = {0x18U, 0x14U, 0x12U, 0x7FU, 0x10U};
-    static const uint8_t digit_5[5] = {0x27U, 0x45U, 0x45U, 0x45U, 0x39U};
-    static const uint8_t digit_6[5] = {0x3CU, 0x4AU, 0x49U, 0x49U, 0x30U};
-    static const uint8_t digit_7[5] = {0x01U, 0x71U, 0x09U, 0x05U, 0x03U};
-    static const uint8_t digit_8[5] = {0x36U, 0x49U, 0x49U, 0x49U, 0x36U};
-    static const uint8_t digit_9[5] = {0x06U, 0x49U, 0x49U, 0x29U, 0x1EU};
-    static const uint8_t letter_B[5] = {0x7FU, 0x49U, 0x49U, 0x49U, 0x36U};
-    static const uint8_t letter_C[5] = {0x3EU, 0x41U, 0x41U, 0x41U, 0x22U};
-    static const uint8_t letter_D[5] = {0x7FU, 0x41U, 0x41U, 0x22U, 0x1CU};
-    static const uint8_t letter_P[5] = {0x7FU, 0x09U, 0x09U, 0x09U, 0x06U};
-    static const uint8_t letter_a[5] = {0x20U, 0x54U, 0x54U, 0x54U, 0x78U};
-    static const uint8_t letter_c[5] = {0x38U, 0x44U, 0x44U, 0x44U, 0x20U};
-    static const uint8_t letter_d[5] = {0x38U, 0x44U, 0x44U, 0x48U, 0x7FU};
-    static const uint8_t letter_e[5] = {0x38U, 0x54U, 0x54U, 0x54U, 0x18U};
-    static const uint8_t letter_i[5] = {0x00U, 0x44U, 0x7DU, 0x40U, 0x00U};
-    static const uint8_t letter_k[5] = {0x7FU, 0x10U, 0x28U, 0x44U, 0x00U};
-    static const uint8_t letter_l[5] = {0x00U, 0x41U, 0x7FU, 0x40U, 0x00U};
-    static const uint8_t letter_n[5] = {0x7CU, 0x08U, 0x04U, 0x04U, 0x78U};
-    static const uint8_t letter_o[5] = {0x38U, 0x44U, 0x44U, 0x44U, 0x38U};
-    static const uint8_t letter_p[5] = {0xFCU, 0x24U, 0x24U, 0x24U, 0x18U};
-    static const uint8_t letter_r[5] = {0x7CU, 0x08U, 0x04U, 0x04U, 0x08U};
-    static const uint8_t letter_s[5] = {0x48U, 0x54U, 0x54U, 0x54U, 0x20U};
-    static const uint8_t letter_t[5] = {0x04U, 0x3FU, 0x44U, 0x40U, 0x20U};
-    static const uint8_t letter_u[5] = {0x3CU, 0x40U, 0x40U, 0x20U, 0x7CU};
-    static const uint8_t letter_y[5] = {0x0CU, 0x50U, 0x50U, 0x50U, 0x3CU};
-    const uint8_t * p_glyph = unknown;
-
-    switch (character)
-    {
-        case ' ': p_glyph = space; break;
-        case ':': p_glyph = colon; break;
-        case '0': p_glyph = digit_0; break;
-        case '1': p_glyph = digit_1; break;
-        case '2': p_glyph = digit_2; break;
-        case '3': p_glyph = digit_3; break;
-        case '4': p_glyph = digit_4; break;
-        case '5': p_glyph = digit_5; break;
-        case '6': p_glyph = digit_6; break;
-        case '7': p_glyph = digit_7; break;
-        case '8': p_glyph = digit_8; break;
-        case '9': p_glyph = digit_9; break;
-        case 'B': p_glyph = letter_B; break;
-        case 'C': p_glyph = letter_C; break;
-        case 'D': p_glyph = letter_D; break;
-        case 'P': p_glyph = letter_P; break;
-        case 'a': p_glyph = letter_a; break;
-        case 'c': p_glyph = letter_c; break;
-        case 'd': p_glyph = letter_d; break;
-        case 'e': p_glyph = letter_e; break;
-        case 'i': p_glyph = letter_i; break;
-        case 'k': p_glyph = letter_k; break;
-        case 'l': p_glyph = letter_l; break;
-        case 'n': p_glyph = letter_n; break;
-        case 'o': p_glyph = letter_o; break;
-        case 'p': p_glyph = letter_p; break;
-        case 'r': p_glyph = letter_r; break;
-        case 's': p_glyph = letter_s; break;
-        case 't': p_glyph = letter_t; break;
-        case 'u': p_glyph = letter_u; break;
-        case 'y': p_glyph = letter_y; break;
-        default: break;
-    }
-
-    for (int column = 0; column < 5; column++)
-    {
-        glyph[column] = p_glyph[column];
-    }
-}
-
-static void draw_text_rgb565(uint8_t * fb, int x, int y, char const * text,
-                             uint16_t color, int scale, int fb_stride_pixels)
-{
-    if ((fb == NULL) || (text == NULL) || (scale <= 0))
-    {
-        return;
-    }
-
-    uint16_t * pixels = (uint16_t *) fb;
-
-    while (*text != '\0')
-    {
-        uint8_t glyph[5];
-        font5x7_get_glyph(*text, glyph);
-
-        for (int column = 0; column < 5; column++)
-        {
-            for (int row = 0; row < 7; row++)
-            {
-                if ((glyph[column] & (1U << row)) == 0U)
-                {
-                    continue;
-                }
-
-                for (int scale_y = 0; scale_y < scale; scale_y++)
-                {
-                    int pixel_y = y + row * scale + scale_y;
-
-                    if ((pixel_y < 0) || (pixel_y >= 600))
-                    {
-                        continue;
-                    }
-
-                    for (int scale_x = 0; scale_x < scale; scale_x++)
-                    {
-                        int pixel_x = x + column * scale + scale_x;
-
-                        if ((pixel_x >= 0) && (pixel_x < 1024))
-                        {
-                            pixels[pixel_y * fb_stride_pixels + pixel_x] = color;
-                        }
-                    }
-                }
-            }
-        }
-
-        x += 6 * scale;
-        text++;
     }
 }

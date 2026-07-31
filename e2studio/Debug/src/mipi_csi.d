@@ -129,7 +129,8 @@ src/mipi_csi.o: ..\src\mipi_csi.c ..\src\mipi_csi.h ..\src\common_utils.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\src\model\sub_0028_tensors.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\src\model\sub_0030_tensors.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\src\model\sub_0032_tensors.h \
-  ..\src\yolo_postprocess.h ..\src\dave2D_overlay.h
+  ..\src\yolo_postprocess.h ..\src\dave2D_overlay.h \
+  ..\src\SEGGER_RTT\bsp_print.h
 ..\src\mipi_csi.h:
 ..\src\common_utils.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_gen\hal_data.h:
@@ -267,3 +268,4 @@ D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\src\mode
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\src\model\sub_0032_tensors.h:
 ..\src\yolo_postprocess.h:
 ..\src\dave2D_overlay.h:
+..\src\SEGGER_RTT\bsp_print.h:

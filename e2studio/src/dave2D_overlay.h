@@ -35,4 +35,11 @@ bool dave2d_overlay_draw_filled_rect(int x0,
                                      int y1,
                                      uint16_t rgb565);
 
+/* 使用 D/AVE 2D Alpha1 字模向当前帧命令缓冲区追加文本。 */
+bool dave2d_overlay_draw_text(int x,
+                              int y,
+                              char const * text,
+                              uint16_t rgb565,
+                              int scale);
+
 #endif // DAVE2D_OVERLAY_H

@@ -106,7 +106,9 @@ src/dave2D_overlay.o: ..\src\dave2D_overlay.c ..\src\dave2D_overlay.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_dtc_cfg.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_iic_master.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_iic_master_cfg.h \
-  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_i2c_master_api.h
+  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_i2c_master_api.h \
+  ..\src\SEGGER_RTT\bsp_print.h ..\src\SEGGER_RTT\SEGGER_RTT.h \
+  ..\src\SEGGER_RTT\SEGGER_RTT_Conf.h
 ..\src\dave2D_overlay.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_gen\hal_data.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\bsp_api.h:
@@ -216,3 +218,6 @@ D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\f
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_iic_master.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_iic_master_cfg.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_i2c_master_api.h:
+..\src\SEGGER_RTT\bsp_print.h:
+..\src\SEGGER_RTT\SEGGER_RTT.h:
+..\src\SEGGER_RTT\SEGGER_RTT_Conf.h:

@@ -14,7 +14,7 @@
 #define YOLO_CLASS_COUNT            (1)
 #define YOLO_OUTPUT_BOX_COUNT       (336)
 #define YOLO_OUTPUT_ATTRS           (5)
-#define YOLO_MAX_DETECTIONS         (64)
+#define YOLO_MAX_DETECTIONS         (4)
 
 typedef struct st_yolo_detection
 {
