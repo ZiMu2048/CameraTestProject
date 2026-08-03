@@ -12,6 +12,7 @@
 #include "yolo_postprocess.h"
 #include "dave2D_overlay.h"
 #include "SEGGER_RTT/bsp_print.h"
+#include "DA16200/da16200_AT.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -23,6 +24,16 @@
 
 /* 5×7 标签字模的整数放大倍数。 */
 #define DAVE2D_TEXT_SCALE          (2)
+
+#define DA16200_WIFI_SSID                 "527_RA8P1"
+#define DA16200_WIFI_PASSWORD             "060117klj"
+#define DA16200_WIFI_CONNECT_TIMEOUT_MS   (60000U)
+
+#define DA16200_TCP_SERVER_IP      "192.168.137.1"
+#define DA16200_TCP_SERVER_PORT    (5000U)
+
+static uint8_t g_da16200_tcp_cid = 0xFFU;
+
 
 /* External variables */
 extern sensor_reg_t live_camera;
@@ -49,6 +60,215 @@ static const uint16_t g_yolo_class_colors[YOLO_CLASS_COUNT] =
     0xF800U, /* PhysicalDamage: red */
 };
 
+static fsp_err_t da16200_connect_local_wifi(void);
+static fsp_err_t da16200_connect_local_tcp(void);
+/*
+ * 功能：按顺序发送最小 AT 指令集，确认 UART、AT 解释器和 Wi-Fi 状态查询链路正常。
+ * 调用环境：系统初始化阶段调用一次，不可在中断中调用。
+ * 返回值：全部指令收到 OK 时返回 FSP_SUCCESS，否则返回首条失败指令的错误码。
+ */
+static fsp_err_t da16200_ensure_station_mode(void)
+{
+    static char response[DA16200_STR_LEN_512];
+    const char * p_mode;
+    fsp_err_t err;
+
+    memset(response, 0, sizeof(response));
+    err = DA16200_SendCommandAndGetResponse("AT+CWMODE=?\r\n",
+                                            response,
+                                            (uint16_t) sizeof(response),
+                                            5000U);
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    p_mode = strstr(response, "+CWMODE:");
+    if ((NULL == p_mode) || (p_mode[8] < '0') || (p_mode[8] > '2'))
+    {
+        g_printf("DA16200: invalid CWMODE response\r\n");
+        return FSP_ERR_ASSERTION;
+    }
+
+    if ('0' == p_mode[8])
+    {
+        g_printf("DA16200: Station mode already active\r\n");
+        return FSP_SUCCESS;
+    }
+
+    g_printf("DA16200: switching Wi-Fi mode %c -> 0 (Station)\r\n", p_mode[8]);
+
+    memset(response, 0, sizeof(response));
+    err = DA16200_SendCommandAndGetResponse("AT+CWMODE=0\r\n",
+                                            response,
+                                            (uint16_t) sizeof(response),
+                                            5000U);
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    memset(response, 0, sizeof(response));
+    err = DA16200_SendCommandAndGetResponse("AT+RST\r\n",
+                                            response,
+                                            (uint16_t) sizeof(response),
+                                            5000U);
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    R_BSP_SoftwareDelay(3U, BSP_DELAY_UNITS_SECONDS);
+
+    memset(response, 0, sizeof(response));
+    err = DA16200_SendCommandAndGetResponse("AT\r\n",
+                                            response,
+                                            (uint16_t) sizeof(response),
+                                            3000U);
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    memset(response, 0, sizeof(response));
+    err = DA16200_SendCommandAndGetResponse("AT+CWMODE=?\r\n",
+                                            response,
+                                            (uint16_t) sizeof(response),
+                                            5000U);
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    p_mode = strstr(response, "+CWMODE:");
+    if ((NULL == p_mode) || ('0' != p_mode[8]))
+    {
+        g_printf("DA16200: Station mode verification failed\r\n");
+        return FSP_ERR_ASSERTION;
+    }
+
+    g_printf("DA16200: Station mode enabled\r\n");
+    return FSP_SUCCESS;
+}
+
+static fsp_err_t da16200_protocol_probe(void)
+{
+    static char response[DA16200_STR_LEN_512];
+    static const char * const probe_commands[] =
+    {
+        "AT\r\n",
+        "AT+SDKVER\r\n",
+    };
+    static const char * const station_status_commands[] =
+    {
+        "AT+CWSTA\r\n",
+        "AT+CWSTAT\r\n",
+    };
+    fsp_err_t err;
+
+    for (size_t index = 0U;
+         index < (sizeof(probe_commands) / sizeof(probe_commands[0]));
+         index++)
+    {
+        memset(response, 0, sizeof(response));
+        g_printf("\r\nDA16200 probe command %u\r\n", (unsigned int) index);
+        err = DA16200_SendCommandAndGetResponse(probe_commands[index],
+                                                response,
+                                                (uint16_t) sizeof(response),
+                                                5000U);
+        if (FSP_SUCCESS != err)
+        {
+            g_printf("DA16200 probe failed at command %u, err=%d\r\n",
+                     (unsigned int) index,
+                     err);
+            return err;
+        }
+    }
+
+    err = da16200_ensure_station_mode();
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200 Station mode setup failed, err=%d\r\n", err);
+        return err;
+    }
+
+    for (size_t index = 0U;
+         index < (sizeof(station_status_commands) / sizeof(station_status_commands[0]));
+         index++)
+    {
+        memset(response, 0, sizeof(response));
+        g_printf("\r\nDA16200 station status command %u\r\n", (unsigned int) index);
+        err = DA16200_SendCommandAndGetResponse(station_status_commands[index],
+                                                response,
+                                                (uint16_t) sizeof(response),
+                                                5000U);
+        if (FSP_SUCCESS != err)
+        {
+            g_printf("DA16200 station status failed at command %u, err=%d\r\n",
+                     (unsigned int) index,
+                     err);
+            return err;
+        }
+    }
+
+    g_printf("\r\nDA16200 protocol probe passed\r\n");
+    return FSP_SUCCESS;
+}
+
+static fsp_err_t da16200_connect_local_wifi(void)
+{
+    fsp_err_t err;
+    static char response[DA16200_STR_LEN_512];
+
+    err = DA16200_EnsureWifiConnected(DA16200_WIFI_SSID,
+                                      DA16200_WIFI_PASSWORD,
+                                      DA16200_WIFI_CONNECT_TIMEOUT_MS);
+    if(FSP_SUCCESS !=err)
+    {
+        return err;
+    }
+
+    memset(response, 0, sizeof(response));
+    err = DA16200_SendCommandAndGetResponse("AT+CWSTAT\r\n",
+                                            response,
+                                            (uint16_t) sizeof(response),
+                                            5000U);
+    
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200: CWSTAT query failed, err=%d\r\n",
+                 err);
+        return err;
+    }
+
+    if (NULL == strstr(response, "wpa_state=COMPLETED"))
+    {
+        g_printf("DA16200: Wi-Fi state is not COMPLETED\r\n");
+        return FSP_ERR_ASSERTION;
+    }
+    
+    g_printf("DA16200: local Wi-Fi is ready\r\n");
+    return FSP_SUCCESS;
+}
+
+static fsp_err_t da16200_connect_local_tcp(void)
+{
+    fsp_err_t err;
+
+    err = DA16200_TcpClientOpen(DA16200_TCP_SERVER_IP,
+                                DA16200_TCP_SERVER_PORT,
+                                &g_da16200_tcp_cid);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200: TCP client open failed, err=%d\r\n", err);
+        return err;
+    }
+
+    g_printf("DA16200: TCP client connected, CID=%u\r\n",
+             (unsigned int) g_da16200_tcp_cid);
+    return FSP_SUCCESS;
+}
+
 /***********************************************************************************************************************
  *  Function Name: mipi_csi_ep_entry
  *  Description  : This function is used to start MIPI CSI example operation.
@@ -68,6 +288,55 @@ void mipi_csi_ep_entry(void)
     TERM_INIT();
 
     g_printf("HELLOWORLD\r\n");
+
+    /* 初始化 SCI6，并在模块上电稳定后执行最小 AT 协议探测。 */
+    err = DA16200_UartInit();
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200 UART init failed, camera continues, err=%d\r\n", err);
+    }
+    else
+    {
+        R_BSP_SoftwareDelay(1U, BSP_DELAY_UNITS_SECONDS);
+        err = da16200_protocol_probe();
+        if (FSP_SUCCESS != err)
+        {
+            g_printf("DA16200 is unavailable, camera continues, err=%d\r\n",
+                    err);
+        }
+        else
+        {
+            err = da16200_connect_local_wifi();
+            if (FSP_SUCCESS != err)
+            {
+                g_printf("DA16200 Wi-Fi unavailable, camera continues, err=%d\r\n",
+                        err);
+            }
+
+            err = DA16200_TcpCloseAll();
+            if (FSP_SUCCESS != err)
+            {
+                g_printf("CID Close Failed");
+            }
+
+            err = da16200_connect_local_tcp();
+            if (FSP_SUCCESS != err)
+            {
+                g_printf("DA16200 TCP client unavailable, camera continues, err=%d\r\n",
+                        err);
+            }
+            err = DA16200_TcpClientSendText(g_da16200_tcp_cid,
+                                            "HELLO FROM RA8P1");
+            if (FSP_SUCCESS != err)
+            {
+                g_printf("DA16200: TCP text send failed, err=%d\r\n",
+                        (int) err);
+            }
+
+            g_printf("DA16200: TCP text command transmitted\r\n");
+            
+        }
+    }
 
     /* Initialize IIC module to control the switch onboard and the camera sensor */
     err = i2c_control_init();

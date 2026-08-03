@@ -1,8 +1,8 @@
-/***********************************************************************************************************************
-* Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+/*
+* Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
 *
 * SPDX-License-Identifier: BSD-3-Clause
-***********************************************************************************************************************/
+*/
 
 /*******************************************************************************************************************//**
  * @ingroup RENESAS_CONNECTIVITY_INTERFACES
@@ -25,7 +25,6 @@
 #ifndef R_UART_API_H
 #define R_UART_API_H
 
-#if (USE_VIRTUAL_COM == 1)
 /***********************************************************************************************************************
  * Includes
  **********************************************************************************************************************/
@@ -244,7 +243,6 @@ typedef struct st_uart_api
      */
     fsp_err_t (* receiveSuspend)(uart_ctrl_t * const p_ctrl);
 
-
     /** Resume RX operations for UART device.
      *
      * @param[in]   p_ctrl     Pointer to the UART control block.
@@ -265,5 +263,4 @@ typedef struct st_uart_instance
 /* Common macro for FSP header files. There is also a corresponding FSP_HEADER macro at the top of this file. */
 FSP_FOOTER
 
-#endif /* USE_VIRTUAL_COM */
 #endif

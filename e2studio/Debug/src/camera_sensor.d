@@ -102,8 +102,11 @@ src/camera_sensor.o: ..\src\camera_sensor.c ..\src\camera_sensor.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_ioport_api.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_ioport_cfg.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h \
-  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_dtc.h \
+  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_sci_b_uart.h \
+  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_uart_api.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_transfer_api.h \
+  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_sci_b_uart_cfg.h \
+  D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_dtc.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_dtc_cfg.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_iic_master.h \
   D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_iic_master_cfg.h \
@@ -215,8 +218,11 @@ D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\i
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_ioport_api.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_ioport_cfg.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h:
-D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_dtc.h:
+D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_sci_b_uart.h:
+D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_uart_api.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\api\r_transfer_api.h:
+D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_sci_b_uart_cfg.h:
+D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_dtc.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_dtc_cfg.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra\fsp\inc\instances\r_iic_master.h:
 D:\Lab\Lab_MCU\Renesas_RA\RA8P1_CAM_GLCDC_AI\CameraTestProject\e2studio\ra_cfg\fsp_cfg\r_iic_master_cfg.h:

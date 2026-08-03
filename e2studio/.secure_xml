@@ -391,6 +391,10 @@
       <configSetting altId="p903.gpio_mode.gpio_mode_peripheral" configurationId="p903.gpio_mode"/>
       <configSetting altId="p904.gpio_speed.gpio_speed_hh" configurationId="p904.gpio_drivecapacity"/>
       <configSetting altId="p904.gpio_mode.gpio_mode_peripheral" configurationId="p904.gpio_mode"/>
+      <configSetting altId="p908.gpio_speed.gpio_speed_hh" configurationId="p908.gpio_drivecapacity"/>
+      <configSetting altId="p908.gpio_mode.gpio_mode_peripheral" configurationId="p908.gpio_mode"/>
+      <configSetting altId="p909.gpio_speed.gpio_speed_hh" configurationId="p909.gpio_drivecapacity"/>
+      <configSetting altId="p909.gpio_mode.gpio_mode_peripheral" configurationId="p909.gpio_mode"/>
       <configSetting altId="p910.gpio_speed.gpio_speed_hh" configurationId="p910.gpio_drivecapacity"/>
       <configSetting altId="p910.gpio_mode.gpio_mode_peripheral" configurationId="p910.gpio_mode"/>
       <configSetting altId="p911.gpio_speed.gpio_speed_hh" configurationId="p911.gpio_drivecapacity"/>
@@ -494,6 +498,8 @@
       <configSetting altId="pd07.gpio_mode.gpio_mode_peripheral" configurationId="pd07.gpio_mode"/>
       <configSetting altId="pdm2.pdmclk2.p812" configurationId="pdm2.pdmclk2" peripheral="PDM2"/>
       <configSetting altId="pdm2.pdmdat2.p502" configurationId="pdm2.pdmdat2" peripheral="PDM2"/>
+      <configSetting altId="sci6.rxd6.p909" configurationId="sci6.rxd6" isUsedByDriver="true" peripheral="SCI6"/>
+      <configSetting altId="sci6.txd6.p908" configurationId="sci6.txd6" isUsedByDriver="true" peripheral="SCI6"/>
       <configSetting altId="sci8.rxd8.pd03" configurationId="sci8.rxd8" peripheral="SCI8"/>
       <configSetting altId="sci8.txd8.pd02" configurationId="sci8.txd8" peripheral="SCI8"/>
       <configSetting altId="sdram.a10.p507" configurationId="sdram.a10" peripheral="SDRAM"/>

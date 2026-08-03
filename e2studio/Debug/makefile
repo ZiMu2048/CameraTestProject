@@ -11,11 +11,9 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/model/subdir.mk
--include src/SERIAL_TERM/r_uarta/subdir.mk
--include src/SERIAL_TERM/r_sci_uart/subdir.mk
--include src/SERIAL_TERM/r_sci_b_uart/subdir.mk
--include src/SERIAL_TERM/subdir.mk
 -include src/SEGGER_RTT/subdir.mk
+-include src/RingBuffer/subdir.mk
+-include src/DA16200/subdir.mk
 -include src/subdir.mk
 -include ra_gen/subdir.mk
 -include ra/tes/dave2d/src/subdir.mk
@@ -34,6 +32,7 @@ RM := rm -rf
 -include ra/npu/ethos-u-core-driver/src/subdir.mk
 -include ra/fsp/src/rm_ethosu/subdir.mk
 -include ra/fsp/src/r_vin/subdir.mk
+-include ra/fsp/src/r_sci_b_uart/subdir.mk
 -include ra/fsp/src/r_mipi_phy/subdir.mk
 -include ra/fsp/src/r_mipi_csi/subdir.mk
 -include ra/fsp/src/r_ioport/subdir.mk

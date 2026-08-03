@@ -146,8 +146,8 @@ FSP_HEADER
 #define ETHERNET_RXC (BSP_IO_PORT_09_PIN_05) /* See E37 in manual */
 #define ETHERNET_RXD0 (BSP_IO_PORT_09_PIN_06) /* See E36 in manual */
 #define ETHERNET_RXD1 (BSP_IO_PORT_09_PIN_07) /* See E34 in manual */
-#define ETHERNET_RXD2 (BSP_IO_PORT_09_PIN_08) /* See E33 in manual */
-#define ETHERNET_RXD3 (BSP_IO_PORT_09_PIN_09) /* See E24 in manual */
+#define ETHERNET_RXD2 (BSP_IO_PORT_09_PIN_08)
+#define RX (BSP_IO_PORT_09_PIN_09)
 #define PARLCD_D4B4 (BSP_IO_PORT_09_PIN_10) /* See SW4 in manual */
 #define PARLCD_D5B5 (BSP_IO_PORT_09_PIN_11) /* See SW4 in manual */
 #define PARLCD_D6B6 (BSP_IO_PORT_09_PIN_12) /* See SW4 in manual */

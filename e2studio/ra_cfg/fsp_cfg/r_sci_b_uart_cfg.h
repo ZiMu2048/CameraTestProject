@@ -1,7 +1,6 @@
+/* generated configuration header file - do not edit */
 #ifndef R_SCI_B_UART_CFG_H_
 #define R_SCI_B_UART_CFG_H_
-
-#if (USE_VIRTUAL_COM == 1)
 #ifdef __cplusplus
             extern "C" {
             #endif
@@ -14,6 +13,4 @@
 #ifdef __cplusplus
             }
             #endif
-            
-#endif /* USE_VIRTUAL_COM */
 #endif /* R_SCI_B_UART_CFG_H_ */

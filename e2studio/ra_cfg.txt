@@ -481,8 +481,8 @@ FSP Configuration
       P905 A14 - ETHERNET_RXC - - Disabled - - "ADC1(Digital): AD1FLAG1; CEU: VIO_D6; ESWM_GMII/MII1: ET1_RX_CLK; ESWM_RGMII1: RGMII1_RXC; ESWM_RMII1: RMII1_REF50CK; GLCDC: LCD_DATA19; GPT13: GTCPPO13; IRQ: IRQ8; PDM1: PDMDAT1; SCI3: RXD3" "See E37 in manual" None - - 
       P906 A13 - ETHERNET_RXD0 - - Disabled - - "ADC0(Digital): AD0FLAG1; CEU: VIO_D5; ESWM_GMII/MII1: ET1_RXD0; ESWM_RGMII1: RGMII1_RXD0; ESWM_RMII1: RMII1_RXD0; GLCDC: LCD_DATA20; GPT13: GTIOC13B; IRQ: IRQ9; PDM0: PDMDAT0; SCI6: CTS6; SSIE1: SSILRCK1; ULPT1: ULPTO1; USB FS: USB_ID" "See E36 in manual" None - - 
       P907 A15 - ETHERNET_RXD1 - - Disabled - - "ADC(Digital): ADSYNC; CEU: VIO_D4; ESWM_GMII/MII1: ET1_RXD1; ESWM_RGMII1: RGMII1_RXD1; ESWM_RMII1: RMII1_RXD1; GLCDC: LCD_DATA21; GPT13: GTIOC13A; IRQ: IRQ10; PDM2: PDMCLK2; SCI6: DE6; SCI6: SCK6; SSIE1: SSIBCK1; ULPT1: ULPTEE1; USB FS: USB_EXICEN" "See E34 in manual" None - - 
-      P908 B13 - ETHERNET_RXD2 - - Disabled - - "ADC1(Digital): ADST1; CANFD1: CRX1; CEU: VIO_D3; ESWM_GMII/MII1: ET1_RXD2; ESWM_RGMII1: RGMII1_RXD2; GLCDC: LCD_DATA22; GPT12: GTIOC12B; IRQ: IRQ11; PDM1: PDMCLK1; SCI6: TXD6; ULPT1: ULPTEVI1; USB FS: USB_OVRCURB; USB HS: USBHS_ID" "See E33 in manual" None - - 
-      P909 B14 - ETHERNET_RXD3 - - Disabled - - "ADC0(Digital): ADST0; CANFD1: CTX1; CEU: VIO_D2; ESWM_GMII/MII1: ET1_RXD3; ESWM_RGMII1: RGMII1_RXD3; GLCDC: LCD_DATA23; GPT12: GTIOC12A; IRQ: IRQ21-DS; PDM0: PDMCLK0; SCI6: RXD6; ULPT1: ULPTOA1; USB FS: USB_OVRCURA; USB HS: USBHS_EXICEN" "See E24 in manual" None - - 
+      P908 B13 SCI6_TXD6 ETHERNET_RXD2 HH None "Peripheral mode" - - "ADC1(Digital): ADST1; CANFD1: CRX1; CEU: VIO_D3; ESWM_GMII/MII1: ET1_RXD2; ESWM_RGMII1: RGMII1_RXD2; GLCDC: LCD_DATA22; GPT12: GTIOC12B; IRQ: IRQ11; PDM1: PDMCLK1; SCI6: TXD6; ULPT1: ULPTEVI1; USB FS: USB_OVRCURB; USB HS: USBHS_ID" - O - - 
+      P909 B14 SCI6_RXD6 RX HH None "Peripheral mode" - - "ADC0(Digital): ADST0; CANFD1: CTX1; CEU: VIO_D2; ESWM_GMII/MII1: ET1_RXD3; ESWM_RGMII1: RGMII1_RXD3; GLCDC: LCD_DATA23; GPT12: GTIOC12A; IRQ: IRQ21-DS; PDM0: PDMCLK0; SCI6: RXD6; ULPT1: ULPTOA1; USB FS: USB_OVRCURA; USB HS: USBHS_EXICEN" - I - - 
       P910 E11 GLCDC_LCD_DATA4 PARLCD_D4B4 HH None "Peripheral mode" - - "ESWM_GMII/MII1: ET1_TXD4; GLCDC: LCD_DATA4; GPT12: GTCPPO12; IRQ: IRQ7" "See SW4 in manual" IO - - 
       P911 C12 GLCDC_LCD_DATA5 PARLCD_D5B5 HH None "Peripheral mode" - - "ESWM_GMII/MII1: ET1_TXD5; GLCDC: LCD_DATA5; GPT3: GTIOC3B; IRQ: IRQ6" "See SW4 in manual" IO - - 
       P912 D12 GLCDC_LCD_DATA6 PARLCD_D6B6 HH None "Peripheral mode" - - "ESWM_GMII/MII1: ET1_TXD6; GLCDC: LCD_DATA6; GPT3: GTIOC3A; IRQ: IRQ5" "See SW4 in manual" IO - - 
@@ -771,8 +771,8 @@ FSP Configuration
       P905 A14 - ETHERNET_RXC - - Disabled - - "ADC1(Digital): AD1FLAG1; CEU: VIO_D6; ESWM_GMII/MII1: ET1_RX_CLK; ESWM_RGMII1: RGMII1_RXC; ESWM_RMII1: RMII1_REF50CK; GLCDC: LCD_DATA19; GPT13: GTCPPO13; IRQ: IRQ8; PDM1: PDMDAT1; SCI3: RXD3" "See E37 in manual" None - - 
       P906 A13 - ETHERNET_RXD0 - - Disabled - - "ADC0(Digital): AD0FLAG1; CEU: VIO_D5; ESWM_GMII/MII1: ET1_RXD0; ESWM_RGMII1: RGMII1_RXD0; ESWM_RMII1: RMII1_RXD0; GLCDC: LCD_DATA20; GPT13: GTIOC13B; IRQ: IRQ9; PDM0: PDMDAT0; SCI6: CTS6; SSIE1: SSILRCK1; ULPT1: ULPTO1; USB FS: USB_ID" "See E36 in manual" None - - 
       P907 A15 - ETHERNET_RXD1 - - Disabled - - "ADC(Digital): ADSYNC; CEU: VIO_D4; ESWM_GMII/MII1: ET1_RXD1; ESWM_RGMII1: RGMII1_RXD1; ESWM_RMII1: RMII1_RXD1; GLCDC: LCD_DATA21; GPT13: GTIOC13A; IRQ: IRQ10; PDM2: PDMCLK2; SCI6: DE6; SCI6: SCK6; SSIE1: SSIBCK1; ULPT1: ULPTEE1; USB FS: USB_EXICEN" "See E34 in manual" None - - 
-      P908 B13 - ETHERNET_RXD2 - - Disabled - - "ADC1(Digital): ADST1; CANFD1: CRX1; CEU: VIO_D3; ESWM_GMII/MII1: ET1_RXD2; ESWM_RGMII1: RGMII1_RXD2; GLCDC: LCD_DATA22; GPT12: GTIOC12B; IRQ: IRQ11; PDM1: PDMCLK1; SCI6: TXD6; ULPT1: ULPTEVI1; USB FS: USB_OVRCURB; USB HS: USBHS_ID" "See E33 in manual" None - - 
-      P909 B14 - ETHERNET_RXD3 - - Disabled - - "ADC0(Digital): ADST0; CANFD1: CTX1; CEU: VIO_D2; ESWM_GMII/MII1: ET1_RXD3; ESWM_RGMII1: RGMII1_RXD3; GLCDC: LCD_DATA23; GPT12: GTIOC12A; IRQ: IRQ21-DS; PDM0: PDMCLK0; SCI6: RXD6; ULPT1: ULPTOA1; USB FS: USB_OVRCURA; USB HS: USBHS_EXICEN" "See E24 in manual" None - - 
+      P908 B13 - ETHERNET_RXD2 L None Disabled - - "ADC1(Digital): ADST1; CANFD1: CRX1; CEU: VIO_D3; ESWM_GMII/MII1: ET1_RXD2; ESWM_RGMII1: RGMII1_RXD2; GLCDC: LCD_DATA22; GPT12: GTIOC12B; IRQ: IRQ11; PDM1: PDMCLK1; SCI6: TXD6; ULPT1: ULPTEVI1; USB FS: USB_OVRCURB; USB HS: USBHS_ID" - O - - 
+      P909 B14 - RX L None Disabled - - "ADC0(Digital): ADST0; CANFD1: CTX1; CEU: VIO_D2; ESWM_GMII/MII1: ET1_RXD3; ESWM_RGMII1: RGMII1_RXD3; GLCDC: LCD_DATA23; GPT12: GTIOC12A; IRQ: IRQ21-DS; PDM0: PDMCLK0; SCI6: RXD6; ULPT1: ULPTOA1; USB FS: USB_OVRCURA; USB HS: USBHS_EXICEN" - I - - 
       P910 E11 - PARLCD_D4B4 L None Disabled - - "ESWM_GMII/MII1: ET1_TXD4; GLCDC: LCD_DATA4; GPT12: GTCPPO12; IRQ: IRQ7" "See SW4 in manual" IO - - 
       P911 C12 - PARLCD_D5B5 L None Disabled - - "ESWM_GMII/MII1: ET1_TXD5; GLCDC: LCD_DATA5; GPT3: GTIOC3B; IRQ: IRQ6" "See SW4 in manual" IO - - 
       P912 D12 - PARLCD_D6B6 L None Disabled - - "ESWM_GMII/MII1: ET1_TXD6; GLCDC: LCD_DATA6; GPT3: GTIOC3A; IRQ: IRQ5" "See SW4 in manual" IO - - 
@@ -961,6 +961,12 @@ FSP Configuration
   Module "D/AVE 2D Port Interface (r_drw)"
     Allow Indirect Mode: Enabled
     Memory Allocation: Default
+    
+  Module "UART (r_sci_b_uart)"
+    Parameter Checking: Default (BSP)
+    FIFO Support: Disable
+    DTC Support: Disable
+    Flow Control Support: Disable
     
   HAL
     Instance "g_ioport I/O Port (r_ioport)"
@@ -1349,3 +1355,30 @@ FSP Configuration
       DRW Interrupt Priority: Priority 2
       
       Instance "D/AVE 2D (r_drw)"
+    Instance "g_uart6 UART (r_sci_b_uart)"
+      General: Name: g_uart6
+      General: Channel: 6
+      General: Data Bits: 8bits
+      General: Parity: None
+      General: Stop Bits: 1bit
+      Baud: Baud Rate: 115200
+      Baud: Baud Rate Modulation: Disabled
+      Baud: Max Error (%): 5
+      Flow Control: CTS/RTS Selection: Hardware RTS
+      Flow Control: Software RTS Port: Disabled
+      Flow Control: Software RTS Pin: Disabled
+      Extra: Clock Source: Internal Clock
+      Extra: Start bit detection: Falling Edge
+      Extra: Noise Filter: Disable
+      Extra: Receive FIFO Trigger Level: Max
+      Extra: RS-485: DE Pin: Disable
+      Extra: RS-485: DE Pin Polarity: Active High
+      Extra: RS-485: DE Pin Assertion Time: 1
+      Extra: RS-485: DE Pin Negation Time: 1
+      Extra: TXI/TEI Synchronization Delay Cycles: 0
+      Interrupts: Callback: UART6_CallBack
+      Interrupts: Receive Interrupt Priority: Priority 12
+      Interrupts: Transmit Data Empty Interrupt Priority: Priority 12
+      Interrupts: Transmit End Interrupt Priority: Priority 12
+      Interrupts: Error Interrupt Priority: Priority 12
+      

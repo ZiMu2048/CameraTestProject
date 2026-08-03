@@ -1,13 +1,12 @@
-/***********************************************************************************************************************
-* Copyright (c) 2020 - 2025 Renesas Electronics Corporation and/or its affiliates
+/*
+* Copyright (c) 2020 - 2026 Renesas Electronics Corporation and/or its affiliates
 *
 * SPDX-License-Identifier: BSD-3-Clause
-***********************************************************************************************************************/
+*/
 
 #ifndef R_SCI_B_UART_H
 #define R_SCI_B_UART_H
 
-#if (USE_VIRTUAL_COM == 1)
 /*******************************************************************************************************************//**
  * @addtogroup SCI_B_UART
  * @{
@@ -17,9 +16,7 @@
  * Includes
  **********************************************************************************************************************/
 #include "bsp_api.h"
-
-#if BSP_PERIPHERAL_SCI_B_PRESENT
-#include "../r_uart_api.h"
+#include "r_uart_api.h"
 #include "r_sci_b_uart_cfg.h"
 
 /* Common macro for FSP header files. There is also a corresponding FSP_FOOTER macro at the end of this file. */
@@ -60,6 +57,7 @@ typedef struct st_sci_b_uart_instance_ctrl
     uint8_t  data_bytes         : 2;   // 1 byte for 7 or 8 bit data, 2 bytes for 9 bit data
     uint8_t  bitrate_modulation : 1;   // 1 if bit rate modulation is enabled, 0 otherwise
     uint32_t open;                     // Used to determine if the channel is configured
+    uint32_t delay_loops;
 
     bsp_io_port_pin_t flow_pin;
 
@@ -181,6 +179,7 @@ typedef struct st_sci_b_uart_extended_cfg
     bsp_io_port_pin_t               flow_control_pin; ///< UART Driver Enable pin
     sci_b_uart_flow_control_t       flow_control;     ///< CTS/RTS function of the SSn pin
     sci_b_uart_rs485_setting_t      rs485_setting;    ///< RS-485 settings.
+    uint8_t delay_cycles;                             ///< Number of SCICLK cycles to delay after writing last byte to TDR
 } sci_b_uart_extended_cfg_t;
 
 /**********************************************************************************************************************
@@ -219,6 +218,4 @@ fsp_err_t R_SCI_B_UART_ReceiveResume(uart_ctrl_t * const p_api_ctrl);
 /* Common macro for FSP header files. There is also a corresponding FSP_HEADER macro at the top of this file. */
 FSP_FOOTER
 
-#endif /* BSP_PERIPHERAL_SCI_B_PRESENT */
-#endif /* USE_VIRTUAL_COM */
 #endif

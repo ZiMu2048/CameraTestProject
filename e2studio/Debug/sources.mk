@@ -98,6 +98,7 @@ ra/fsp/src/r_iic_master \
 ra/fsp/src/r_ioport \
 ra/fsp/src/r_mipi_csi \
 ra/fsp/src/r_mipi_phy \
+ra/fsp/src/r_sci_b_uart \
 ra/fsp/src/r_vin \
 ra/fsp/src/rm_ethosu \
 ra/npu/ethos-u-core-driver/src \
@@ -115,11 +116,9 @@ ra/npu/tflite-micro/tensorflow/lite/micro/tflite_bridge \
 ra/npu/tflite-micro/tensorflow/lite/schema \
 ra/tes/dave2d/src \
 ra_gen \
+src/DA16200 \
+src/RingBuffer \
 src/SEGGER_RTT \
-src/SERIAL_TERM/r_sci_b_uart \
-src/SERIAL_TERM/r_sci_uart \
-src/SERIAL_TERM/r_uarta \
-src/SERIAL_TERM \
 src \
 src/model \
 

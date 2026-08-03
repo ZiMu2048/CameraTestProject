@@ -109,6 +109,8 @@
             <slot name="P902.CPU0" secure="true"/>
             <slot name="P903.CPU0" secure="true"/>
             <slot name="P904.CPU0" secure="true"/>
+            <slot name="P908.CPU0" secure="true"/>
+            <slot name="P909.CPU0" secure="true"/>
             <slot name="P910.CPU0" secure="true"/>
             <slot name="P911.CPU0" secure="true"/>
             <slot name="P912.CPU0" secure="true"/>
@@ -188,6 +190,10 @@
             <slot name="IRQ14.CPU0" secure="true"/>
             <slot name="IRQ15.CPU0" secure="true"/>
             <slot name="IRQ16.CPU0" secure="true"/>
+            <slot name="IRQ17.CPU0" secure="true"/>
+            <slot name="IRQ18.CPU0" secure="true"/>
+            <slot name="IRQ19.CPU0" secure="true"/>
+            <slot name="IRQ20.CPU0" secure="true"/>
         </peripheral>
     </partition>
 </azone>
