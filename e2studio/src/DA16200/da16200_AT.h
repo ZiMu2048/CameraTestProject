@@ -132,4 +132,9 @@ fsp_err_t DA16200_TcpCloseAll(void);
 fsp_err_t DA16200_TcpClientSendText(uint8_t cid,
                                     const char * p_text);
 
+fsp_err_t DA16200_TcpClientSendBinaryChunk(
+    uint8_t cid,
+    const uint8_t * p_data,
+    uint16_t data_length,
+    uint32_t timeout_ms);
 #endif /* DA16200_DA16200_AT_H_ */

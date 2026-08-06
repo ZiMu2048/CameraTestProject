@@ -6,7 +6,9 @@
 - 本地网页：`http://127.0.0.1:8000`
 - 依赖：Python 3.10 或更高版本，仅使用标准库
 
-当前版本能够自动接受多个 TCP 连接，并实时显示文本、十六进制数据、累计字节数和连接日志。
-图像区域已预留，待 MCU 图像帧头协议确定后接入解包与显示逻辑。
+当前版本按固定 24 字节大端帧头接收 RA8P1 JPEG 图像，并严格按照 `jpeg_length` 累计读取数据。
+接收器会检查 JPEG 的 `FF D8` 与 `FF D9` 标志，将图片按 `ra8p1_YYYYMMDD_HHMMSS_mmm.jpg` 保存到 `ERROR` 目录，并在网页中实时显示最新图片、置信度和本次运行的异常历史。
+
+帧头字段依次为 `magic/version/header_size/flags/frame_id/width/height/jpeg_length/confidence_milli/reserved`。
 
 如果提示端口被占用，请先关闭此前运行的 PowerShell TCP 服务端，再重新启动本程序。

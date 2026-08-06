@@ -13,6 +13,7 @@
 #include "dave2D_overlay.h"
 #include "SEGGER_RTT/bsp_print.h"
 #include "DA16200/da16200_AT.h"
+#include "ImageUpload/Image_JPEG_Encoder.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -32,6 +33,23 @@
 #define DA16200_TCP_SERVER_IP      "192.168.137.1"
 #define DA16200_TCP_SERVER_PORT    (5000U)
 
+#define IMAGE_TCP_PROTOCOL_VERSION       (1U)
+#define IMAGE_TCP_HEADER_SIZE            (24U)
+#define IMAGE_TCP_JPEG_CHUNK_SIZE        (1024U)
+#define IMAGE_TCP_SEND_TIMEOUT_MS        (5000U)
+
+#define IMAGE_UPLOAD_SOURCE_WIDTH         (1024U)
+#define IMAGE_UPLOAD_SOURCE_HEIGHT        (600U)
+#define IMAGE_UPLOAD_SOURCE_STRIDE        (1024U)
+#define IMAGE_UPLOAD_CROP_X               (212U)
+#define IMAGE_UPLOAD_CROP_Y               (0U)
+#define IMAGE_UPLOAD_CROP_WIDTH           (600U)
+#define IMAGE_UPLOAD_CROP_HEIGHT          (600U)
+#define IMAGE_UPLOAD_OUTPUT_WIDTH         (240U)
+#define IMAGE_UPLOAD_OUTPUT_HEIGHT        (240U)
+#define IMAGE_UPLOAD_JPEG_QUALITY         (60U)
+#define IMAGE_UPLOAD_CLEAR_FRAMES         (10U)
+
 static uint8_t g_da16200_tcp_cid = 0xFFU;
 
 
@@ -44,7 +62,7 @@ extern const vin_extended_cfg_t g_vin_cfg_extend;
 extern volatile uint8_t g_vsync_flag;
 
 /* Global variables */
-uint8_t * gp_next_buffer;
+uint8_t * volatile gp_next_buffer;
 uint16_t g_image_width = RESET_VALUE;
 uint16_t g_image_height = RESET_VALUE;
 vin_extended_cfg_t g_vin_cfg_run_time_extend;
@@ -62,10 +80,19 @@ static const uint16_t g_yolo_class_colors[YOLO_CLASS_COUNT] =
 
 static fsp_err_t da16200_connect_local_wifi(void);
 static fsp_err_t da16200_connect_local_tcp(void);
-/*
- * 功能：按顺序发送最小 AT 指令集，确认 UART、AT 解释器和 Wi-Fi 状态查询链路正常。
- * 调用环境：系统初始化阶段调用一次，不可在中断中调用。
- * 返回值：全部指令收到 OK 时返回 FSP_SUCCESS，否则返回首条失败指令的错误码。
+static fsp_err_t da16200_send_published_jpeg(uint8_t cid,
+                                             uint16_t width,
+                                             uint16_t height,
+                                             uint16_t confidence_milli);
+static fsp_err_t da16200_encode_and_send_camera_frame(uint8_t cid,
+                                                       const uint16_t * p_frame,
+                                                       uint16_t confidence_milli);
+
+/**
+ * @brief 确保 DA16200 工作在 Station 模式。
+ * @param 无。
+ * @return 成功时返回 FSP_SUCCESS，AT 通信、复位或模式校验失败时返回对应错误码。
+ * @note 该函数包含阻塞式 AT 命令和软件延时，只能在普通执行上下文中调用。
  */
 static fsp_err_t da16200_ensure_station_mode(void)
 {
@@ -151,6 +178,12 @@ static fsp_err_t da16200_ensure_station_mode(void)
     return FSP_SUCCESS;
 }
 
+/**
+ * @brief 探测 DA16200 AT 协议、固件版本、工作模式和 Station 联网状态。
+ * @param 无。
+ * @return 全部命令与状态检查通过时返回 FSP_SUCCESS，否则返回首次失败的错误码。
+ * @note 该函数用于系统启动阶段，不可在中断中调用。
+ */
 static fsp_err_t da16200_protocol_probe(void)
 {
     static char response[DA16200_STR_LEN_512];
@@ -215,6 +248,12 @@ static fsp_err_t da16200_protocol_probe(void)
     return FSP_SUCCESS;
 }
 
+/**
+ * @brief 连接本地 Wi-Fi，并确认详细状态中已经出现 wpa_state=COMPLETED。
+ * @param 无。
+ * @return 联网并验证成功时返回 FSP_SUCCESS，否则返回连接、查询或状态断言错误。
+ * @note Wi-Fi 凭据来自本文件的本地配置宏，日志不得输出真实密码。
+ */
 static fsp_err_t da16200_connect_local_wifi(void)
 {
     fsp_err_t err;
@@ -251,6 +290,12 @@ static fsp_err_t da16200_connect_local_wifi(void)
     return FSP_SUCCESS;
 }
 
+/**
+ * @brief 使用已配置的电脑 IP 和端口建立 DA16200 TCP 客户端连接。
+ * @param 无。
+ * @return TCP 连接成功并取得 CID 时返回 FSP_SUCCESS，否则返回驱动错误码。
+ * @note 成功取得的 CID 保存到 g_da16200_tcp_cid，供后续发送函数使用。
+ */
 static fsp_err_t da16200_connect_local_tcp(void)
 {
     fsp_err_t err;
@@ -269,24 +314,241 @@ static fsp_err_t da16200_connect_local_tcp(void)
     return FSP_SUCCESS;
 }
 
-/***********************************************************************************************************************
- *  Function Name: mipi_csi_ep_entry
- *  Description  : This function is used to start MIPI CSI example operation.
- *  Arguments    : None
- *  Return Value : None
- **********************************************************************************************************************/
+/**
+ * @brief 按网络大端字节序写入一个 16 位无符号整数。
+ * @param[out] p_destination 两字节输出缓冲区首地址。
+ * @param[in] value 需要序列化的 16 位数值。
+ * @return 无。
+ * @note 调用者必须保证输出缓冲区至少有两个可写字节；本函数不可传入空指针。
+ */
+static void image_tcp_store_u16_be(uint8_t * p_destination, uint16_t value)
+{
+    p_destination[0] = (uint8_t) (value >> 8U);
+    p_destination[1] = (uint8_t) value;
+}
+
+/**
+ * @brief 按网络大端字节序写入一个 32 位无符号整数。
+ * @param[out] p_destination 四字节输出缓冲区首地址。
+ * @param[in] value 需要序列化的 32 位数值。
+ * @return 无。
+ * @note 调用者必须保证输出缓冲区至少有四个可写字节；本函数不可传入空指针。
+ */
+static void image_tcp_store_u32_be(uint8_t * p_destination, uint32_t value)
+{
+    p_destination[0] = (uint8_t) (value >> 24U);
+    p_destination[1] = (uint8_t) (value >> 16U);
+    p_destination[2] = (uint8_t) (value >> 8U);
+    p_destination[3] = (uint8_t) value;
+}
+
+/**
+ * @brief 将最近一次发布的 JPEG 封装为图像帧并通过 DA16200 分块发送。
+ * @param[in] cid 已建立的 DA16200 TCP Client 会话编号。
+ * @param[in] width JPEG 图像宽度，单位为像素。
+ * @param[in] height JPEG 图像高度，单位为像素。
+ * @param[in] confidence_milli 检测置信度千分值，例如 0.735 对应 735。
+ * @return 帧头和全部 JPEG 数据块发送成功时返回 FSP_SUCCESS，否则返回对应错误码。
+ * @note 本函数为阻塞调用，只能在普通执行上下文调用；发送结束前不得启动下一次 JPEG 编码。
+ */
+static fsp_err_t da16200_send_published_jpeg(uint8_t cid,
+                                             uint16_t width,
+                                             uint16_t height,
+                                             uint16_t confidence_milli)
+{
+    static uint32_t frame_id = 0U;
+    uint8_t header[IMAGE_TCP_HEADER_SIZE] = {0};
+    const uint8_t * p_jpeg_data = NULL;
+    size_t jpeg_size = 0U;
+    size_t offset = 0U;
+    fsp_err_t err;
+
+    err = ImageJpeg_GetEncodedData(&p_jpeg_data, &jpeg_size);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("Image upload: encoded JPEG unavailable, err=%d\r\n",
+                 (int) err);
+        return err;
+    }
+
+    if ((jpeg_size < 4U) || (jpeg_size > UINT32_MAX))
+    {
+        return FSP_ERR_INVALID_SIZE;
+    }
+
+    frame_id++;
+
+    header[0] = (uint8_t) 'R';
+    header[1] = (uint8_t) 'J';
+    header[2] = (uint8_t) 'P';
+    header[3] = (uint8_t) 'G';
+    header[4] = IMAGE_TCP_PROTOCOL_VERSION;
+    header[5] = IMAGE_TCP_HEADER_SIZE;
+    image_tcp_store_u16_be(&header[6], 0U);
+    image_tcp_store_u32_be(&header[8], frame_id);
+    image_tcp_store_u16_be(&header[12], width);
+    image_tcp_store_u16_be(&header[14], height);
+    image_tcp_store_u32_be(&header[16], (uint32_t) jpeg_size);
+    image_tcp_store_u16_be(&header[20], confidence_milli);
+    image_tcp_store_u16_be(&header[22], 0U);
+
+    err = DA16200_TcpClientSendBinaryChunk(
+        cid,
+        header,
+        (uint16_t) sizeof(header),
+        IMAGE_TCP_SEND_TIMEOUT_MS);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("Image upload: frame header send failed, err=%d\r\n",
+                 (int) err);
+        return err;
+    }
+
+    while (offset < jpeg_size)
+    {
+        size_t const remaining = jpeg_size - offset;
+        uint16_t const chunk_size =
+            (uint16_t) ((remaining > IMAGE_TCP_JPEG_CHUNK_SIZE) ?
+                        IMAGE_TCP_JPEG_CHUNK_SIZE : remaining);
+
+        err = DA16200_TcpClientSendBinaryChunk(
+            cid,
+            &p_jpeg_data[offset],
+            chunk_size,
+            IMAGE_TCP_SEND_TIMEOUT_MS);
+        if (FSP_SUCCESS != err)
+        {
+            g_printf("Image upload: JPEG chunk failed at offset=%lu, err=%d\r\n",
+                     (unsigned long) offset,
+                     (int) err);
+            return err;
+        }
+
+        offset += chunk_size;
+    }
+
+    g_printf("Image upload: frame=%lu, JPEG=%lu bytes sent\r\n",
+             (unsigned long) frame_id,
+             (unsigned long) jpeg_size);
+    return FSP_SUCCESS;
+}
+
+/**
+ * @brief 将一帧稳定的 1024×600 RGB565 摄像头图像编码并发送到电脑。
+ * @param[in] cid 已建立的 DA16200 TCP Client 会话编号。
+ * @param[in] p_frame 稳定且不会被 VIN 覆盖的 RGB565 帧缓冲区首地址。
+ * @return JPEG 编码和全部 TCP 分块发送成功时返回 FSP_SUCCESS，否则返回对应错误码。
+ * @note 当前固定执行中央 600×600 裁剪并缩放为 240×240；本函数为阻塞调用且不支持并发。
+ */
+/**
+ * @brief Encode one stable RGB565 camera frame and send it as a JPEG error record.
+ * @param[in] cid Connected DA16200 TCP client session ID.
+ * @param[in] p_frame Stable 1024x600 RGB565 frame buffer.
+ * @param[in] confidence_milli Detection confidence multiplied by 1000.
+ * @return FSP_SUCCESS when JPEG encoding and all TCP chunks succeed, otherwise an error code.
+ * @note This is a blocking function and must not be called from interrupt context.
+ */
+static fsp_err_t da16200_encode_and_send_camera_frame(uint8_t cid,
+                                                       const uint16_t * p_frame,
+                                                       uint16_t confidence_milli)
+{
+    image_jpeg_encode_cfg_t const cfg =
+    {
+        .source_width         = IMAGE_UPLOAD_SOURCE_WIDTH,
+        .source_height        = IMAGE_UPLOAD_SOURCE_HEIGHT,
+        .source_stride_pixels = IMAGE_UPLOAD_SOURCE_STRIDE,
+        .crop_x               = IMAGE_UPLOAD_CROP_X,
+        .crop_y               = IMAGE_UPLOAD_CROP_Y,
+        .crop_width           = IMAGE_UPLOAD_CROP_WIDTH,
+        .crop_height          = IMAGE_UPLOAD_CROP_HEIGHT,
+        .output_width         = IMAGE_UPLOAD_OUTPUT_WIDTH,
+        .output_height        = IMAGE_UPLOAD_OUTPUT_HEIGHT,
+        .quality              = IMAGE_UPLOAD_JPEG_QUALITY
+    };
+    size_t jpeg_size = 0U;
+    fsp_err_t err;
+
+    if (NULL == p_frame)
+    {
+        return FSP_ERR_INVALID_ARGUMENT;
+    }
+
+    err = ImageJpeg_EncodeAndPublishRgb565(p_frame, &cfg, &jpeg_size);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("Image upload: camera JPEG encode failed, err=%d\r\n",
+                 (int) err);
+        return err;
+    }
+
+    g_printf("Image upload: camera JPEG encoded, size=%lu bytes\r\n",
+             (unsigned long) jpeg_size);
+
+    return da16200_send_published_jpeg(
+        cid,
+        IMAGE_UPLOAD_OUTPUT_WIDTH,
+        IMAGE_UPLOAD_OUTPUT_HEIGHT,
+        confidence_milli);
+}
+
+/**
+ * @brief 初始化终端、DA16200、摄像头、VIN、显示和 NPU，并运行实时采集与推理主循环。
+ * @param 无。
+ * @return 无。
+ * @note 当前通信流程包含阻塞操作，该函数是应用主入口，不可在中断上下文中调用。
+ */
 void mipi_csi_ep_entry(void)
 {
-    fsp_pack_version_t  version = {RESET_VALUE};
+    //fsp_pack_version_t  version = {RESET_VALUE};
     fsp_err_t           err     = FSP_SUCCESS;
 #if (DISPLAY_OUTPUT == 1U)
     /* GLCDC starts with fb_background[0]. CPU always renders the other buffer. */
     uint8_t draw_buffer_index = 1U;
+    bool error_event_latched = false;
+    uint8_t clean_frame_count = 0U;
 #endif
 
     /* Initialize the terminal */
     TERM_INIT();
+    /*===========图像裁剪自检==================*/
+    err = ImageJpeg_SelfTestScalar();
+    if (FSP_SUCCESS == err)
+    {
+        g_printf("Image JPEG: scalar conversion self-test passed\r\n");
+    }
+    else
+    {
+        g_printf("Image JPEG: scalar conversion self-test failed, err=%d\r\n",
+                (int) err);
+    }
 
+    err = ImageJpeg_SelfTestHelium();
+    if (FSP_SUCCESS == err)
+    {
+        g_printf("Image JPEG: Helium conversion self-test passed\r\n");
+    }
+    else
+    {
+        g_printf("Image JPEG: Helium conversion self-test failed, err=%d\r\n",
+                (int) err);
+    }
+
+    size_t jpeg_test_size = 0U;
+    err = ImageJpeg_SelfTestEncode(&jpeg_test_size);
+
+    if (FSP_SUCCESS == err)
+    {
+        g_printf(
+            "Image JPEG: encode self-test passed, size=%lu bytes\r\n",
+            (unsigned long) jpeg_test_size);
+    }
+    else
+    {
+        g_printf(
+            "Image JPEG: encode self-test failed, err=%d\r\n",
+            (int) err);
+    }
+    /*=======================================*/
     g_printf("HELLOWORLD\r\n");
 
     /* 初始化 SCI6，并在模块上电稳定后执行最小 AT 协议探测。 */
@@ -325,16 +587,7 @@ void mipi_csi_ep_entry(void)
                 g_printf("DA16200 TCP client unavailable, camera continues, err=%d\r\n",
                         err);
             }
-            err = DA16200_TcpClientSendText(g_da16200_tcp_cid,
-                                            "HELLO FROM RA8P1");
-            if (FSP_SUCCESS != err)
-            {
-                g_printf("DA16200: TCP text send failed, err=%d\r\n",
-                        (int) err);
-            }
 
-            g_printf("DA16200: TCP text command transmitted\r\n");
-            
         }
     }
 
@@ -378,6 +631,23 @@ void mipi_csi_ep_entry(void)
     memset(vin_image_buffer_2, RESET_VALUE, VIN_BYTES_PER_FRAME);
     memset(vin_image_buffer_3, RESET_VALUE, VIN_BYTES_PER_FRAME);
 
+#if BSP_CFG_DCACHE_ENABLED
+    /*
+     * VIN is a DMA producer and does not update the Cortex-M85 D-Cache.
+     * Clean the initialization writes, then invalidate all cached copies before
+     * handing the three buffers to VIN.
+     */
+    SCB_CleanInvalidateDCache_by_Addr(
+        (uint32_t *) vin_image_buffer_1,
+        (int32_t) VIN_BYTES_PER_FRAME);
+    SCB_CleanInvalidateDCache_by_Addr(
+        (uint32_t *) vin_image_buffer_2,
+        (int32_t) VIN_BYTES_PER_FRAME);
+    SCB_CleanInvalidateDCache_by_Addr(
+        (uint32_t *) vin_image_buffer_3,
+        (int32_t) VIN_BYTES_PER_FRAME);
+#endif
+
     
     /* Scale the output image via VIN module */
     err = vin_scale_image(g_image_width, g_image_height);
@@ -406,23 +676,36 @@ void mipi_csi_ep_entry(void)
 #if (DISPLAY_OUTPUT == 1U)
         /*双缓冲*/
         uint8_t * p_draw_buffer = fb_background[draw_buffer_index];
+        uint8_t * p_completed_frame;
 
         /*垂直同步*/
         g_vsync_flag = RESET_FLAG;
         while(!g_vsync_flag);
 
+        /*
+         * Snapshot the ISR-published pointer once. The callback may publish a
+         * newer completed buffer while this loop is running.
+         */
+        p_completed_frame = gp_next_buffer;
 
         /*把 VIN 最新帧复制到显示 framebuffer*/
-        if (gp_next_buffer != NULL)
+        if (p_completed_frame != NULL)
         {
-            memcpy(p_draw_buffer, gp_next_buffer, VIN_BYTES_PER_FRAME);
+#if BSP_CFG_DCACHE_ENABLED
+            /* Discard stale CPU cache lines before reading the DMA-written frame. */
+            SCB_InvalidateDCache_by_Addr(
+                p_completed_frame,
+                (int32_t) VIN_BYTES_PER_FRAME);
+#endif
+            memcpy(p_draw_buffer, p_completed_frame, VIN_BYTES_PER_FRAME);
+
         }
 
         /*算子工作*/
-        if (gp_next_buffer != NULL)
+        if (p_completed_frame != NULL)
         {
             int8_t * model_input = GetModelInputPtr_x();//获取模型输入缓冲区指针
-            preprocess_frame_to_yolo(gp_next_buffer, model_input);//输入图像伸缩预处理
+            preprocess_frame_to_yolo(p_completed_frame, model_input);//输入图像伸缩预处理
 
             RunModel(false);//调用模型推理
 
@@ -437,6 +720,60 @@ void mipi_csi_ep_entry(void)
              * 一帧只打开和提交一次 D/AVE 2D render buffer。
              * 检测框、标签背景和文字都只向同一张命令表追加命令。
              */
+            float max_confidence = 0.0f;
+            for (int index = 0; index < detection_count; index++)
+            {
+                if (detections[index].score > max_confidence)
+                {
+                    max_confidence = detections[index].score;
+                }
+            }
+
+            /*
+             * Upload only the first frame of one continuous error event.
+             * Ten consecutive clean inference frames re-arm the trigger.
+             */
+            if ((detection_count > 0) &&
+                (max_confidence > MAXTRUSTTHRESHOLD))
+            {
+                clean_frame_count = 0U;
+
+                if ((!error_event_latched) &&
+                    (g_da16200_tcp_cid <= 7U))
+                {
+                    uint16_t confidence_milli =
+                        (max_confidence >= 1.0f) ?
+                        1000U :
+                        (uint16_t) (max_confidence * 1000.0f + 0.5f);
+
+                    /* Latch before the blocking transfer to avoid retry storms. */
+                    error_event_latched = true;
+                    err = da16200_encode_and_send_camera_frame(
+                        g_da16200_tcp_cid,
+                        (const uint16_t *) p_draw_buffer,
+                        confidence_milli);
+                    if (FSP_SUCCESS != err)
+                    {
+                        g_printf(
+                            "Image upload: detection frame failed, confidence=%u, err=%d\r\n",
+                            (unsigned int) confidence_milli,
+                            (int) err);
+                    }
+                }
+            }
+            else
+            {
+                if (clean_frame_count < IMAGE_UPLOAD_CLEAR_FRAMES)
+                {
+                    clean_frame_count++;
+                }
+
+                if (clean_frame_count >= IMAGE_UPLOAD_CLEAR_FRAMES)
+                {
+                    error_event_latched = false;
+                }
+            }
+
             if (detection_count > 0)
             {
                 bool d2_ok =
@@ -628,12 +965,12 @@ void mipi_csi_ep_entry(void)
 * End of function mipi_csi_ep_entry
 ***********************************************************************************************************************/
 
-/***********************************************************************************************************************
- *  Function Name: vin_callback
- *  Description  : This function is used to get captured image from VIN callback
- *  Arguments    : p_args       Pointer to callback argument
- *  Return Value : None
- **********************************************************************************************************************/
+/**
+ * @brief 处理 VIN 捕获回调，并在一帧完成时更新下一帧缓冲区指针。
+ * @param[in] p_args VIN 驱动传入的事件、状态与帧缓冲区信息。
+ * @return 无。
+ * @note 该函数运行在回调上下文中，只执行必要的状态读取和指针更新。
+ */
 void vin_callback (capture_callback_args_t * p_args)
  {
      vin_module_status_t    module_status    = (vin_module_status_t) p_args->event_status;
@@ -664,16 +1001,13 @@ void vin_callback (capture_callback_args_t * p_args)
          }
      }
  }
-/***********************************************************************************************************************
-* End of function vin_callback
-***********************************************************************************************************************/
 
-/***********************************************************************************************************************
- *  Function Name: mipi_csi0_callback
- *  Description  : This function is used to handle MIPI CSI event
- *  Arguments    : p_args      Pointer to callback argument
- *  Return Value : None
- **********************************************************************************************************************/
+/**
+ * @brief 接收 MIPI CSI 外设事件，并忽略当前应用未使用的事件类型。
+ * @param[in] p_args MIPI CSI 驱动传入的事件信息。
+ * @return 无。
+ * @note 该函数运行在回调上下文中，不执行日志、大块复制或阻塞操作。
+ */
  void mipi_csi0_callback (mipi_csi_callback_args_t * p_args)
  {
      switch (p_args->event)
@@ -696,17 +1030,13 @@ void vin_callback (capture_callback_args_t * p_args)
              break;
      }
  }
- /***********************************************************************************************************************
-* End of function mipi_csi0_callback
-***********************************************************************************************************************/
 
-/***********************************************************************************************************************
- *  Function Name: vin_camera_start
- *  Description  : This function is used to initialize the VIN module with inputed configuration
- *  Arguments    : p_cfg          Pointer to selected VIN configuration
- *  Return Value : FSP_SUCCESS    Upon successful operation
- *                 Any Other Error code apart from FSP_SUCCESS
- **********************************************************************************************************************/
+/**
+ * @brief 按给定配置重新打开 VIN，并依次启动 VIN 捕获和摄像头数据流。
+ * @param[in] p_cfg 需要应用的 VIN 捕获配置。
+ * @return 全部启动步骤成功时返回 FSP_SUCCESS，否则返回对应驱动错误码。
+ * @note 调用过程中会停止当前视频流并重新配置 VIN，不可在中断中调用。
+ */
 static fsp_err_t vin_camera_start(capture_cfg_t const * p_cfg)
  {
      fsp_err_t err;
@@ -746,18 +1076,14 @@ static fsp_err_t vin_camera_start(capture_cfg_t const * p_cfg)
 
      return err;
  }
-/***********************************************************************************************************************
-* End of function vin_camera_start
-***********************************************************************************************************************/
 
-/***********************************************************************************************************************
- *  Function Name: vin_scale_image
- *  Description  : This function is used to change the VIN parameters according to the inputed size
- *  Arguments    : new_width      Target width of image
- *                 new_height     Target height of image
- *  Return Value : FSP_SUCCESS    Upon successful operation
- *                 Any Other Error code apart from FSP_SUCCESS
- **********************************************************************************************************************/
+/**
+ * @brief 根据目标宽高计算 VIN 缩放参数，并生成运行时配置副本。
+ * @param[in] new_width 目标输出宽度，单位为像素。
+ * @param[in] new_height 目标输出高度，单位为像素。
+ * @return 配置计算成功时返回 FSP_SUCCESS，尺寸为零时返回 FSP_ERR_INVALID_ARGUMENT。
+ * @note 该函数只更新运行时配置结构体，不直接启动 VIN 硬件。
+ */
 static fsp_err_t vin_scale_image(uint16_t new_width, uint16_t new_height)
  {
      /* Validate arguments (avoid division by zero later) */
@@ -808,17 +1134,14 @@ static fsp_err_t vin_scale_image(uint16_t new_width, uint16_t new_height)
 
      return FSP_SUCCESS;
  }
-/***********************************************************************************************************************
-* End of function vin_scale_image
-***********************************************************************************************************************/
 
-/***********************************************************************************************************************
- *  Function Name: handle_error
- *  Description  : This function close all opened modules, print and trap error.
- *  Arguments    : err            error code
- *                 err_str        error string
- *  Return Value : None
- **********************************************************************************************************************/
+/**
+ * @brief 处理不可恢复错误，打印信息、关闭已打开外设并进入错误陷阱。
+ * @param[in] err 需要处理的 FSP 错误码。
+ * @param[in] err_str 需要输出的错误说明字符串。
+ * @return 无。
+ * @note 当 err 为 FSP_SUCCESS 时不执行任何操作，否则该函数通常不会正常返回。
+ */
 void handle_error (fsp_err_t err, char * err_str)
 {
     if(FSP_SUCCESS != err)
@@ -851,9 +1174,14 @@ void handle_error (fsp_err_t err, char * err_str)
 /***********************************************************************************************************************
 * End of function handle_error
 ***********************************************************************************************************************/
-// 把 VIN 的 RGB565 1024x600 帧 → FOMO 输入 int8 RGB 256x256
-// src: VIN帧缓冲指针(RGB565, stride=2048字节)
-// dst: 模型输入指针(RGB888 int8, 256x256x3)
+
+/**
+ * @brief 将 VIN 的 RGB565 中央裁剪区域缩放并转换为 YOLO 所需的 int8 RGB 输入。
+ * @param[in] src VIN RGB565 帧缓冲区首地址。
+ * @param[out] dst YOLO 输入张量缓冲区首地址。
+ * @return 无。
+ * @note 当前使用固定裁剪尺寸、目标尺寸和源行步长，调用者必须保证缓冲区有效。
+ */
 static void preprocess_frame_to_yolo(const uint8_t * src, int8_t * dst)
 {
     const int crop_x = 212;

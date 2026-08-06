@@ -17,10 +17,11 @@ static volatile uint32_t g_da16200_rx_char_count = 0U;
 static volatile uint32_t g_da16200_rx_drop_count = 0U;
 
 
-/*
- * 功能：初始化 SCI6 UART、DA16200 接收环形缓冲区和驱动状态变量。
- * 调用环境：系统初始化阶段调用一次，不可在中断中调用。
- * 返回值：FSP_SUCCESS 表示初始化成功，其他值表示 UART 打开失败。
+/**
+ * @brief 初始化 SCI6 UART、DA16200 接收环形缓冲区和驱动状态变量。
+ * @param 无。
+ * @return 初始化成功时返回 FSP_SUCCESS，否则返回 FSP UART 驱动错误码。
+ * @note 系统启动阶段只调用一次；本函数不是线程安全函数，也不可在中断中调用。
  */
 fsp_err_t DA16200_UartInit(void)
 {
@@ -43,11 +44,12 @@ fsp_err_t DA16200_UartInit(void)
     return FSP_SUCCESS;
 }
 
-/*
- * 功能：通过 SCI6 启动一次原始字节序列发送。
- * 注意：本函数只启动发送，不等待全部字节真正发送完成。
- * 参数：p_data 为发送缓冲区地址，length 为发送字节数。
- * 返回值：FSP_SUCCESS 表示成功启动发送。
+/**
+ * @brief 通过 SCI6 启动一次原始字节序列发送。
+ * @param[in] p_data 待发送数据的首地址。
+ * @param[in] length 待发送数据长度，单位为字节。
+ * @return 成功启动发送时返回 FSP_SUCCESS，否则返回参数或 FSP UART 驱动错误码。
+ * @note 本函数只启动异步发送，不等待 UART_EVENT_TX_COMPLETE；不可在中断中调用，当前不支持并发发送。
  */
 static fsp_err_t da16200_send_raw(const uint8_t * p_data, uint16_t length)
 {
@@ -69,9 +71,11 @@ static fsp_err_t da16200_send_raw(const uint8_t * p_data, uint16_t length)
     return FSP_SUCCESS;
 }
 
-/*
- * 功能：在关闭 SCI6 接收中断的临界区内清空 DA16200 接收环形缓冲区。
- * 目的：防止清空过程中 UART 接收中断同时修改环形缓冲区读写索引。
+/**
+ * @brief 在关闭 SCI6 接收中断的临界区内清空 DA16200 接收环形缓冲区。
+ * @param 无。
+ * @return 无。
+ * @note 仅在开始新的同步 AT 事务前调用；会丢弃尚未处理的异步数据，当前不支持并发调用。
  */
 static void da16200_clear_rx_ring(void)
 {
@@ -80,10 +84,11 @@ static void da16200_clear_rx_ring(void)
     R_BSP_IrqEnableNoClear(g_uart6_cfg.rxi_irq);
 }
 
-/*
- * 功能：从 DA16200 接收环形缓冲区中安全读取一个字节。
- * 参数：p_byte 指向接收结果存放位置。
- * 返回值：true 表示成功读取一个字节，false 表示当前没有数据。
+/**
+ * @brief 从 DA16200 接收环形缓冲区中安全读取一个字节。
+ * @param[out] p_byte 保存读取到的字节。
+ * @return 成功读取一个字节时返回 true，当前没有数据时返回 false。
+ * @note 通过短暂关闭 SCI6 RXI 中断保护环形缓冲区读索引；调用者必须传入有效指针。
  */
 static bool da16200_read_rx_byte(uint8_t * p_byte)
 {
@@ -96,10 +101,12 @@ static bool da16200_read_rx_byte(uint8_t * p_byte)
     return data_available;
 }
 
-/*
- * 功能：检查响应字符串中是否存在独立且完整的终止行。
- * 参数：p_response 为完整响应字符串，p_terminal 为待查找的终止内容。
- * 返回值：true 表示找到独立终止行，否则返回 false。
+/**
+ * @brief 检查响应字符串中是否存在独立且完整的终止行。
+ * @param[in] p_response 以空字符结尾的响应字符串。
+ * @param[in] p_terminal 待查找的终止行内容，例如 OK。
+ * @return 找到独立终止行时返回 true，否则返回 false。
+ * @note 本函数只读取字符串，不修改缓冲区；调用者必须保证两个指针有效。
  */
 static bool da16200_response_has_terminal_line(const char * p_response,
                                                const char * p_terminal)
@@ -124,9 +131,11 @@ static bool da16200_response_has_terminal_line(const char * p_response,
     return false;
 }
 
-/*
- * 功能：检查响应字符串中是否已经收到完整的 ERROR 行。
- * 返回值：true 表示收到完整错误响应，否则返回 false。
+/**
+ * @brief 检查响应字符串中是否已经收到完整的 ERROR 行。
+ * @param[in] p_response 以空字符结尾的响应字符串。
+ * @return 收到以 ERROR 开头且以换行结束的完整错误行时返回 true，否则返回 false。
+ * @note 本函数只进行字符串检查，不解析具体错误码；调用者必须传入有效指针。
  */
 static bool da16200_response_has_complete_error_line(const char * p_response)
 {
@@ -147,14 +156,14 @@ static bool da16200_response_has_complete_error_line(const char * p_response)
     return false;
 }
 
-/*
- * 功能：发送一条 AT 指令，并阻塞等待完整的 OK 或 ERROR 响应。
- * 参数：p_command 为以回车换行结束的 AT 指令。
- * 参数：p_response 为调用者提供的响应缓冲区。
- * 参数：response_size 为响应缓冲区容量。
- * 参数：timeout_ms 为发送和接收阶段的超时时间。
- * 注意：本函数会清空旧接收数据，不可在中断中调用，也不是线程安全函数。
- * 返回值：FSP_SUCCESS 表示收到 OK，其他值表示参数、超时、溢出或模块错误。
+/**
+ * @brief 发送一条 AT 指令，并阻塞等待完整的 OK 或 ERROR 响应。
+ * @param[in] p_command 以回车换行结尾的 AT 指令字符串。
+ * @param[out] p_response 保存模块原始响应的缓冲区。
+ * @param[in] response_size 响应缓冲区容量，单位为字节且至少为 2。
+ * @param[in] timeout_ms UART 发送和模块响应阶段的最大等待时间，单位为毫秒。
+ * @return 收到 OK 时返回 FSP_SUCCESS，否则返回参数、超时、溢出、UART 或模块错误码。
+ * @note 本函数会在事务开始前清空旧接收数据；不可在中断中调用，当前不支持并发 AT 事务。
  */
 fsp_err_t DA16200_SendCommandAndGetResponse(const char * p_command,
                                             char * p_response,
@@ -256,10 +265,13 @@ fsp_err_t DA16200_SendCommandAndGetResponse(const char * p_command,
     return FSP_ERR_TIMEOUT;
 }
 
-/*
- * 功能：发送一条 AT 指令，并检查响应中是否包含指定关键字。
- * 参数：p_expected 为期望出现在响应中的字符串。
- * 返回值：收到完整响应且找到关键字时返回 FSP_SUCCESS。
+/**
+ * @brief 发送一条 AT 指令，并检查成功响应中是否包含指定关键字。
+ * @param[in] p_command 以回车换行结尾的 AT 指令字符串。
+ * @param[in] p_expected 期望出现在完整响应中的非空字符串。
+ * @param[in] timeout_ms 最大等待时间，单位为毫秒。
+ * @return 收到 OK 且找到关键字时返回 FSP_SUCCESS，否则返回对应错误码。
+ * @note 内部使用固定 512 字节响应缓冲区；不可在中断中调用，当前不支持并发 AT 事务。
  */
 fsp_err_t DA16200_SendCommandAndWait(const char * p_command,
                                      const char * p_expected,
@@ -282,10 +294,11 @@ fsp_err_t DA16200_SendCommandAndWait(const char * p_command,
     return (NULL != strstr(response, p_expected)) ? FSP_SUCCESS : FSP_ERR_ASSERTION;
 }
 
-/*
- * 功能：查询 E103-W12 当前的 Wi-Fi 工作模式。
- * 参数：p_mode 用于返回 Station、SoftAP 或 Station+SoftAP 模式。
- * 返回值：FSP_SUCCESS 表示查询和解析成功。
+/**
+ * @brief 查询 E103-W12 当前的 Wi-Fi 工作模式。
+ * @param[out] p_mode 返回 Station、SoftAP 或 Station+SoftAP 模式枚举值。
+ * @return 查询和解析成功时返回 FSP_SUCCESS，否则返回参数、通信或响应格式错误码。
+ * @note 本函数执行阻塞式 AT 事务；不可在中断中调用，当前不支持并发调用。
  */
 fsp_err_t DA16200_QueryWifiMode(da16200_wifi_mode_t * p_mode)
 {
@@ -318,10 +331,11 @@ fsp_err_t DA16200_QueryWifiMode(da16200_wifi_mode_t * p_mode)
     return FSP_SUCCESS;
 }
 
-/*
- * 功能：设置 E103-W12 的 Wi-Fi 工作模式。
- * 注意：模式写入 NVRAM 后需要重启模块才能生效。
- * 返回值：FSP_SUCCESS 表示模块接受了设置指令。
+/**
+ * @brief 设置 E103-W12 的 Wi-Fi 工作模式。
+ * @param[in] mode 需要写入的 Station、SoftAP 或 Station+SoftAP 模式枚举值。
+ * @return 模块接受设置时返回 FSP_SUCCESS，否则返回参数、通信或模块错误码。
+ * @note 配置写入 NVRAM 后必须重启 DA16200 才能生效；不可在中断中调用。
  */
 fsp_err_t DA16200_SetWifiMode(da16200_wifi_mode_t mode)
 {
@@ -358,9 +372,11 @@ fsp_err_t DA16200_SetWifiMode(da16200_wifi_mode_t mode)
                                       5000U);
 }
 
-/*
- * 功能：发送复位指令，等待模块重新启动，再通过 AT 指令确认通信恢复。
- * 注意：本函数包含毫秒级软件延时，是阻塞函数，不可在中断中调用。
+/**
+ * @brief 复位 DA16200，等待模块重新启动，并使用 AT 指令确认通信恢复。
+ * @param 无。
+ * @return 复位和通信确认均成功时返回 FSP_SUCCESS，否则返回对应错误码。
+ * @note 本函数包含秒级阻塞延时；不可在中断中调用，当前不支持并发调用。
  */
 fsp_err_t DA16200_ResetAndWaitReady(void)
 {
@@ -376,11 +392,11 @@ fsp_err_t DA16200_ResetAndWaitReady(void)
     return DA16200_SendCommandAndWait("AT\r\n", "OK", 5000U);
 }
 
-/*
- * 功能：配置 E103-W12 SoftAP 的 SSID、密码、信道和国家代码。
- * 参数：p_cfg 指向 SoftAP 配置结构体。
- * 注意：配置内容会写入模块 NVRAM。
- * 返回值：FSP_SUCCESS 表示配置成功。
+/**
+ * @brief 配置 E103-W12 SoftAP 的 SSID、密码、信道和国家代码。
+ * @param[in] p_cfg 指向 SoftAP 配置结构体，结构体及其字符串成员必须有效。
+ * @return 参数合法且模块接受配置时返回 FSP_SUCCESS，否则返回对应错误码。
+ * @note 配置内容会写入模块 NVRAM；函数不会输出密码，不可在中断中调用。
  */
 fsp_err_t DA16200_ConfigSoftAp(const da16200_softap_cfg_t * p_cfg)
 {
@@ -432,19 +448,23 @@ fsp_err_t DA16200_ConfigSoftAp(const da16200_softap_cfg_t * p_cfg)
     return DA16200_SendCommandAndWait(command, "+CWSAP", 5000U);
 }
 
-/*
- * 功能：根据已经保存的 SoftAP 配置启动无线热点。
- * 返回值：FSP_SUCCESS 表示模块返回 OK。
+/**
+ * @brief 使用已经保存的 SoftAP 配置启动无线热点。
+ * @param 无。
+ * @return 模块返回 OK 时返回 FSP_SUCCESS，否则返回通信或模块错误码。
+ * @note 本函数执行阻塞式 AT 事务；不可在中断中调用，热点已启动时模块可能返回错误。
  */
 fsp_err_t DA16200_StartSoftAp(void)
 {
     return DA16200_SendCommandAndWait("AT+CWOAP\r\n", "OK", 5000U);
 }
 
-/*
- * 功能：非阻塞读取 DA16200 接收环形缓冲区中的异步数据。
- * 参数：p_data 为输出缓冲区，capacity 为最多允许读取的字节数。
- * 返回值：实际读取的字节数，返回 0 表示当前没有数据。
+/**
+ * @brief 非阻塞读取 DA16200 接收环形缓冲区中的异步数据。
+ * @param[out] p_data 保存读取结果的调用者缓冲区。
+ * @param[in] capacity 最多允许读取的字节数。
+ * @return 实际读取的字节数；参数无效或当前没有数据时返回 0。
+ * @note 本函数不添加字符串结束符；读取期间短暂关闭 RXI 中断，不可与同步 AT 事务并发使用。
  */
 size_t DA16200_ReadAsync(uint8_t * p_data, size_t capacity)
 {
@@ -464,10 +484,11 @@ size_t DA16200_ReadAsync(uint8_t * p_data, size_t capacity)
     return length;
 }
 
-/*
- * 功能：阻塞等待 SCI6 产生 UART_EVENT_TX_COMPLETE 发送完成事件。
- * 参数：timeout_ms 为最大等待时间。
- * 返回值：FSP_SUCCESS 表示发送完成，其他值表示超时或 UART 错误。
+/**
+ * @brief 阻塞等待 SCI6 产生 UART_EVENT_TX_COMPLETE 发送完成事件。
+ * @param[in] timeout_ms 最大等待时间，单位为毫秒。
+ * @return 发送完成时返回 FSP_SUCCESS，否则返回 UART 或超时错误码。
+ * @note 必须在 da16200_send_raw() 成功后调用；不可在中断中调用，当前不支持并发发送。
  */
 static fsp_err_t da16200_wait_tx_complete(uint32_t timeout_ms)
 {
@@ -492,11 +513,82 @@ static fsp_err_t da16200_wait_tx_complete(uint32_t timeout_ms)
     return FSP_SUCCESS;
 }
 
-/*
- * 功能：通过 E103-W12 的 TCP Server 会话向指定远端客户端发送短文本。
- * 参数：p_remote_ip 和 remote_port 指定已连接客户端的地址与端口。
- * 参数：p_text 为不包含逗号、回车和换行的短文本。
- * 注意：本函数使用 CID 0，只适用于模块作为 TCP Server 的场景。
+/**
+ * @brief 等待 DA16200 返回独立的 OK 或 ERROR 响应行。
+ * @param[in] timeout_ms 最大等待时间，单位为毫秒。
+ * @return 收到 OK 时返回 FSP_SUCCESS；收到 ERROR、UART 错误、缓冲区溢出
+ *         或发生超时时返回对应错误码。
+ * @note 本函数只读取现有接收环形缓冲区，不发送数据，也不清空环形缓冲区；
+ *       只能在线程或主循环上下文调用，不可在中断中调用，当前不支持并发调用。
+ */
+static fsp_err_t da16200_wait_response_ok(uint32_t timeout_ms)
+{
+    char response[DA16200_STR_LEN_128] = {0};
+    uint8_t received_byte;
+    uint16_t response_length = 0U;
+    uint32_t elapsed_ms = 0U;
+
+    if (0U == timeout_ms)
+    {
+        return FSP_ERR_INVALID_ARGUMENT;
+    }
+
+    while (elapsed_ms < timeout_ms)
+    {
+        if (FSP_SUCCESS != g_da16200_uart_error)
+        {
+            return g_da16200_uart_error;
+        }
+
+        if (g_da16200_rx_overflow)
+        {
+            g_printf("DA16200: RX ring overflow while waiting response\r\n");
+            return FSP_ERR_RXBUF_OVERFLOW;
+        }
+
+        if (da16200_read_rx_byte(&received_byte))
+        {
+            if (response_length >=
+                ((uint16_t) sizeof(response) - 1U))
+            {
+                g_printf("DA16200: response buffer overflow\r\n");
+                return FSP_ERR_RXBUF_OVERFLOW;
+            }
+
+            response[response_length] = (char) received_byte;
+            response_length++;
+            response[response_length] = '\0';
+
+            if (da16200_response_has_terminal_line(response, "OK"))
+            {
+                return FSP_SUCCESS;
+            }
+
+            if (da16200_response_has_complete_error_line(response))
+            {
+                g_printf("DA16200: module returned error: %s\r\n", response);
+                return FSP_ERR_ASSERTION;
+            }
+        }
+        else
+        {
+            R_BSP_SoftwareDelay(1U,BSP_DELAY_UNITS_MILLISECONDS);
+            elapsed_ms++;
+        }
+    }
+
+    g_printf("DA16200: response timeout, received=%s\r\n",
+             response);
+    return FSP_ERR_TIMEOUT;
+}
+
+/**
+ * @brief 通过 E103-W12 TCP Server 会话向指定远端客户端发送短文本。
+ * @param[in] p_remote_ip 已连接 TCP 客户端的 IPv4 地址字符串。
+ * @param[in] remote_port 已连接 TCP 客户端的端口号。
+ * @param[in] p_text 不包含逗号、回车和换行的非空短文本。
+ * @return 成功启动完整命令发送时返回 FSP_SUCCESS，否则返回参数或 UART 错误码。
+ * @note 固定使用 CID 0，仅适用于模块作为 TCP Server；当前只等待 UART 发送完成，不等待模块 OK。
  */
 fsp_err_t DA16200_TcpServerSendText(const char * p_remote_ip,
                                     uint16_t remote_port,
@@ -553,6 +645,14 @@ fsp_err_t DA16200_TcpServerSendText(const char * p_remote_ip,
 }        
 
 
+/**
+ * @brief 连接指定 Wi-Fi 热点并等待 Station 接口进入已连接状态。
+ * @param[in] p_ssid 目标热点 SSID 字符串。
+ * @param[in] p_password WPA/WPA2 热点密码字符串。
+ * @param[in] timeout_ms 等待联网完成的最大时间，单位为毫秒。
+ * @return 成功联网时返回 FSP_SUCCESS，否则返回参数、UART、模块响应或超时错误码。
+ * @note 本函数包含阻塞式 AT 事务；不会输出密码，不可在中断中调用，当前不支持并发调用。
+ */
 fsp_err_t DA16200_ConnectWifi(const char * p_ssid,
                               const char * p_password,
                               uint32_t timeout_ms)
@@ -708,10 +808,11 @@ if ((command_length < 0) ||
     return FSP_ERR_TIMEOUT;
 }
 
-/*
- * 功能：查询 Station 接口是否已经连接 Wi-Fi。
- * 参数：p_connected 用于返回连接状态。
- * 返回值：查询和解析成功时返回 FSP_SUCCESS。
+/**
+ * @brief 查询 DA16200 Station 接口是否已经连接 Wi-Fi。
+ * @param[out] p_connected 查询成功后返回连接状态。
+ * @return 查询和解析成功时返回 FSP_SUCCESS，否则返回参数、通信或响应格式错误码。
+ * @note 本函数执行阻塞式 AT 事务；不可在中断中调用，当前不支持并发调用。
  */
 fsp_err_t DA16200_QueryStaConnected(bool * p_connected)
 {
@@ -747,11 +848,13 @@ fsp_err_t DA16200_QueryStaConnected(bool * p_connected)
     return FSP_SUCCESS;
 }
 
-/*
- * 功能：确保 DA16200 最终处于 Wi-Fi 已连接状态。
- * 参数：p_ssid 为热点名称，p_password 为密码。
- * 参数：timeout_ms 为 DA16200_ConnectWifi 的最大等待时间。
- * 返回值：确认 CWSTA=1 时返回 FSP_SUCCESS。
+/**
+ * @brief 确保 DA16200 最终处于 Wi-Fi 已连接状态。
+ * @param[in] p_ssid 目标热点 SSID 字符串。
+ * @param[in] p_password 目标热点密码字符串。
+ * @param[in] timeout_ms 首次联网操作的最大等待时间，单位为毫秒。
+ * @return 确认 CWSTA=1 时返回 FSP_SUCCESS，否则返回查询、联网或超时错误码。
+ * @note 已连接时直接返回；函数包含阻塞查询和延时，不可在中断中调用，也不会输出密码。
  */
 fsp_err_t DA16200_EnsureWifiConnected(const char * p_ssid,
                                       const char * p_password,
@@ -801,8 +904,12 @@ fsp_err_t DA16200_EnsureWifiConnected(const char * p_ssid,
     return FSP_ERR_TIMEOUT;
 }
 
-/*
- * 功能：从 TCP 客户端建立连接的响应中解析 CID。
+/**
+ * @brief 从 TCP 客户端建立连接的响应中解析 DA16200 分配的 CID。
+ * @param[in] p_response 以空字符结尾的模块响应字符串。
+ * @param[out] p_cid 返回解析得到的 0 至 7 会话编号。
+ * @return 找到合法的 +TRTC 或 +CIPSTART 响应时返回 true，否则返回 false。
+ * @note 本函数只读取响应字符串，不修改模块状态；调用者必须保证两个指针有效。
  */
 static bool da16200_parse_tcp_client_cid(const char * p_response,
                                          uint8_t * p_cid)
@@ -841,11 +948,13 @@ static bool da16200_parse_tcp_client_cid(const char * p_response,
     return true;
 }
 
-/*
- * 功能：连接局域网内的 TCP 服务端，并返回模块分配的 CID。
- * 参数：p_server_ip 为电脑的局域网 IPv4 地址。
- * 参数：server_port 为电脑监听的 TCP 端口。
- * 参数：p_cid 用于返回 DA16200 分配的连接编号。
+/**
+ * @brief 建立到局域网 TCP 服务端的客户端连接并取得模块分配的 CID。
+ * @param[in] p_server_ip TCP 服务端的 IPv4 地址字符串。
+ * @param[in] server_port TCP 服务端监听端口。
+ * @param[out] p_cid 返回 DA16200 分配的会话编号。
+ * @return 连接成功并解析到 CID 时返回 FSP_SUCCESS，否则返回参数、通信、格式或超时错误码。
+ * @note 本函数执行阻塞式 AT 事务；不可在中断中调用，失败时 p_cid 保持为 0xFF。
  */
 fsp_err_t DA16200_TcpClientOpen(const char * p_server_ip,
                                 uint16_t server_port,
@@ -948,10 +1057,11 @@ fsp_err_t DA16200_TcpClientOpen(const char * p_server_ip,
 
 }
 
-/*
- * 功能：关闭 DA16200 当前保存的全部 socket 会话。
- * 调用上下文：线程或主循环上下文，不可在中断中调用。
- * 返回值：FSP_SUCCESS 表示模块返回 OK。
+/**
+ * @brief 关闭 DA16200 当前保存的全部 socket 会话。
+ * @param 无。
+ * @return 模块返回 OK 时返回 FSP_SUCCESS，否则返回通信或模块错误码。
+ * @note 本函数执行阻塞式 AT 事务；只能在线程或主循环上下文调用，当前不支持并发调用。
  */
 fsp_err_t DA16200_TcpCloseAll(void)
 {
@@ -972,12 +1082,12 @@ fsp_err_t DA16200_TcpCloseAll(void)
     g_printf("DA16200: all sockets closed\r\n");
     return FSP_SUCCESS;
 }
-/*
- * 功能：通过已经建立的 TCP Client 会话发送短文本。
- * 参数：cid 为 DA16200_TcpClientOpen 返回的连接编号。
- * 参数：p_text 为不包含逗号、回车和换行的短文本。
- * 调用环境：线程或主循环上下文，不可在中断中调用。
- * 限制：当前版本只适用于短文本测试，不适用于二进制图像。
+/**
+ * @brief 通过已经建立的 TCP Client 会话发送短文本。
+ * @param[in] cid DA16200_TcpClientOpen() 返回的会话编号。
+ * @param[in] p_text 不包含逗号、回车和换行的非空短文本。
+ * @return 成功启动完整命令发送时返回 FSP_SUCCESS，否则返回参数或 UART 错误码。
+ * @note 当前只等待 UART 发送完成，不等待模块 OK；只适用于短文本测试，不适用于二进制图像。
  */
 fsp_err_t DA16200_TcpClientSendText(uint8_t cid,
                                     const char * p_text)
@@ -1026,12 +1136,11 @@ fsp_err_t DA16200_TcpClientSendText(uint8_t cid,
 }
 
 
-/*
- * 功能：处理 SCI6 UART 中断事件。
- * 接收事件：把接收到的字节写入环形缓冲区。
- * 发送完成事件：设置发送完成标志。
- * 错误事件：记录奇偶校验、帧或接收溢出错误。
- * 调用环境：由 FSP UART 驱动在中断上下文中调用。
+/**
+ * @brief 处理 SCI6 UART 接收、发送完成和错误事件。
+ * @param[in] p_args FSP UART 驱动传入的事件参数。
+ * @return 无。
+ * @note 本函数运行在中断上下文；只写入环形缓冲区或更新状态标志，不执行阻塞操作。
  */
 void UART6_CallBack(uart_callback_args_t *p_args)
 {
@@ -1074,3 +1183,132 @@ void UART6_CallBack(uart_callback_args_t *p_args)
     }
 }
 
+/**
+ * @brief 通过已建立的 DA16200 TCP Client 会话发送一个二进制数据块。
+ * @param[in] cid DA16200_TcpClientOpen() 返回的 TCP 会话编号。
+ * @param[in] p_data 待发送二进制数据首地址。
+ * @param[in] data_length 本次发送的实际字节数。
+ * @param[in] timeout_ms 每个 UART 发送或模块响应阶段的最大等待时间，单位为毫秒。
+ * @return 两阶段发送均成功并分别收到 OK 时返回 FSP_SUCCESS，否则返回对应错误码。
+ * @note 严格使用手册规定的 0x1B + H 两阶段发送格式；本函数为阻塞调用，
+ *       不可在中断中调用，当前不支持并发调用。
+ */
+fsp_err_t DA16200_TcpClientSendBinaryChunk(
+    uint8_t cid,
+    const uint8_t * p_data,
+    uint16_t data_length,
+    uint32_t timeout_ms)
+{
+    uint8_t control_header[DA16200_STR_LEN_32] = {0};
+    int text_length;
+    uint16_t control_header_length;
+
+    fsp_err_t err;
+
+        if ((cid > 7U) ||
+        (NULL == p_data) ||
+        (0U == data_length) ||
+        (0U == timeout_ms))
+    {
+        return FSP_ERR_INVALID_ARGUMENT;
+    }
+
+    /*
+     *  <ESC> 是控制字节 0x1B
+     */
+    control_header[0] = 0x1BU;
+
+    /*
+     * 从第二个字节开始生成，并按照手册统一要求以 CRLF 结束：
+     * H<CID>,<length>,0,0\r\n
+     */
+    text_length = snprintf(
+        (char *) &control_header[1],
+        sizeof(control_header) - 1U,
+        "H%u,%u,0,0\r\n",
+        (unsigned int) cid,
+        (unsigned int) data_length);
+
+    if ((text_length < 0) ||
+        ((size_t) text_length >=
+         (sizeof(control_header) - 1U)))
+    {
+        return FSP_ERR_INVALID_SIZE;
+    }
+
+    control_header_length = (uint16_t) ((uint16_t) text_length + 1U);
+
+    /*
+     * 只在完整事务开始前清理旧响应
+     * 数据发送后的第二个 OK 不能被清除
+    */
+    da16200_clear_rx_ring();
+
+    g_da16200_rx_overflow = false;
+    g_da16200_uart_error  = FSP_SUCCESS;
+    g_da16200_rx_char_count = 0U;
+    g_da16200_rx_drop_count = 0U;
+
+    g_printf(
+        "DA16200: binary request, CID=%u, length=%u\r\n",
+        (unsigned int) cid,
+        (unsigned int) data_length);
+
+    /*
+     * 第一阶段：发送 0x1B + H 控制头
+     */
+    err = da16200_send_raw(control_header,control_header_length);
+
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    err = da16200_wait_tx_complete(timeout_ms);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200: binary control header TX failed, err=%d\r\n",(int) err);
+        return err;
+    }
+
+    /*
+     * 必须收到第一个 OK 后才能发送二进制载荷
+     */
+    err = da16200_wait_response_ok(timeout_ms);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200: binary request rejected, err=%d\r\n",(int) err);
+        return err;
+    }
+
+    /*
+     * 第二阶段：发送恰好 data_length 字节
+     * 二进制数据中的 0x00、0xFF 和换行符都不会改变发送长度
+     */
+    err = da16200_send_raw(p_data, data_length);
+    if (FSP_SUCCESS != err)
+    {
+        return err;
+    }
+
+    err = da16200_wait_tx_complete(timeout_ms);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf("DA16200: binary payload TX failed, err=%d\r\n",(int) err);
+        return err;
+    }
+
+    /*
+     * 等待模块处理完本块数据后的第二个 OK
+     */
+    err = da16200_wait_response_ok(timeout_ms);
+    if (FSP_SUCCESS != err)
+    {
+        g_printf( "DA16200: binary payload not confirmed, err=%d\r\n",(int) err);
+        return err;
+    }
+
+    g_printf("DA16200: binary chunk sent, length=%u\r\n",(unsigned int) data_length);
+
+    return FSP_SUCCESS;
+}
